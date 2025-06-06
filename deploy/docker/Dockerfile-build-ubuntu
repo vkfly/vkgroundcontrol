@@ -1,0 +1,28 @@
+FROM ubuntu:22.04
+
+ARG QT_VERSION=6.8.3
+ARG QT_MODULES="qtcharts qtlocation qtpositioning qtspeech qt5compat qtmultimedia qtserialport qtimageformats qtshadertools qtconnectivity qtquick3d qtsensors"
+
+ENV DEBIAN_FRONTEND noninteractive
+
+ENV DISPLAY :99
+
+ENV QT_PATH /opt/Qt
+ENV QT_DESKTOP $QT_PATH/${QT_VERSION}/gcc_64
+
+ENV PATH /usr/lib/ccache:$QT_DESKTOP/bin:$PATH
+
+COPY tools/setup/install-dependencies-debian.sh /tmp/qt/
+RUN /tmp/qt/install-dependencies-debian.sh
+
+COPY tools/setup/install-qt-debian.sh /tmp/qt/
+RUN /tmp/qt/install-qt-debian.sh
+
+RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
+
+RUN git config --global --add safe.directory /project/source
+
+WORKDIR /project/build
+CMD cmake -S /project/source -B . -G Ninja -DCMAKE_BUILD_TYPE=Release ; \
+    cmake --build . --target all --config Release ; \
+    cmake --install . --config Release

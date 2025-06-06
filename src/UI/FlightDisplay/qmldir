@@ -1,0 +1,18 @@
+Module FlightDisplay
+
+FlyView                                         1.0 FlyView.qml
+FlyViewMap                                      1.0 FlyViewMap.qml
+FlyViewVideo                                    1.0 FlyViewVideo.qml
+ObstacleDistanceOverlayVideo                    1.0 ObstacleDistanceOverlayVideo.qml
+ProximityRadarVideoView                         1.0 ProximityRadarVideoView.qml
+VKVideoBackground                               1.0 VKVideoBackground.qml
+FlyViewCustomLayer                              1.0 FlyViewCustomLayer.qml
+FlyViewRightSetWindow                           1.0 FlyViewRightSetWindow.qml
+MessageAllShow                                  1.0 MessageAllShow.qml
+FlyViewPanelPart1                               1.0 FlyViewPanelPart1.qml
+FlyViewPanelPart2                               1.0 FlyViewPanelPart2.qml
+FlyViewPanelPart3                               1.0 FlyViewPanelPart3.qml
+FlyViewMsgPanel                                 1.0 FlyViewMsgPanel.qml
+SixTuText                                       1.0 SixTuText.qml
+VK_StartMission                                 1.0 VK_StartMission.qml
+VKReturn                                        1.0 VKReturn.qml

@@ -1,0 +1,6 @@
+Module FlightMap
+
+# Main view controls
+FlightMap                   1.0 FlightMap.qml
+MapScale                    1.0 MapScale.qml
+VehicleMapItem              1.0 VehicleMapItem.qml

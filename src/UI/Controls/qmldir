@@ -1,0 +1,30 @@
+Module Controls
+
+VKLabel                                             1.0 VKLabel.qml
+VKPipState                                          1.0 VKPipState.qml
+VKPipOverlay                                        1.0 VKPipOverlay.qml
+VKToolInsets                                        1.0 VKToolInsets.qml
+IconTextButton                                      1.0 IconTextButton.qml
+IconButton                                          1.0 IconButton.qml
+VKMapLabel                                          1.0 VKMapLabel.qml
+VKCheckBox                                          1.0 VKCheckBox.qml
+VKFlickable                                         1.0 VKFlickable.qml
+VKSetToolbar                                        1.0 VKSetToolbar.qml
+VTitle                                              1.0 VTitle.qml
+NumericParameterControl                             1.0 NumericParameterControl.qml
+ParameterComboBox                                   1.0 ParameterComboBox.qml
+VKSeekBar                                           1.0 VKSeekBar.qml
+VKSlider                                            1.0 VKSlider.qml
+VKMessageShow                                       1.0 VKMessageShow.qml
+VerticalIconTextButton                              1.0 VerticalIconTextButton.qml
+NumericParameterInputControl                        1.0 NumericParameterInputControl.qml
+SliderSwitch                                        1.0 SliderSwitch.qml
+KeyboardNumView                                     1.0 KeyboardNumView.qml
+TextMathPart                                        1.0 TextMathPart.qml
+MathKeyboard                                        1.0 MathKeyboard.qml
+RCAdjuster                                          1.0 RCAdjuster.qml
+TextButton                                          1.0 TextButton.qml
+GroupButton                                         1.0 GroupButton.qml
+NumericInputField                                   1.0 NumericInputField.qml
+CustomPopup                                         1.0 CustomPopup.qml
+CustomComboBox                                      1.0 CustomComboBox.qml

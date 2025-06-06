@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 72 72">
+    <path d="M72 0H0v72c39.797 0 72-32.203 72-72" style="opacity:.5"/>
+    <g stroke-miterlimit="10">
+        <path d="M14.4 29.599h36v27h-36z" style="stroke:#fff;stroke-width:2;stroke-miterlimit:10" transform="translate(3.933 -20.926)"/>
+        <path d="M5.4 38.599h36v27h-36z" style="stroke:#fff;stroke-width:2;stroke-miterlimit:10" transform="translate(3.933 -20.926)"/>
+    </g>
+</svg>

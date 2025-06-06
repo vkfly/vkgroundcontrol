@@ -1,0 +1,5 @@
+# BasedOnStyle: Google
+BasedOnStyle: LLVM
+ColumnLimit: 120
+IndentWidth: 4
+AccessModifierOffset: -4

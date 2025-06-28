@@ -25,9 +25,7 @@ BaseSettingPage {
     titleName: qsTr("工厂模式")
     
     // 添加 _activeVehicle 属性，避免未定义错误
-    property var activeVehicle: VkSdkInstance.vehicleManager.vehicles[0]
-
-    property real settingType: FactorySettings.SettingType.FactorySettings
+    property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
     property int factorySelectId: FactorySettings.FactoryType.PlaneModel  // 使用枚举类型初始化
 
     signal goToMain
@@ -39,7 +37,7 @@ BaseSettingPage {
     // 内容区域
     RowLayout {
         anchors.fill: parent
-        spacing: ScreenTools.defaultFontPixelWidth
+        spacing: 6 * ScreenTools.scaleWidth
 
         // 左侧内容区域
         Rectangle {
@@ -97,7 +95,7 @@ BaseSettingPage {
 
         // 右侧按钮区域
         Item {
-            Layout.minimumWidth: ScreenTools.defaultFontPixelWidth * 26
+            Layout.minimumWidth: ScreenTools.scaleWidth * 156
             Layout.fillHeight: true
 
             ColumnLayout {

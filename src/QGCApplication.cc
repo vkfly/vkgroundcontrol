@@ -195,14 +195,14 @@ void QGCApplication::init() {
     QGroundControlQmlGlobal::registerQmlTypes();
     SettingsManager::registerQmlTypes();
     VideoManager::registerQmlTypes();
-
     VkSdkInstance::initSdk(VK_USER_ID, VK_SDK_LICENSE);
     VkSdkInstance::registerQmlData();
-    if(QFontDatabase::addApplicationFont(":/fonts/opensans") < 0) {
-        qCWarning(QGCApplicationLog) << "Could not load /fonts/opensans font";
-    }
-    if(QFontDatabase::addApplicationFont(":/fonts/opensans-demibold") < 0) {
-        qCWarning(QGCApplicationLog) << "Could not load /fonts/opensans-demibold font";
+    int fontId = QFontDatabase::addApplicationFont(":/fonts/songti");
+    if(fontId < 0) {
+        qCWarning(QGCApplicationLog) << "Could not load /fonts/songti font";
+    } else {
+        QFont f(QString::fromLocal8Bit("Nowar Warcraft Rounded CN Medium"), fontId);
+        setFont(f);
     }
     _initForNormalAppBoot();
 }

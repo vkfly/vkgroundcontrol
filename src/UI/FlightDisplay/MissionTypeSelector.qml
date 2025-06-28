@@ -24,12 +24,12 @@ Popup {
     property color buttonFontColor: "white"
 
     // Layout properties
-    property int popupWidth: 600
-    property int popupHeight: 720
+    property int popupWidth: 600 * ScreenTools.scaleWidth
+    property int popupHeight: 720 * ScreenTools.scaleWidth
     property int textAlignment: 0 // 0: center, 1: left
-    property int leftDistance: 15 // distance from left edge
-    property int textFontSize: 25 // text font size
-    property int buttonFontSizeSmall: 14 // button font size
+    property int leftDistance: 15 * ScreenTools.scaleWidth  // distance from left edge
+    property int textFontSize: 25 * ScreenTools.scaleWidth // text font size
+    property int buttonFontSizeSmall: 14 * ScreenTools.scaleWidth // button font size
 
     // Mission properties
     property int waypointId: 0
@@ -135,7 +135,7 @@ Popup {
                         iconSource: "/qmlimages/icon/tiao_a.png"
                         selectedIconSource: "/qmlimages/icon/tiao_b.png"
                         isSelected: selectedMissionType === 1
-                        fontSize: buttonFontSize * 0.9 / ScreenTools.scaleWidth
+                        fontSize: buttonFontSize * 0.9
                         selectedTextColor: buttonFontColor
                         unSelectedTextColor: buttonFontColor
                         selectedBackgroundColor: "#00000000"
@@ -158,7 +158,7 @@ Popup {
                         iconSource: "/qmlimages/icon/dai_a.png"
                         selectedIconSource: "/qmlimages/icon/dai_b.png"
                         isSelected: selectedMissionType === 2
-                        fontSize: buttonFontSize * 0.9 / ScreenTools.scaleWidth
+                        fontSize: buttonFontSize * 0.9
                         selectedTextColor: buttonFontColor
                         unSelectedTextColor: buttonFontColor
                         selectedBackgroundColor: "#00000000"
@@ -181,7 +181,7 @@ Popup {
                         iconSource: "/qmlimages/icon/kuai_a.png"
                         selectedIconSource: "/qmlimages/icon/kuai_b.png"
                         isSelected: selectedMissionType === 3
-                        fontSize: buttonFontSize * 0.9 / ScreenTools.scaleWidth
+                        fontSize: buttonFontSize * 0.9
                         selectedTextColor: buttonFontColor
                         unSelectedTextColor: buttonFontColor
                         selectedBackgroundColor: "#00000000"

@@ -266,6 +266,7 @@
         <file alias="icon/pipResize.svg">resources/icon/pipResize.svg</file>
         <file alias="icon/AlertAircraft.svg">resources/icon/AlertAircraft.svg</file>
         <file alias="icon/compassInstrumentArrow.svg">resources/icon/compassInstrumentArrow.svg</file>
+        <file alias="icon/Hamburger.svg">resources/icon/Hamburger.svg</file>
 
     </qresource>
     <qresource prefix="/"/>

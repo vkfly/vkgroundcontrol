@@ -8,8 +8,8 @@ import VkSdkInstance
 
 CustomPopup {
     id: messagePopup
-    width: popupWidth
-    height: contentColumn.height
+    contentWidth: popupWidth
+    contentHeight: contentColumn.height
 
     // === 配置属性 (驼峰命名风格) ===
     property int planeType: 0
@@ -27,6 +27,8 @@ CustomPopup {
     property string sendId: "AIRFRAME1"
     property int buttonOpenValue: 0
     property var logController
+
+    property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle //TODO暂时这么处理，可以用activevehicle
 
     // === 显示内容属性 ===
     property string messageText: ""
@@ -101,7 +103,6 @@ CustomPopup {
             text: warningText
             Layout.fillWidth: true
             Layout.preferredHeight: 60 * sw
-            
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: fontSize
             color: "red"
@@ -112,17 +113,18 @@ CustomPopup {
         RowLayout {
             visible: messageType === 1 || messageType === 2
             Layout.fillWidth: true
-            Layout.preferredHeight: 60 * sw
             spacing: 0
             
             // 取消按钮
             TextButton {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                Layout.preferredHeight: 60 * sw
                 buttonText: qsTr("取消")
                 fontSize: fontSize
                 backgroundColor: "#808080"
                 textColor: buttonFontColor
+                pressedColor: "#808080"
                 cornerRadius: 0
                 borderWidth: 0
                 onClicked: messagePopup.close()
@@ -132,6 +134,7 @@ CustomPopup {
             TextButton {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                Layout.preferredHeight: 60 * sw
                 buttonText: qsTr("确认")
                 fontSize: fontSize
                 backgroundColor: mainColor
@@ -192,26 +195,26 @@ CustomPopup {
     }
 
     function handleVoltageProtection() {
-        if (activeVehicle) {
-            activeVehicle.sendEscIndex(escId)
+        if (_activeVehicle) {
+            _activeVehicle.sendEscIndex(escId)
         }
     }
 
     function handleClearAllLogs() {
-        if (logController) {
-            logController.eraseAll()
+        if (_activeVehicle) {
+            _activeVehicle.eraseAll()
         }
     }
 
     function handleAirframeParameter() {
-        if (activeVehicle) {
-            activeVehicle.setParam("AIRFRAME", planeType)
+        if (_activeVehicle) {
+            _activeVehicle.setParam("AIRFRAME", planeType)
         }
     }
 
     function handleGenericParameter() {
-        if (activeVehicle) {
-            activeVehicle.setParam(parameter, value)
+        if (_activeVehicle) {
+            _activeVehicle.setParam(parameter, value)
         }
     }
 }

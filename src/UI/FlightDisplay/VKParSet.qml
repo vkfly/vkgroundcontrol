@@ -29,14 +29,10 @@ Flickable {
     property int returnAltitude: 0
     property int takeoffAltitude: 0
     property var horizontalSpeed: 10
-    property var activeVehicle: VkSdkInstance.vehicleManager.vehicles[0]
+    property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
     property int climbMode: activeVehicle ? parseInt(activeVehicle.parameters["WP_FP_ALT_MODE"]) : 0
     property int returnHeadingMode: activeVehicle ? parseInt(activeVehicle.parameters["RTL_HEAD_MODE"]) : 0
 
-    Settings {
-        id: settings
-        property int applicationSetting: 0 // 0-物流模式 1-巡检模式 2-侦察模式
-    }
 
     Column {
         id: mainColumn

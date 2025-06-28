@@ -12,7 +12,7 @@ Item {
     height: parent.height
 
     // ===== 属性定义 =====
-    property var _Vehicle : VkSdkInstance.vehicleManager.vehicles[0]
+    property var _Vehicle : VkSdkInstance.vehicleManager.activeVehicle
 
     property var comversions: _activeVehicle ? _activeVehicle.comversions : new Array(6)
 
@@ -20,7 +20,7 @@ Item {
     readonly property string v12UpdateUrl: "http://vk-fly.com:8081/v12_rbl_update_folder/updata.txt"
     readonly property string v10ProUpdateUrl: "http://vk-fly.com:8081/v10_3rbl_update_folder/updata.txt"
     readonly property string apkUpdateUrl: "http://vk-fly.com:8081/v10_apk_update_folder/updata.txt"
-    readonly property real marginSpacing: 4 * ScreenTools.defaultFontPixelWidth
+    readonly property real marginSpacing: 24 * ScreenTools.scaleWidth
     signal setOnlick(var selID)
 
     Component.onCompleted: {

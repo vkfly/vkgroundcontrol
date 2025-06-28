@@ -27,6 +27,13 @@ VKInstallBase {
                     height: 50 * ScreenTools.scaleWidth
                     fontSize: buttonFontsize
                     names: [qsTr("水平校准"), qsTr("磁罗盘校准")]
+                    onClicked: function(index) {
+                        if (index === 0) {
+                            levelCalibrationPopup.open()
+                        } else if (index === 1) {
+                            compassCalibrationPopup.open()
+                        }
+                    }
                 }
             }
         }
@@ -54,4 +61,5 @@ VKInstallBase {
             }
         }
     }
+
 }

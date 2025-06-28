@@ -3,8 +3,6 @@
         <file alias="MainRootWindow.qml">src/UI/MainRootWindow.qml</file>
         <file alias="FlightDisplay/qmldir">src/UI/FlightDisplay/qmldir</file>
         <file alias="FlightMap/qmldir">src/UI/FlightMap/qmldir</file>
-        <file alias="MainVKToolBar.qml">src/UI/MainVKToolBar.qml</file>
-        <file alias="BMSMsgToolbar.qml">src/UI/BMSMsgToolbar.qml</file>
         <file alias="Controls/qmldir">src/UI/Controls/qmldir</file>
         <file alias="Controls/VKToolInsets.qml">src/UI/Controls/VKToolInsets.qml</file>
         <file alias="Controls/KeyboardNumView.qml">src/UI/Controls/KeyboardNumView.qml</file>
@@ -32,9 +30,18 @@
         <file alias="Controls/SliderSwitch.qml">src/UI/Controls/SliderSwitch.qml</file>
         <file alias="Controls/CustomPopup.qml">src/UI/Controls/CustomPopup.qml</file>
         <file alias="Controls/CustomComboBox.qml">src/UI/Controls/CustomComboBox.qml</file>
+        <file alias="Controls/VKPassWordMsg.qml">src/UI/Controls/VKPassWordMsg.qml</file>
+        <file alias="Controls/VKFileDialog.qml">src/UI/Controls/VKFileDialog.qml</file>
+        <file alias="Controls/VKPopupDialog.qml">src/UI/Controls/VKPopupDialog.qml</file>
+        <file alias="Controls/VKMouseArea.qml">src/UI/Controls/VKMouseArea.qml</file>
+        <file alias="Controls/SectionHeader.qml">src/UI/Controls/SectionHeader.qml</file>
+        <file alias="Controls/FileButton.qml">src/UI/Controls/FileButton.qml</file>
+        <file alias="Controls/VKMenu.qml">src/UI/Controls/VKMenu.qml</file>
+        <file alias="Controls/VKMenuItem.qml">src/UI/Controls/VKMenuItem.qml</file>
         <file alias="ScreenTools/ScreenTools.qml">src/UI/ScreenTools/ScreenTools.qml</file>
         <file alias="FlightDisplay/FlightDisplayViewVideo.qml">src/UI/FlightDisplay/FlightDisplayViewVideo.qml</file>
         <file alias="FlightDisplay/FlyView.qml">src/UI/FlightDisplay/FlyView.qml</file>
+        <file alias="FlightDisplay/FlyStatusView.qml">src/UI/FlightDisplay/FlyStatusView.qml</file>
         <file alias="FlightDisplay/FlyViewMap.qml">src/UI/FlightDisplay/FlyViewMap.qml</file>
         <file alias="FlightDisplay/FlyViewVideo.qml">src/UI/FlightDisplay/FlyViewVideo.qml</file>
         <file alias="FlightDisplay/ProximityRadarVideoView.qml">src/UI/FlightDisplay/ProximityRadarVideoView.qml</file>
@@ -61,6 +68,8 @@
         <file alias="FlightDisplay/WaypointSettingsDialog.qml">src/UI/FlightDisplay/WaypointSettingsDialog.qml</file>
         <file alias="FlightDisplay/WaypointListPanel.qml">src/UI/FlightDisplay/WaypointListPanel.qml</file>
         <file alias="FlightDisplay/VKReturn.qml">src/UI/FlightDisplay/VKReturn.qml</file>
+        <file alias="FlightDisplay/MainVKToolBar.qml">src/UI/FlightDisplay/MainVKToolBar.qml</file>
+        <file alias="FlightDisplay/BMSMsgToolbar.qml">src/UI/FlightDisplay/BMSMsgToolbar.qml</file>
         <file alias="FlightMap/VehicleMapItem.qml">src/UI/FlightMap/VehicleMapItem.qml</file>
         <file alias="FlightMap/FlightMap.qml">src/UI/FlightMap/FlightMap.qml</file>
         <file alias="FlightMap/MapScale.qml">src/UI/FlightMap/MapScale.qml</file>
@@ -85,6 +94,8 @@
         <file alias="Home/FactorySettings/MotorBar.qml">src/UI/Home/FactorySettings/MotorBar.qml</file>
         <file alias="Home/FactorySettings/MotionSettings.qml">src/UI/Home/FactorySettings/MotionSettings.qml</file>
         <file alias="Home/FactorySettings/MotionParamBar.qml">src/UI/Home/FactorySettings/MotionParamBar.qml</file>
+        <file alias="Home/FactorySettings/VKLevelCalibration.qml">src/UI/Home/FactorySettings/VKLevelCalibration.qml</file>
+        <file alias="Home/FactorySettings/VKCompassCalibration.qml">src/UI/Home/FactorySettings/VKCompassCalibration.qml</file>
         <file alias="Home/DeviceManager/RCSet.qml">src/UI/Home/DeviceManager/RCSet.qml</file>
         <file alias="Home/DeviceManager/RCAdjuster.qml">src/UI/Home/DeviceManager/RCAdjuster.qml</file>
         <file alias="Home/DeviceManager/RemoteSensing.qml">src/UI/Home/DeviceManager/RemoteSensing.qml</file>
@@ -106,6 +117,10 @@
         <file alias="Home/DeviceManager/FirmwareUpgrade.qml">src/UI/Home/DeviceManager/FirmwareUpgrade.qml</file>
         <file alias="Home/DeviceManager/PWMSetTitle.qml">src/UI/Home/DeviceManager/PWMSetTitle.qml</file>
         <file alias="Home/DeviceManager/PWMSet.qml">src/UI/Home/DeviceManager/PWMSet.qml</file>
+        <file alias="Home/DeviceManager/WeightCalculator.qml">src/UI/Home/DeviceManager/WeightCalculator.qml</file>
+        <file alias="Home/DeviceManager/LogDownloadPage.qml">src/UI/Home/DeviceManager/LogDownloadPage.qml</file>
+        <file alias="Home/DeviceManager/LogDownloadProgressDialog.qml">src/UI/Home/DeviceManager/LogDownloadProgressDialog.qml</file>
+        <file alias="Home/DeviceManager/BatteryCalibration.qml">src/UI/Home/DeviceManager/BatteryCalibration.qml</file>
         <file alias="Home/LinkSettings/LinkSettings.qml">src/UI/Home/LinkSettings/LinkSettings.qml</file>
         <file alias="Home/LinkSettings/LinkSelect.qml">src/UI/Home/LinkSettings/LinkSelect.qml</file>
         <file alias="Home/LinkSettings/TcpSettings.qml">src/UI/Home/LinkSettings/TcpSettings.qml</file>

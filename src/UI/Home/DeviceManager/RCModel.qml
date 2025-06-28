@@ -39,8 +39,8 @@ Item {
                         showJapan: _rcSettings.value === 0
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
-                        remoterXValue: activeVehicle ? activeVehicle.rcchanelvalues[3] : ""
-                        remoterYValue: activeVehicle ? (_rcSettings.value === 0 ? 3000 - activeVehicle.rcchanelvalues[2] : activeVehicle.rcchanelvalues[1]) : ""
+                        remoterXValue: activeVehicle ? _rcChannels.rcChannelsRaw[3] : ""
+                        remoterYValue: activeVehicle ? (_rcSettings.value === 0 ? 3000 - _rcChannels.rcChannelsRaw[2] : _rcChannels.rcChannelsRaw[1]) : ""
                     }
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -78,8 +78,8 @@ Item {
                         height: parent.height
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
-                        remoterXValue: activeVehicle ? activeVehicle.rcchanelvalues[0] : ""
-                        remoterYValue: activeVehicle ? (_rcSettings.value === 0 ? activeVehicle.rcchanelvalues[1] : 3000 - activeVehicle.rcchanelvalues[2]) : ""
+                        remoterXValue: activeVehicle ?_rcChannels.rcChannelsRaw[0] : ""
+                        remoterYValue: activeVehicle ? (_rcSettings.value === 0 ? _rcChannels.rcChannelsRaw[1] : 3000 - _rcChannels.rcChannelsRaw[2]) : ""
                         showLeft: false
                         showJapan: _rcSettings.value === 0
                     }

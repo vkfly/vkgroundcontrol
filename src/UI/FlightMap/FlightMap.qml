@@ -15,23 +15,35 @@ import QtPositioning
 import QtLocation
 
 import VKGroundControl
+import VkSdkInstance
 
 Map {
     id: _map
 
+    property bool allowVehicleLocationCenter: false
+    property bool firstVehiclePositionReceived: false
+
+    property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
+    property var _activeVehicleCoordinate: _activeVehicle.coordinate
+
     plugin: Plugin {
         name: "QGroundControl"
     }
-    width: _map.width
-    height: _map.height
     opacity: 0.99 // https://bugreports.qt.io/browse/QTBUG-82185
 
-    zoomLevel: 4
     maximumZoomLevel: 20
 
     Component.onCompleted: {
         updateActiveMapType()
         _possiblyCenterToVehiclePosition()
+    }
+
+    onVisibleChanged: {
+        if(visible) {
+            _possiblyCenterToVehiclePosition()
+        } else {
+            firstVehiclePositionReceived = false
+        }
     }
 
     function updateActiveMapType() {
@@ -48,19 +60,20 @@ Map {
 
     function _possiblyCenterToVehiclePosition() {
         if (!firstVehiclePositionReceived && allowVehicleLocationCenter
-                && _activeVehicleCoordinate.isValid) {
+                && _activeVehicleCoordinate && _activeVehicleCoordinate.isValid) {
             firstVehiclePositionReceived = true
             center = _activeVehicleCoordinate
-            zoomLevel = QGroundControl.flightMapInitialZoom
+            zoomLevel = VKGroundControl.flightMapInitialZoom
         }
     }
 
-    // onMapReadyChanged: {
-    //     if (_map.mapReady) {
-    //         updateActiveMapType()
-    //         _possiblyCenterToVehiclePosition()
-    //     }
-    // }
+    onMapReadyChanged: {
+        if (mapReady) {
+            updateActiveMapType()
+            _possiblyCenterToVehiclePosition()
+        }
+    }
+
     Connections {
         target: VKGroundControl.settingsManager.flightMapSettings.mapType
         function onRawValueChanged() {

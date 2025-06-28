@@ -13,7 +13,7 @@ import "../Common"
 VKInstallBase {
     id: _root
 
-    property var paramvalue : VkSdkInstance.vehicleManager.vehicles[0].parameters["RTK_H_COMP"]
+    property var paramvalue : VkSdkInstance.vehicleManager.activeVehicle.parameters["RTK_H_COMP"]
 
     // 监听参数变化
     onParamvalueChanged: {
@@ -69,13 +69,13 @@ VKInstallBase {
                                 "左后"), qsTr("右后")]
                         onClicked:{
                             if(index===0)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("RTK_H_COMP",0)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("RTK_H_COMP",0)
                             if(index===1)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("RTK_H_COMP",90)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("RTK_H_COMP",90)
                             if(index===2)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("RTK_H_COMP",45)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("RTK_H_COMP",45)
                             if(index===3)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("RTK_H_COMP",-45)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("RTK_H_COMP",-45)
                         }
                     }
                 }

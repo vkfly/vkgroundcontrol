@@ -42,6 +42,8 @@ FlightMap {
     property int mousey: 0
     readonly property int _decimalPlaces: 7
     property bool mousePressed: false
+    property bool _keepVehicleCentered: pipMode ? true : false
+    allowVehicleLocationCenter: !_keepVehicleCentered
 
     VKPipState {
         id: _pipState
@@ -62,12 +64,6 @@ FlightMap {
     }
 
     onPipModeChanged: _adjustMapZoomForPipMode()
-
-    onVisibleChanged: {
-        if (visible) {
-            center = VKGroundControl.flightMapPosition
-        }
-    }
 
     Timer {
         id: panRecenterTimer

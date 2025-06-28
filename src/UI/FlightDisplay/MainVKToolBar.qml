@@ -8,32 +8,29 @@ import VkSdkInstance 1.0
 
 Item {
     id: _root
-    property double batteryVoltage: _activeVehicle ? _activeVehicle.batteryVoltage.toFixed(
-                                                         1) : 0
     property double satellites_num: 0
     property bool gps2_status: false
-    property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle1 ? QGroundControl.multiVehicleManager.activeVehicle1 : ""
-    property var weigher_cell: _vehicles.weigherState
-    property var parachute_cell: _vehicles.formationLeader
+    property var weigher_cell: _activeVehicle ? _activeVehicle.weigherState : undefined
+    property var parachute_cell: _activeVehicle ? _activeVehicle.formationLeader : undefined
     property var gps_status: _activeVehicle ? _activeVehicle.gps_intraw1[18] : ""
     property var selectevehicle
     property var parsedErrors: ""
-    property var bms_cell: _activeVehicle.bms_cell
+    property var bms_cell: _activeVehicle ? _activeVehicle.bms_cell : 0
     property var gps1_num: 0
     property var gps2_num: 0
     property var showzuoye: false
 
     //测试代码和showRtk
     property bool showRtk: false
-    property var _vehicles: VkSdkInstance.vehicleManager.activeVehicle
+    property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
     property var _appSettings: VKGroundControl.settingsManager.appSettings
     signal settingChanged(int newValue)
 
-    property int baojingerror1: _vehicles ? _vehicles.sysStatus.errorCount1 : 0
-    property int baojingerror2: _vehicles ? _vehicles.sysStatus.errorCount2 : 0
-    property int baojingerror3: _vehicles ? _vehicles.sysStatus.errorCount3 : 0
+    property int baojingerror1: _activeVehicle ? _activeVehicle.sysStatus.errorCount1 : 0
+    property int baojingerror2: _activeVehicle ? _activeVehicle.sysStatus.errorCount2 : 0
+    property int baojingerror3: _activeVehicle ? _activeVehicle.sysStatus.errorCount3 : 0
 
-    property var custmode: _vehicles.heartbeat.heartbeatCustomMode
+    property var custmode: _activeVehicle ? _activeVehicle.heartbeat.heartbeatCustomMode : undefined
 
     onCustmodeChanged: {
 
@@ -44,6 +41,7 @@ Item {
     }
 
     onWeigher_cellChanged: {
+        if(!weigher_cell) return
         if (weigher_cell.timestamp !== "" && weigher_cell.timestamp !== 0
                 && weigher_cell.timestamp !== "0") {
             weigher_text.visible = true
@@ -51,6 +49,7 @@ Item {
         }
     }
     onParachute_cellChanged: {
+        if(!parachute_cell) return
         if (parachute_cell.timestamp !== "" && parachute_cell.timestamp !== 0
                 && parachute_cell.timestamp !== "0") {
             parachute.visible = true
@@ -91,68 +90,13 @@ Item {
                                       baojingerror3)
     }
 
-    function setapptaskmode(taskid, id) {
-        if (taskid === 0) {
-            comobox1.model = wuliuModel
-            if (id === 10) {
-                comobox1.currentIndex = 0
-            }
-            if (id === 11) {
-                comobox1.currentIndex = 1
-            }
-            if (id === 12) {
-                comobox1.currentIndex = 2
-            }
-        }
-        if (taskid === 1) {
-            comobox1.model = xunchaModel
-            if (id === 20) {
-                comobox1.currentIndex = 0
-            }
-            if (id === 41) {
-                comobox1.currentIndex = 1
-            }
-            if (id === 22) {
-                comobox1.currentIndex = 2
-            }
-        }
-        if (taskid === 2) {
-            comobox1.model = bianduiModel
-            comobox1.currentIndex = 0
-        }
-    }
+
     Settings {
         id: settings
         property int application_setting: 0 //0物流模式 1巡检模式 2 侦察模式
         property int application_setting_id: 0 //00物流模式 10巡检模式 20 侦察模式  0-9为物流模式id 10到19为巡检模式id 20-29为侦察模式id
     }
-    property ListModel wuliuModel: ListModel {
-        ListElement {
-            text: qsTr("手动物流")
-        }
-        ListElement {
-            text: qsTr("AB物流")
-        }
-        ListElement {
-            text: qsTr("多点物流")
-        }
-    }
-    property ListModel xunchaModel: ListModel {
-        ListElement {
-            text: qsTr("手动巡查")
-        }
-        ListElement {
-            text: qsTr("指点巡查")
-        }
-        ListElement {
-            text: qsTr("航线巡查")
-        }
-    }
-    property ListModel bianduiModel: ListModel {
-        ListElement {
-            text: qsTr("编队飞行")
-        }
-    }
+
     onSelectevehicleChanged: {
         bmss0.visible = false
         bmss1.visible = false
@@ -321,62 +265,63 @@ Item {
     }
 
     function getflightmode() {
-        if (_vehicles.heartbeat.heartbeatCustomMode === 3) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 3) {
             return qsTr("姿态模式")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 4) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 4) {
             return qsTr("定点模式")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 10) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 10) {
             return qsTr("自动起飞")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 11) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 11) {
             return qsTr("自动悬停")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 12) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 12) {
             return qsTr("自动返航")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 13) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 13) {
             return qsTr("飞向目标点")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 15) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 15) {
             return qsTr("自动巡航")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 18) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 18) {
             return qsTr("指点飞行")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 19) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 19) {
             return qsTr("降落")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 20) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 20) {
             return qsTr("迫降")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 21) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 21) {
             return qsTr("跟随")
         }
 
-        if (_vehicles.heartbeat.heartbeatCustomMode === 23) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 23) {
             return qsTr("航点环绕")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 24) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 24) {
             return qsTr("动平台起飞")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 25) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 25) {
             return qsTr("动平台降落")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 26) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 26) {
             return qsTr("自主避障")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 27) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 27) {
             return qsTr("OFFBORAD 控制")
         }
-        if (_vehicles.heartbeat.heartbeatCustomMode === 28) {
+        if (_activeVehicle.heartbeat.heartbeatCustomMode === 28) {
             return qsTr("队形编队")
         }
+        return ""
     }
     function getfixed() {
-        if (_vehicles) {
-            if (_vehicles.RtkMsg.rtkMsgFixType === 6) {
+        if (_activeVehicle) {
+            if (_activeVehicle.RtkMsg.rtkMsgFixType === 6) {
                 return "R"
             } else {
                 return ""
@@ -386,9 +331,9 @@ Item {
         }
     }
     function getheading() {
-        if (_vehicles) {
-            if (_vehicles.RtkMsg.rtkMsgYaw > 0
-                    && _vehicles.RtkMsg.rtkMsgYaw <= 36000) {
+        if (_activeVehicle) {
+            if (_activeVehicle.RtkMsg.rtkMsgYaw > 0
+                    && _activeVehicle.RtkMsg.rtkMsgYaw <= 36000) {
                 return "H"
             } else {
                 return ""
@@ -430,7 +375,7 @@ Item {
                 // text: "退出"
                 width: parent.height * 1.5
                 height: parent.height
-                onClicked: mainWindow.windowState = 0
+                onClicked: mainWindow.goHome()
                 background: Rectangle {
                     anchors.fill: parent
                     color: "#00000000"
@@ -439,27 +384,6 @@ Item {
                         height: parent.height * 0.9
                         anchors.centerIn: parent
                         source: "/qmlimages/icon/left.png"
-                    }
-                }
-            }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                //第八个
-                Item {
-                    width: 500 * sw
-                    height: 45 * sw
-                    anchors.verticalCenter: parent.verticalCenter
-                    Text {
-                        id: baojingtext
-                        width: 440 * sw
-                        height: 45 * sw
-                        anchors.fill: parent
-                        verticalAlignment: Text.AlignVCenter // 垂直居中
-                        text: ""
-                        //wrapMode: Text.Wrap
-                        color: "white"
-                        font.pixelSize: 50 * sh
-                        font.bold: false
                     }
                 }
             }
@@ -494,9 +418,9 @@ Item {
                         //horizontalAlignment: Text.AlignHCenter
                         anchors.verticalCenter: parent.verticalCenter // 垂直居中
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: _vehicles ? (_vehicles.heartbeat.heartbeatCustomMode
+                        text: _activeVehicle ? (_activeVehicle.heartbeat.heartbeatCustomMode
                                            === 12 ? (getuavid() + getstrreason(
-                                                         _vehicles.fmuStatus.loiterReason)) : _vehicles.heartbeat.heartbeatCustomMode === 11 ? gethoverreason(_vehicles.fmuStatus.loiterReason) : (getuavid() + getflightmode())) : ""
+                                                         _activeVehicle.fmuStatus.loiterReason)) : _activeVehicle.heartbeat.heartbeatCustomMode === 11 ? gethoverreason(_activeVehicle.fmuStatus.loiterReason) : (getuavid() + getflightmode())) : ""
                         color: "white"
                         wrapMode: Text.Wrap
                         font.pixelSize: 55 * sh
@@ -512,8 +436,8 @@ Item {
                     anchors.right: parent.right
                     height: 65 * sw
                     spacing: 0 //左右的距离（现在是没有距离）
-                    //第六个
-                    // QXBMSMsgToolBar{
+                   //第六个
+                    // QXB MSMsgToolBar{
                     // }
                     Row {
                         id: vol_msg
@@ -530,10 +454,7 @@ Item {
 
                                 anchors.verticalCenter: parent.verticalCenter
                                 //anchors.horizontalCenter: parent.horizontalCenter
-                                Rectangle {
-                                    anchors.fill: parent
-                                    color: mainWindow.showBattery ? "#40ffffff" : "#000000"
-                                }
+
                                 Image {
                                     width: 40 * sw
                                     height: 40 * sw
@@ -559,35 +480,27 @@ Item {
                         Column {
                             width: 120 * sw
                             anchors.verticalCenter: parent.verticalCenter
-                            //height: 60*sw
                             spacing: 0
                             Text {
                                 width: 120 * sw
                                 height: 30 * sw
-                                //anchors.verticalCenter: parent.verticalCenter // 垂直居中
-                                text: VkSdkInstance.vehicleManager.vehicles[0].sysStatus.batteryVoltage.toFixed(
-                                          2) + "V"
-                                //horizontalAlignment: Text.AlignHCenter
+                                text: _activeVehicle ? _activeVehicle.sysStatus.batteryVoltage.toFixed(
+                                          2) + "V" : "N/A"
                                 verticalAlignment: Text.AlignVCenter
                                 color: "#FFFFFF"
                                 font.pixelSize: 55 * sh
-                                //font.bold: false
                             }
                             Text {
                                 width: 120 * sw
                                 height: 30 * sw
                                 visible: false
-                                //anchors.verticalCenter: parent.verticalCenter // 垂直居中
                                 text: _activeVehicle ? (_activeVehicle.prc_vol + "%")
                                                        + ((_activeVehicle.current_battery
                                                            * 0.01).toFixed(
                                                               0.) + "A") : "N/A"
-                                //   text: _activeVehicle?(_activeVehicle.prc_vol+"%"):"N/A"
-                                // horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                                 color: "#FFFFFF"
                                 font.pixelSize: 48 * sh
-                                //font.bold: false
                             }
                         }
                     }
@@ -664,9 +577,7 @@ Item {
                                 visible: stat_type.text !== ""
                                 width: 60 * sw
                                 height: 30 * sw
-                                //anchors.verticalCenter: parent.verticalCenter // 垂直居中
                                 text: getfixed() + getheading() + get_rtk_star()
-                                //horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                                 color: "#FFFFFF"
                                 font.pixelSize: 48 * sh
@@ -676,14 +587,10 @@ Item {
                                 id: gnssnum
                                 width: 60 * sw
                                 height: 30 * sw
-                                // /anchors.verticalCenter: parent.verticalCenter // 垂直居中
-                                // horizontalAlignment: Text.AlignHCenter
-                                text: _vehicles.GNSS1.gpsInputSatellitesVisible
+                                text: _activeVehicle ? _activeVehicle.GNSS1.gpsInputSatellitesVisible : "N/A"
                                 verticalAlignment: Text.AlignVCenter
-
                                 color: "#FFFFFF"
                                 font.pixelSize: stat_type.visible ? 48 * sh : 55 * sh
-                                //font.bold: false
                             }
                         }
                     }
@@ -752,8 +659,6 @@ Item {
                                         ctlmsg.text_slider = qsTr("立即停桨开伞")
                                         ctlmsg.ctl_id = 11 //立即停桨叶开伞
                                         ctlmsg.open()
-                                        //mainWindow.showRtk=!mainWindow.showRtk;
-                                        //setelliteWindow.visible = true;
                                     }
                                 }
                             }
@@ -765,11 +670,11 @@ Item {
                             height: 60 * sw
                             anchors.verticalCenter: parent.verticalCenter // 垂直居中
                             horizontalAlignment: Text.AlignHCenter
-                            text: parachute_cell.state
+                            text: parachute_cell ? parachute_cell.state
                                   === "0" ? qsTr("未就绪") : parachute_cell.state
                                             === 1 ? qsTr("已就绪") : parachute_cell.state
                                                     === 2 ? qsTr("已开伞") : parachute_cell.state
-                                                            === 3 ? qsTr("故障") : ""
+                                                            === 3 ? qsTr("故障") : "" : "N/A"
                             verticalAlignment: Text.AlignVCenter
                             color: "#FFFFFF"
                             font.pixelSize: 55 * sh
@@ -797,7 +702,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter // 垂直居中
                             horizontalAlignment: Text.AlignHCenter
                             text: qsTr("%1kg").arg(
-                                      _vehicles ? (_vehicles.weigher_cell.weight * 0.001).toFixed(
+                                      _activeVehicle ? (_activeVehicle.weigher_cell.weight * 0.001).toFixed(
                                                       1) : 0)
                             verticalAlignment: Text.AlignVCenter
                             color: "#FFFFFF"
@@ -805,139 +710,8 @@ Item {
                             //font.bold: false
                         }
                     }
-
                     Item {
-                        width: 20 * sw
-                        height: 50 * sw
-                    }
-                    ComboBox {
-                        id: comobox1
-                        width: 220 * sw
-                        height: 50 * sw
-                        anchors.verticalCenter: parent.verticalCenter
-                        model: mainWindow.application_setting
-                               === 0 ? wuliuModel : mainWindow.application_setting
-                                       === 1 ? xunchaModel : mainWindow.application_setting
-                                               === 1 ? bianduiModel : wuliuModel
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 10
-                            color: "white"
-                        }
-                        contentItem: Text {
-                            text: comobox1.currentText
-                            font.bold: false
-                            font.pixelSize: 22 * sw
-                            anchors.centerIn: parent
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                        }
-                        delegate: ItemDelegate {
-                            width: 220 * sw
-                            height: 50 * sw
-                            background: Rectangle {
-                                anchors.fill: parent
-                                color: "white"
-                            }
-                            Text {
-                                width: 220 * sw
-                                height: 50 * sw
-                                font.pixelSize: 22 * sw
-                                font.bold: false
-                                text: model.text
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
-                            }
-                        }
-                        onCurrentIndexChanged: {
-                            if (mainWindow.application_setting === 0) {
-                                if (currentIndex === 0) {
-                                    mainWindow.setpoint = false
-                                    showzuoye = false
-                                    settings.application_setting = 0
-                                    settings.application_setting_id = 10 //0为手动物流
-                                    mainWindow.application_setting_id = 10
-                                    settings.sync()
-                                } else if (currentIndex === 1) {
-                                    mainWindow.setpoint = false
-                                    if (missionModel.itemCount === 0
-                                            || missionModel.getwpt_mode(
-                                                ) === 111) {
-                                        settings.application_setting = 0
-                                        settings.application_setting_id = 11 //1为AB物流
-                                        mainWindow.application_setting_id = 11
-
-                                        missionModel.setwpt_mode(111)
-                                        settings.sync()
-                                    } else if (missionModel.getwpt_mode(
-                                                   ) !== 111) {
-                                        messageboxs.sendId = "Enterab" //进入AB模式
-                                        messageboxs.messageText = qsTr(
-                                                    "该航线不是AB物流航线，是否删除该航线？")
-                                        messageboxs.parameterY = 0
-                                        messageboxs.messageType = 1
-                                        messageboxs.open()
-                                    }
-                                    showzuoye = false
-                                    settings.sync()
-                                } else if (currentIndex === 2) {
-                                    mainWindow.setpoint = false
-                                    if (missionModel.itemCount === 0
-                                            || missionModel.getwpt_mode(
-                                                ) === 121) {
-                                        //text_wuliu_title.text="多点物流"
-                                        settings.application_setting = 0
-                                        settings.application_setting_id = 12 //1为AB物流
-                                        mainWindow.application_setting_id = 12
-                                        missionModel.setwpt_mode(
-                                                    121) //settingChanged(1)
-                                        settings.sync()
-                                    } else if (missionModel.getwpt_mode(
-                                                   ) !== 121) {
-                                        messageboxs.sendId = "Enterduodian" //进入AB模式
-                                        messageboxs.messageText = qsTr(
-                                                    "该航线不是多点物流航线，是删除该航线？")
-                                        messageboxs.messageType = 1
-                                        messageboxs.parameterY = 0
-                                        messageboxs.open()
-                                    }
-                                    settings.sync()
-                                    showzuoye = false
-                                }
-                            }
-                            if (mainWindow.application_setting === 1) {
-                                if (currentIndex === 0) {
-                                    showzuoye = false
-                                    settings.application_setting = 1
-                                    settings.application_setting_id = 20 //0为手动物流
-                                    mainWindow.application_setting_id = 20
-                                    mainWindow.setpoint = false
-                                    settings.sync()
-                                }
-                                if (currentIndex === 1) {
-                                    showzuoye = false
-                                    settings.application_setting = 1
-                                    settings.application_setting_id = 41 //11为管线巡检
-                                    mainWindow.application_setting_id = 41
-                                    mainWindow.setpoint = true
-                                    settings.sync()
-                                }
-                                if (currentIndex === 2) {
-                                    showzuoye = false
-                                    settings.application_setting = 1
-                                    settings.application_setting_id = 22 //2为多点物流
-                                    mainWindow.application_setting_id = 22
-                                    mainWindow.setpoint = false
-                                    settings.sync()
-                                }
-                            }
-                            if (mainWindow.application_setting === 2) {
-                                mainWindow.setpoint = false
-                            }
-                        }
-                    }
-                    Item {
-                        width: 5 * sw
+                        width: 36 * sw
                         height: 50 * sw
                     }
                 }
@@ -948,10 +722,8 @@ Item {
         visible: showRtk
         width: 560 * ScreenTools.scaleWidth
         height: 140 * ScreenTools.scaleWidth
-        //anchors.top: parent.top
-        //anchors.right: parent.right
-        //anchors.topMargin: 0
-        //anchors.rightMargin: 70*ScreenTools.scaleWidth
+        parent: signalIcon
+
         // 智能定位
         x: {
             // 强制绑定动态属性
@@ -1005,7 +777,7 @@ Item {
                     color: "white"
                     font.pixelSize: 20 * ScreenTools.scaleWidth
                     text: qsTr("ANT1:%1").arg(
-                              _vehicles ? _vehicles.RtkMsg.rtkMsgSatellitesVisible : "")
+                              _activeVehicle ? _activeVehicle.RtkMsg.rtkMsgSatellitesVisible : "")
                     verticalAlignment: Text.AlignVCenter
                 }
                 Text {
@@ -1015,7 +787,7 @@ Item {
                     color: "white"
                     font.pixelSize: 20 * ScreenTools.scaleWidth
                     text: qsTr("ANT2:%1").arg(
-                              _vehicles ? _vehicles.RtkMsg.rtkMsgDgpsSatellites : "")
+                              _activeVehicle ? _activeVehicle.RtkMsg.rtkMsgDgpsSatellites : "")
                     verticalAlignment: Text.AlignVCenter
                 }
             }
@@ -1045,7 +817,7 @@ Item {
                     color: "white"
                     font.pixelSize: 20 * ScreenTools.scaleWidth
                     text: qsTr("RTK海拔:%1").arg(
-                              _vehicles ? (_vehicles.RtkMsg.rtkMsgAltitudeMsl / 1000.0).toFixed(
+                              _activeVehicle ? (_activeVehicle.RtkMsg.rtkMsgAltitudeMsl / 1000.0).toFixed(
                                               1) : "")
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -1079,11 +851,11 @@ Item {
                     font.pixelSize: 20 * ScreenTools.scaleWidth
                     text: mainWindow.dingweimode
                           === "beidou" ? qsTr("北斗海拔:%1m").arg(
-                                             _vehicles ? (_vehicles.RtkMsg.rtkMsgAltitudeMsl
+                                             _activeVehicle ? (_activeVehicle.RtkMsg.rtkMsgAltitudeMsl
                                                           * 0.1 * 10).toFixed(
                                                              1) : "") : qsTr(
                                              "GNSS海拔:%1m").arg(
-                                             _vehicles ? (_vehicles.RtkMsg.rtkMsgAltitudeMsl
+                                             _activeVehicle ? (_activeVehicle.RtkMsg.rtkMsgAltitudeMsl
                                                           * 0.1 * 10).toFixed(
                                                              1) : "")
                     verticalAlignment: Text.AlignVCenter
@@ -1096,11 +868,11 @@ Item {
                     font.pixelSize: 20 * ScreenTools.scaleWidth
                     text: mainWindow.dingweimode
                           === "beidou" ? qsTr("北斗 PDOP:%1").arg(
-                                             _vehicles ? (_vehicles.RtkMsg.rtkMsgHdop
+                                             _activeVehicle ? (_activeVehicle.RtkMsg.rtkMsgHdop
                                                           * 0.01).toFixed(
                                                              1) + "m" : "") : qsTr(
                                              "GNSS PDOP:%1").arg(
-                                             _vehicles ? (_vehicles.RtkMsg.rtkMsgHdop
+                                             _activeVehicle ? (_activeVehicle.RtkMsg.rtkMsgHdop
                                                           * 0.01).toFixed(
                                                              1) + "m" : "")
                     verticalAlignment: Text.AlignVCenter
@@ -1109,14 +881,8 @@ Item {
                     id: gnss2
                     height: 40 * ScreenTools.scaleWidth
                     width: 180 * ScreenTools.scaleWidth
-                    //height: 40*ScreenTools.scaleWidth
-                    //anchors.left:parent.left
-                    //color:_activeVehicle.gps_intraw1[18]==="1"&&_activeVehicle.gps_intraw1[8]==="0"?"red": "white"
                     color: "white"
                     font.pixelSize: 20 * ScreenTools.scaleWidth
-                    //text:qsTr("GNSS-B:未连接")
-                    //text:_activeVehicle?_activeVehicle.gps_intraw1[8]==="0"?qsTr("GNSS:断开"):qsTr("GNSS星数:%1").arg(_activeVehicle.gps_intraw1[9]):""
-                    //text:qsTr("GNSS星数:%1").arg(_activeVehicle.gps_intraw1[8])
                     verticalAlignment: Text.AlignVCenter
                 }
             }
@@ -1167,6 +933,7 @@ Item {
             return qsTr("伺服动力故障保护返航")
         if (reason === 13)
             return qsTr("航线完成返航")
+        return ""
     }
 
     function gethoverreason(reason) {
@@ -1202,11 +969,12 @@ Item {
             return qsTr("发动机油量低悬停")
         if (reason === 21)
             return qsTr("定点悬停(航点数据异常)")
+        return ""
     }
 
     function get_rtk_star() {
-        if (_vehicles)
-            return (_vehicles.RtkMsg.rtkMsgSatellitesVisible)
+        if (_activeVehicle)
+            return (_activeVehicle.RtkMsg.rtkMsgSatellitesVisible)
         else {
             return ""
         }
@@ -1214,8 +982,8 @@ Item {
 
     //TODO:旧的showrtkstatus
     function showrtkstatus() {
-        if (_vehicles) {
-            switch (parseInt(_vehicles.RtkMsg.rtkMsgFixType)) {
+        if (_activeVehicle) {
+            switch (parseInt(_activeVehicle.RtkMsg.rtkMsgFixType)) {
             case 0:
                 return qsTr("未连接")
             case 1:
@@ -1231,7 +999,7 @@ Item {
             case 6:
                 return qsTr("固定解")
             default:
-                return _vehicles ? _vehicles.RtkMsg.rtkMsgFixType : ""
+                return _activeVehicle ? _activeVehicle.RtkMsg.rtkMsgFixType : ""
             }
         } else {
             return ""
@@ -1239,13 +1007,13 @@ Item {
     }
 
     function gethead() {
-        if (_vehicles) {
-            if (parseInt(_vehicles.RtkMsg.rtkMsgYaw) > 0 && parseInt(
-                        _vehicles.RtkMsg.rtkMsgYaw) < 36000)
-                return (parseInt(_vehicles.RtkMsg.rtkMsgYaw) * 0.01).toFixed(1)
-            else if (parseInt(_vehicles.RtkMsg.rtkMsgYaw) === 0) {
+        if (_activeVehicle) {
+            if (parseInt(_activeVehicle.RtkMsg.rtkMsgYaw) > 0 && parseInt(
+                        _activeVehicle.RtkMsg.rtkMsgYaw) < 36000)
+                return (parseInt(_activeVehicle.RtkMsg.rtkMsgYaw) * 0.01).toFixed(1)
+            else if (parseInt(_activeVehicle.RtkMsg.rtkMsgYaw) === 0) {
                 return qsTr("无侧向")
-            } else if (parseInt(_vehicles.RtkMsg.rtkMsgYaw) === 65535) {
+            } else if (parseInt(_activeVehicle.RtkMsg.rtkMsgYaw) === 65535) {
                 return qsTr("无侧向")
             } else {
                 return ""

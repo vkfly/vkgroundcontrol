@@ -19,8 +19,8 @@ import FlightMap
 import FlightDisplay
 import ScreenTools
 import Controls
-
 import Home
+
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
 import VkSdkInstance 1.0
@@ -46,6 +46,7 @@ ApplicationWindow {
     property var videoVisible: false
     property int windowState: MainRootWindow.WindowState.Home
     property var appversion: "V1.2.41"
+    //property bool isgongchang : false //工厂模式密码
 
     //报错属性
     property var parsedErrors: ""
@@ -99,6 +100,11 @@ ApplicationWindow {
     function isMainWindow() {
         return windowState === MainRootWindow.WindowState.MainWindow
     }
+
+    function goHome() {
+        return windowState = MainRootWindow.WindowState.Home
+    }
+
     onClosing: close => {
                    if (!_forceClose) {
                        _closeChecksToSkip = 0
@@ -107,10 +113,10 @@ ApplicationWindow {
                }
 
     header: MainVKToolBar {
-        id: mainvktoolbar
-        width: mainWindow.width
-        height: sw * 65
-        visible: windowState === MainRootWindow.WindowState.MainWindow
+          id: header
+          width: parent.width
+          height: sw * 65
+          visible: windowState === MainRootWindow.WindowState.MainWindow
     }
 
     HomePage {
@@ -125,7 +131,6 @@ ApplicationWindow {
     }
 
     FlyView {
-        id: flyView
         anchors.fill: parent
         visible: windowState === MainRootWindow.WindowState.MainWindow
     }
@@ -134,6 +139,13 @@ ApplicationWindow {
         id: messageboxs
         anchors.centerIn: parent
         popupWidth: parent.width * 0.5
+    }
+
+    VKPassWordMsg
+    {
+        width: 800 * ScreenTools.scaleWidth
+        id: vkPasswordmsg
+        anchors.centerIn: parent
     }
 
     KeyboardNumView{
@@ -158,8 +170,8 @@ ApplicationWindow {
                     _activeVehicle.sendesc_index(keyBoardNumView.currentText)
             }
             if (keyBoardNumView.sendId === 99) {
-                if (VkSdkInstance.vehicleManager.vehicles[0]) {
-                    VkSdkInstance.vehicleManager.vehicles[0].setParam(
+                if (VkSdkInstance.vehicleManager.activeVehicle) {
+                    VkSdkInstance.vehicleManager.activeVehicle.setParam(
                                 keyBoardNumView.parameterName,
                                 keyBoardNumView.currentText)
                 }

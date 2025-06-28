@@ -2,13 +2,13 @@
 import QtQuick.Controls
 import VKGroundControl.Palette
 
-
+import ScreenTools
 // 按钮集合组件
 Item {
     id: root
 
     // 属性定义
-    property real fontSize: 12
+    property real fontSize: 25 * ScreenTools.scaleWidth
     property string text: qsTr("机型设置")
     property color unSelectedBackgroundColor: "lightgray"
     property color selectedBackgroundColor: "#00000000"

@@ -16,30 +16,17 @@ Flickable {
     //property var buttonMainColor: mainWindow.titlecolor
     property string buttonMainColor: ScreenTools.titleColor
     property string buttonTextColor: "white"
-
-    // Vehicle management related properties
-    //property var activeVehicle: VKGroundControl.multiVehicleManager.activeVehicle1
-    //property var parameterManager: VKGroundControl.multiVehicleManager.activeVehicle1 ? VKGroundControl.multiVehicleManager.activeVehicle1.parameterManager : ""
-   // property string paramName: parameterManager ? parameterManager.paramName : ""
-    //property string paramValue: parameterManager ? parameterManager.paramValue : ""
     property int attitudeMode: 0
 
 
     property var _rcSettings: VKGroundControl.settingsManager.appSettings.rcSetting
-    property var activeVehicle:VkSdkInstance.vehicleManager.vehicles[0]
-    property var _rcChannels:VkSdkInstance.vehicleManager.vehicles[0].rcChannels
+    property var activeVehicle:VkSdkInstance.vehicleManager.activeVehicle
+    property var _rcChannels:VkSdkInstance.vehicleManager.activeVehicle.rcChannels
 
     height: parent.height
     width: parent.width
     clip: true
     contentHeight: mainColumn.implicitHeight
-
-
-
-    //Settings {
-    //    id: settings
-    //    property int rcSetting: 0
-    //}
 
     RCAdjuster{
         width: 800 * ScreenTools.scaleWidth

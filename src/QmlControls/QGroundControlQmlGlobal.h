@@ -17,7 +17,7 @@
 #include <QtPositioning/QGeoCoordinate>
 
 // class MissionCommandTree;
-// class QGCMapEngineManager;
+class QGCMapEngineManager;
 class VKPalette;
 class SettingsManager;
 class VideoManager;
@@ -27,6 +27,7 @@ Q_MOC_INCLUDE("VKPalette.h")
 Q_MOC_INCLUDE("SettingsManager.h")
 Q_MOC_INCLUDE("VideoManager.h")
 Q_MOC_INCLUDE("FileDownloader.h")
+Q_MOC_INCLUDE("QGCMapEngineManager.h")
 
 class QGroundControlQmlGlobal : public QObject {
     Q_OBJECT
@@ -59,6 +60,7 @@ public:
     Q_PROPERTY(QGeoCoordinate       flightMapPosition       READ    flightMapPosition       WRITE setFlightMapPosition  NOTIFY flightMapPositionChanged)
     Q_PROPERTY(double               flightMapZoom           READ    flightMapZoom           WRITE setFlightMapZoom      NOTIFY flightMapZoomChanged)
     Q_PROPERTY(double               flightMapInitialZoom    MEMBER  _flightMapInitialZoom   CONSTANT)   ///< Zoom level to use when either gcs or vehicle shows up for first time
+    Q_PROPERTY(QGCMapEngineManager* mapEngineManager        READ    mapEngineManager        CONSTANT)
 
     Q_PROPERTY(QString  parameterFileExtension  READ parameterFileExtension CONSTANT)
     Q_PROPERTY(QString  missionFileExtension    READ missionFileExtension   CONSTANT)
@@ -139,6 +141,10 @@ public:
     }
     static double           flightMapZoom       ()  {
         return _zoom;
+    }
+
+    QGCMapEngineManager*    mapEngineManager    ()  {
+        return _mapEngineManager;
     }
 
 #ifndef QGC_AIRLINK_DISABLED
@@ -233,7 +239,8 @@ private:
 
     VideoManager*           _videoManager           = nullptr;
     SettingsManager*        _settingsManager        = nullptr;
-    VKPalette*             _globalPalette          = nullptr;
+    VKPalette*              _globalPalette          = nullptr;
+    QGCMapEngineManager*    _mapEngineManager       = nullptr;
     double                  _flightMapInitialZoom   = 17.0;
     QStringList             _altitudeModeEnumString;
 

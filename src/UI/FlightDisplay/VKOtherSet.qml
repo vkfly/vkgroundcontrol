@@ -24,11 +24,8 @@ Flickable {
     property color fontColor: "white"
 
     property var appSettings: VKGroundControl.settingsManager.appSettings
-    property int isUdp: 0
-
-    Component.onCompleted: {
-        isUdp = udpSettingsManager.getValue("udp/isopen", "0")
-    }
+    property string _mapProvider:               VKGroundControl.settingsManager.flightMapSettings.mapProvider.value
+    property string _mapType:                   VKGroundControl.settingsManager.flightMapSettings.mapType.value
 
     // === 可复用组件定义 ===
     component SettingSection: Item {
@@ -146,37 +143,6 @@ Flickable {
             }
         }
 
-        // 应用模式设置
-        SettingSection {
-            width: parent.width
-
-            content: Column {
-                width: parent.width
-                SettingRow {
-                    labelText: qsTr("应用模式")
-                    content: GroupButton {
-                        width: 320 * ScreenTools.scaleWidth
-                        height: 50 * ScreenTools.scaleWidth
-                        anchors.verticalCenter: parent.verticalCenter
-                        names: fcuModelVersions === "V10Pro" ? [qsTr(
-                                                                    "物流"), qsTr(
-                                                                    "巡查"), qsTr(
-                                                                    "集群")] : [qsTr(
-                                                                                  "物流"), qsTr("巡查")]
-                        selectedIndex: appSettings.applicationSetting.value
-                        mainColor: root.backgroundColor
-                        fontSize: buttonFontSize * 5 / 6
-                        spacing: 3 * ScreenTools.scaleWidth
-                        backgroundColor: "black"
-
-                        onClicked: function (index) {
-                            appSettings.applicationSetting.value = index
-                        }
-                    }
-                }
-            }
-        }
-
         // 飞行设置
         SettingSection {
             width: parent.width
@@ -186,7 +152,6 @@ Flickable {
 
                 SettingRow {
                     labelText: qsTr("飞行轨迹")
-
                     content: CustomComboBox {
                         width: 320 * ScreenTools.scaleWidth
                         height: 50 * ScreenTools.scaleWidth
@@ -226,7 +191,7 @@ Flickable {
             content: Column {
                 width: parent.width
                 spacing: 30 * ScreenTools.scaleWidth
-
+/*
                 SettingRow {
                     labelText: qsTr("语言设置")
 
@@ -236,6 +201,8 @@ Flickable {
                         height: 50 * ScreenTools.scaleWidth
                         anchors.verticalCenter: parent.verticalCenter
                         fontSize: buttonFontSize * 5 / 6
+                        // currentIndex: VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumIndex
+                        // model: VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumStrings
                         onActivated: {
                             VKGroundControl.settingsManager.appSettings.qLocaleLanguage.value
                                     = VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumValues[index]
@@ -251,6 +218,7 @@ Flickable {
                         height: 50 * ScreenTools.scaleWidth
                         anchors.verticalCenter: parent.verticalCenter
                         fontSize: buttonFontSize * 5 / 6
+                        currentIndex: 1
                         model: [qsTr("开启"), qsTr("关闭")]
                         onActivated: {
 
@@ -258,7 +226,7 @@ Flickable {
                         }
                     }
                 }
-
+*/
                 SettingRow {
                     labelText: qsTr("地图提供商")
 
@@ -268,7 +236,9 @@ Flickable {
                         height: 50 * ScreenTools.scaleWidth
                         anchors.verticalCenter: parent.verticalCenter
                         fontSize: buttonFontSize * 5 / 6
+                        model: VKGroundControl.mapEngineManager.mapProviderList
                         onActivated: {
+                            _mapProvider = textAt(index)
                             VKGroundControl.settingsManager.flightMapSettings.mapProvider.value
                                     = textAt(index)
                             VKGroundControl.settingsManager.flightMapSettings.mapType.value
@@ -293,6 +263,7 @@ Flickable {
                         height: 50 * ScreenTools.scaleWidth
                         anchors.verticalCenter: parent.verticalCenter
                         fontSize: buttonFontSize * 5 / 6
+                        model: VKGroundControl.mapEngineManager.mapTypeList(_mapProvider)
                         onActivated: {
                             VKGroundControl.settingsManager.flightMapSettings.mapType.value
                                     = textAt(index)
@@ -302,119 +273,6 @@ Flickable {
                             if (index < 0)
                                 index = 0
                             currentIndex = index
-                        }
-                    }
-                }
-            }
-        }
-
-        // UDP设置
-        SettingSection {
-            width: parent.width
-
-            content: Column {
-                width: parent.width
-                spacing: 30 * ScreenTools.scaleWidth
-
-                SettingRow {
-                    labelText: qsTr("UDP数据转发")
-
-                    content: CustomComboBox {
-                        id: udpCombo
-                        width: 320 * ScreenTools.scaleWidth
-                        height: 50 * ScreenTools.scaleWidth
-                        anchors.verticalCenter: parent.verticalCenter
-                        fontSize: buttonFontSize * 5 / 6
-                        model: [qsTr("开启"), qsTr("关闭"), qsTr("气象")]
-                        onActivated: {
-                            udpSettingsManager.setValue("udp/isopen", index)
-                            isUdp = index
-                        }
-                    }
-                }
-
-                SettingRow {
-                    visible: isUdp !== 1
-                    labelText: qsTr("转发IP")
-
-                    content: CustomTextField {
-                        id: forwardIpField
-                        onEditingFinished: {
-
-                            // 处理IP设置
-                        }
-                    }
-                }
-
-                SettingRow {
-                    visible: isUdp !== 1
-                    labelText: qsTr("转发端口")
-
-                    content: CustomTextField {
-                        id: forwardPortField
-                        onTextChanged: {
-                            udpSettingsManager.setValue("udp/port",
-                                                        text.toString())
-                        }
-                        onEditingFinished: {
-                            udpSettingsManager.setValue("udp/port",
-                                                        text.toString())
-                        }
-                    }
-                }
-
-                SettingRow {
-                    visible: isUdp !== 1
-                    labelText: qsTr("接收IP")
-
-                    content: CustomTextField {
-                        id: receiveIpField
-                        onEditingFinished: {
-
-                            // 处理接收IP设置
-                        }
-                    }
-                }
-
-                // 气象控制
-                SettingRow {
-                    visible: isUdp === 2
-                    labelText: qsTr("气象控制")
-
-                    content: Row {
-                        spacing: 1 * ScreenTools.scaleWidth
-
-                        TextButton {
-                            width: 106 * ScreenTools.scaleWidth
-                            height: 50 * ScreenTools.scaleWidth
-                            buttonText: qsTr("开启")
-                            onClicked: {
-                                ctlmsg.text_slider = qsTr("仪器开启")
-                                ctlmsg.ctl_id = 18
-                                ctlmsg.open()
-                            }
-                        }
-
-                        TextButton {
-                            width: 106 * ScreenTools.scaleWidth
-                            height: 50 * ScreenTools.scaleWidth
-                            buttonText: qsTr("关闭")
-                            onClicked: {
-                                ctlmsg.text_slider = qsTr("仪器关闭")
-                                ctlmsg.ctl_id = 19
-                                ctlmsg.open()
-                            }
-                        }
-
-                        TextButton {
-                            width: 106 * ScreenTools.scaleWidth
-                            height: 50 * ScreenTools.scaleWidth
-                            buttonText: qsTr("采样")
-                            onClicked: {
-                                ctlmsg.text_slider = qsTr("仪器采样")
-                                ctlmsg.ctl_id = 20
-                                ctlmsg.open()
-                            }
                         }
                     }
                 }

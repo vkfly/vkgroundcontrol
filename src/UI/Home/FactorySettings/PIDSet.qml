@@ -18,7 +18,7 @@ Flickable {
 
     // 车辆管理相关属性
 
-    property var paramvalue11 : VkSdkInstance.vehicleManager.vehicles[0].parameters["MC_MIN_THR"]
+    property var paramvalue11 : VkSdkInstance.vehicleManager.activeVehicle.parameters["MC_MIN_THR"]
 
 
     onParamvalue11Changed: {
@@ -437,10 +437,10 @@ Flickable {
                             width: parent.width
                             height: parent.height
                             spacing: 2
-                            selectedIndex: VkSdkInstance.vehicleManager.vehicles[0].parameters["IMU_GFLT_TYPE"]
+                            selectedIndex: VkSdkInstance.vehicleManager.activeVehicle.parameters["IMU_GFLT_TYPE"]
                             names: ["0", "1", "2", "3", "4", "5"]
                             onClicked: {
-                                VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_GFLT_TYPE",index)
+                                VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_GFLT_TYPE",index)
                             }
                         }
                     }
@@ -476,11 +476,11 @@ Flickable {
                             width: parent.width
                             height: parent.height
                             spacing: 2
-                            selectedIndex: VkSdkInstance.vehicleManager.vehicles[0].parameters["IMU_AFLT_TYPE"]
+                            selectedIndex: VkSdkInstance.vehicleManager.activeVehicle.parameters["IMU_AFLT_TYPE"]
 
                             names: ["0", "1", "2", "3", "4", "5"]
                             onClicked: {
-                                VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_AFLT_TYPE",index)
+                                VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_AFLT_TYPE",index)
                             }
                         }
                     }
@@ -526,16 +526,16 @@ Flickable {
                                     "快速"), qsTr("高速")]
                             onClicked: {
                                 if(index===0)
-                                    VkSdkInstance.vehicleManager.vehicles[0].setParam("MC_MIN_THR",0.05)
+                                    VkSdkInstance.vehicleManager.activeVehicle.setParam("MC_MIN_THR",0.05)
                                 if(index===1)
-                                    VkSdkInstance.vehicleManager.vehicles[0].setParam("MC_MIN_THR",0.10)
+                                    VkSdkInstance.vehicleManager.activeVehicle.setParam("MC_MIN_THR",0.10)
                                 if(index===2)
-                                    VkSdkInstance.vehicleManager.vehicles[0].setParam("MC_MIN_THR",0.15)
+                                    VkSdkInstance.vehicleManager.activeVehicle.setParam("MC_MIN_THR",0.15)
                                 if(index===3)
-                                    VkSdkInstance.vehicleManager.vehicles[0].setParam("MC_MIN_THR",0.20)
+                                    VkSdkInstance.vehicleManager.activeVehicle.setParam("MC_MIN_THR",0.20)
                                 if(index===4)
-                                    VkSdkInstance.vehicleManager.vehicles[0].setParam("MC_MIN_THR",0.25)
-                                //VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_AFLT_TYPE",index)
+                                    VkSdkInstance.vehicleManager.activeVehicle.setParam("MC_MIN_THR",0.25)
+                                //VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_AFLT_TYPE",index)
                             }
                         }
                     }

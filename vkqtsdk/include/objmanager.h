@@ -18,6 +18,7 @@ public:
     virtual VkVehicle *getVehicle(int sysid) = 0;
 
 signals:
+    // 当有新的飞机连接时，会触发这个信号
     void vehicleAdded(int sysid);
     void vehicleRemoved(int sysid);
     void activeVehicleChanged(int sysid);

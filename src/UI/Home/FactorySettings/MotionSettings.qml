@@ -20,10 +20,10 @@ Flickable {
     property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
 
     // ESC Properties
-    property int escIndex: activeVehicle ? activeVehicle.esc_index : ""
-    property var escCurrent: activeVehicle ? activeVehicle.esc_current : ""
-    property var escVoltage: activeVehicle ? activeVehicle.esc_vol : ""
-    property var escRpm: activeVehicle ? activeVehicle.esc_rpm : ""
+    property int escIndex: activeVehicle && activeVehicle.esc_index ? activeVehicle.esc_index : 0
+    property var escCurrent: activeVehicle && activeVehicle.esc_current ? activeVehicle.esc_current : ""
+    property var escVoltage: activeVehicle && activeVehicle.esc_vol ? activeVehicle.esc_vol : ""
+    property var escRpm: activeVehicle && activeVehicle.esc_rpm ? activeVehicle.esc_rpm : ""
 
     // Advanced Settings Properties
     property bool isAdvanced: false
@@ -238,8 +238,8 @@ Flickable {
                                         }
 
                                         onClicked: {
-                                            if(VkSdkInstance.vehicleManager.vehicles[0]){
-                                                VkSdkInstance.vehicleManager.vehicles[0].setParam("RC_ATT_EN",0);
+                                            if(VkSdkInstance.vehicleManager.activeVehicle){
+                                                VkSdkInstance.vehicleManager.activeVehicle.setParam("RC_ATT_EN",0);
                                             }
                                         }
                                     }
@@ -273,8 +273,8 @@ Flickable {
                                         }
 
                                         onClicked: {
-                                            if(VkSdkInstance.vehicleManager.vehicles[0]){
-                                                VkSdkInstance.vehicleManager.vehicles[0].setParam("RC_ATT_EN",1);
+                                            if(VkSdkInstance.vehicleManager.activeVehicle){
+                                                VkSdkInstance.vehicleManager.activeVehicle.setParam("RC_ATT_EN",1);
                                             }
                                         }
                                     }
@@ -343,6 +343,6 @@ Flickable {
         textWidth: itemTextWidth
         anchors.horizontalCenter: parent.horizontalCenter
         textColor: "gray"
-        parameterValue: activeVehicle ? activeVehicle.parameters[parameter] : 0
+        parameterValue: activeVehicle && activeVehicle.parameters[parameter] ? activeVehicle.parameters[parameter] : 0
     }
 }

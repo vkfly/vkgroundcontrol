@@ -23,35 +23,30 @@
 #include <QtGui/QInputDevice>
 
 #if defined(Q_OS_IOS)
-#include <sys/utsname.h>
+    #include <sys/utsname.h>
 #endif
 
 QGC_LOGGING_CATEGORY(ScreenToolsControllerLog, "qgc.qmlcontrols.screentoolscontroller")
 
 ScreenToolsController::ScreenToolsController(QObject *parent)
-    : QObject(parent)
-{
+    : QObject(parent) {
     // qCDebug(ScreenToolsControllerLog) << Q_FUNC_INFO << this;
 }
 
-ScreenToolsController::~ScreenToolsController()
-{
+ScreenToolsController::~ScreenToolsController() {
     // qCDebug(ScreenToolsControllerLog) << Q_FUNC_INFO << this;
 }
 
-int ScreenToolsController::mouseX()
-{
+int ScreenToolsController::mouseX() {
     return QCursor::pos().x();
 }
 
-int ScreenToolsController::mouseY()
-{
+int ScreenToolsController::mouseY() {
     return QCursor::pos().y();
 }
 
-bool ScreenToolsController::hasTouch()
-{
-    for (const auto &inputDevice: QInputDevice::devices()) {
+bool ScreenToolsController::hasTouch() {
+    for (const auto &inputDevice : QInputDevice::devices()) {
         if (inputDevice->type() == QInputDevice::DeviceType::TouchScreen) {
             return true;
         }
@@ -59,8 +54,7 @@ bool ScreenToolsController::hasTouch()
     return false;
 }
 
-QString ScreenToolsController::iOSDevice()
-{
+QString ScreenToolsController::iOSDevice() {
 #if defined(Q_OS_IOS)
     struct utsname systemInfo;
     uname(&systemInfo);
@@ -70,30 +64,25 @@ QString ScreenToolsController::iOSDevice()
 #endif
 }
 
-QString ScreenToolsController::fixedFontFamily()
-{
+QString ScreenToolsController::fixedFontFamily() {
     return QFontDatabase::systemFont(QFontDatabase::FixedFont).family();
 }
 
-QString ScreenToolsController::normalFontFamily()
-{
+QString ScreenToolsController::normalFontFamily() {
     //-- See App.SettinsGroup.json for index
     const int langID = SettingsManager::instance()->appSettings()->qLocaleLanguage()->rawValue().toInt();
     if (langID == QLocale::Korean) {
         return QStringLiteral("NanumGothic");
     }
-
-    return QStringLiteral("Open Sans");
+    return QStringLiteral("Nowar Warcraft Rounded CN Medium");
 }
 
-double ScreenToolsController::defaultFontDescent(int pointSize)
-{
+double ScreenToolsController::defaultFontDescent(int pointSize) {
     return QFontMetrics(QFont(normalFontFamily(), pointSize)).descent();
 }
 
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
-bool ScreenToolsController::fakeMobile()
-{
+bool ScreenToolsController::fakeMobile() {
     return qgcApp()->fakeMobile();
 }
 #endif

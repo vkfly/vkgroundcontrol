@@ -19,11 +19,12 @@ Item {
     property int sendId: 0                          // 发送ID: 0-不发送, 1-速度, 2-高度
     property string valueOk: "0"                    // 确认后的值
     property string currentText: "0"                // 当前显示的文本
-    property int minValue: 0                        // 最小值
-    property int maxValue: 100                      // 最大值
+    property real minValue: 0                        // 最小值
+    property real maxValue: 100                      // 最大值
     property string titleText: "title"              // 标题文本
     property string unitText: ""                    // 单位文本
     property string parameterName: ""               // 参数名称
+    property bool isInit: false
 
     // 信号
     signal keyboardConfirmed()                      // 键盘确认信号
@@ -34,6 +35,11 @@ Item {
     width: 270 * sw * 1.3
     height: 390 * sw * 1.3
 
+    onVisibleChanged: {
+        if(visible) {
+            isInit = true
+        }
+    }
     // 主容器
     Rectangle {
         anchors.fill: parent
@@ -70,6 +76,10 @@ Item {
      * @param keyValue 键盘输入的值
      */
     function handleKeyboardInput(keyValue) {
+        if(isInit) {
+            currentText = ""
+            isInit = false
+        }
         switch (keyValue) {
             case "OK":
                 if (textDisplay.isValueValid) {
@@ -158,7 +168,7 @@ Item {
      * 重置组件状态
      */
     function reset() {
-        currentText = "0"
+        currentText = ""
         textDisplay.reset()
     }
 

@@ -10,8 +10,8 @@ Item {
     property string content: "0"
     property string textColor: isValueValid ? "black" : "red"
     property real baseFontSize: 45
-    property int minValue: 0
-    property int maxValue: 0
+    property real minValue: 0
+    property real maxValue: 0
     property string title: "title"
     property string unitText: ""
 

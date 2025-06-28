@@ -8,7 +8,7 @@ Item {
     width: 300
     height: 300
 
-    property var _vehicles: VkSdkInstance.vehicleManager.vehicles[0]
+    property var _vehicles: VkSdkInstance.vehicleManager.activeVehicle
 
     property double throttle: _vehicles ? _vehicles.vfrHud.throttle : 0
     property double rollAngle: _vehicles ? _vehicles.attitude.attitudeRoll : 0
@@ -53,7 +53,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 25 * mainWindow.bili_width
+                font.pixelSize: 25 * ScreenTools.scaleWidth
                 //font.family:"Arial"
                 id: text1
                 text: qsTr("油门\n%1%").arg(throttle)

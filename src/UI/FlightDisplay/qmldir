@@ -16,3 +16,4 @@ FlyViewMsgPanel                                 1.0 FlyViewMsgPanel.qml
 SixTuText                                       1.0 SixTuText.qml
 VK_StartMission                                 1.0 VK_StartMission.qml
 VKReturn                                        1.0 VKReturn.qml
+MainVKToolBar                                   1.0 MainVKToolBar.qml

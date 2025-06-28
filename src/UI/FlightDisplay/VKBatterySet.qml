@@ -136,7 +136,7 @@ Flickable {
                 minValue: 12
                 valueType: 9
                 textWidth: 240 * ScreenTools.scaleWidth
-                parameterValue: VkSdkInstance.vehicleManager.vehicles[0].parameters[parameterName] || 0
+                parameterValue: VkSdkInstance.vehicleManager.activeVehicle.parameters[parameterName] || 0
             }
 
             NumericParameterControl {
@@ -152,7 +152,7 @@ Flickable {
                 minValue: 1
                 valueType: 1
                 textWidth: 240 * ScreenTools.scaleWidth
-                parameterValue: VkSdkInstance.vehicleManager.vehicles[0].parameters[parameterName] || 0
+                parameterValue: VkSdkInstance.vehicleManager.activeVehicle.parameters[parameterName] || 0
             }
 
             // 触发动作选择
@@ -160,7 +160,7 @@ Flickable {
                 width: parent.width - 60 * ScreenTools.scaleWidth
                 anchors.horizontalCenter: parent.horizontalCenter
                 parameterName: section.actionParameterName
-                currentValue: VkSdkInstance.vehicleManager.vehicles[0].parameters[section.actionParameterName]
+                currentValue: VkSdkInstance.vehicleManager.activeVehicle.parameters[section.actionParameterName]
                 labelName: qsTr("触发动作")
                 customModel: ListModel {
                     ListElement { text: qsTr("无动作") }

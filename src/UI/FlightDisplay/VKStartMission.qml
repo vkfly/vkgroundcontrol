@@ -19,9 +19,9 @@ Popup {
     property color backgroundColor: ScreenTools.titleColor
     property int returnMode: 0 // 返航方式
     property int missionType: 1 // 航线方式 正序航线和逆序航线
-    property int climbMode: VkSdkInstance.vehicleManager.vehicles[0] ? 
-                           parseInt(VkSdkInstance.vehicleManager.vehicles[0].parameters["WP_FP_ALT_MODE"]) : 0
-    property var activeVehicle: VkSdkInstance.vehicleManager.vehicles[0]
+    property int climbMode: VkSdkInstance.vehicleManager.activeVehicle ? 
+                           parseInt(VkSdkInstance.vehicleManager.activeVehicle.parameters["WP_FP_ALT_MODE"]) : 0
+    property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
 
     // Popup entrance animation
     enter: Transition {

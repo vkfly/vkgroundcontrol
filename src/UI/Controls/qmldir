@@ -28,3 +28,9 @@ GroupButton                                         1.0 GroupButton.qml
 NumericInputField                                   1.0 NumericInputField.qml
 CustomPopup                                         1.0 CustomPopup.qml
 CustomComboBox                                      1.0 CustomComboBox.qml
+VKPassWordMsg                                       1.0 VKPassWordMsg.qml
+VKFileDialog                                        1.0 VKFileDialog.qml
+VKMouseArea                                         1.0 VKMouseArea.qml
+SectionHeader                                       1.0 SectionHeader.qml
+VKMenu                                              1.0 VKMenu.qml
+VKMenuItem                                          1.0 VKMenuItem.qml

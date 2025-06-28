@@ -13,12 +13,13 @@
 #include "AppSettings.h"
 #include "FlightMapSettings.h"
 #include "SettingsManager.h"
-// #include "QGCMapEngineManager.h"
+#include "QGCMapEngineManager.h"
 #include "ScreenToolsController.h"
 #include "VKPalette.h"
 #include "QmlObjectListModel.h"
 #include "VideoManager.h"
 #include "FileDownloader.h"
+#include "QGCFileDialogController.h"
 
 #include <QtCore/QSettings>
 #include <QtCore/QLineF>
@@ -40,8 +41,9 @@ static QObject* qgroundcontrolQmlGlobalSingletonFactory(QQmlEngine*, QJSEngine*)
 void QGroundControlQmlGlobal::registerQmlTypes() {
     qmlRegisterUncreatableType<QmlObjectListModel>      ("VKGroundControl",                       1, 0, "QmlObjectListModel",  "Reference only");
     qmlRegisterType<ScreenToolsController>              ("VKGroundControl.Controllers",           1, 0, "ScreenToolsController");
-    qmlRegisterType<VKPalette>                         ("VKGroundControl.Palette",               1, 0, "VKPalette");
-    qmlRegisterType<FileDownloader>                         ("VKGroundControl.FileDownloader",               1, 0, "FileDownloader");
+    qmlRegisterType<QGCFileDialogController>            ("VKGroundControl.Controllers",            1, 0,  "QGCFileDialogController");
+    qmlRegisterType<VKPalette>                         ("VKGroundControl.Palette",                1, 0, "VKPalette");
+    qmlRegisterType<FileDownloader>                     ("VKGroundControl.FileDownloader",        1, 0, "FileDownloader");
     qmlRegisterSingletonType<QGroundControlQmlGlobal>   ("VKGroundControl",                       1, 0, "VKGroundControl",         qgroundcontrolQmlGlobalSingletonFactory);
     qmlRegisterSingletonType<ScreenToolsController>     ("VKGroundControl.ScreenToolsController", 1, 0, "ScreenToolsController",  screenToolsControllerSingletonFactory);
 }
@@ -50,7 +52,8 @@ QGroundControlQmlGlobal::QGroundControlQmlGlobal(QObject *parent)
     : QObject(parent)
     , _videoManager(VideoManager::instance())
     , _settingsManager(SettingsManager::instance())
-    , _globalPalette(new VKPalette(this)) {
+    , _globalPalette(new VKPalette(this)),
+      _mapEngineManager(QGCMapEngineManager::instance()) {
     // We clear the parent on this object since we run into shutdown problems caused by hybrid qml app. Instead we let it leak on shutdown.
     // setParent(nullptr);
     // Load last coordinates and zoom from config file

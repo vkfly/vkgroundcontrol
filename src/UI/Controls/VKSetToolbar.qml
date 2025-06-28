@@ -3,11 +3,12 @@ import QtQuick.Controls
 import VKGroundControl
 
 import ScreenTools
+import VkSdkInstance
 
 Item {
     id: _root
     property string titleName: qsTr("设置")
-    property var _activeVehicle: VKGroundControl.multiVehicleManager.activeVehicle1 ? VKGroundControl.multiVehicleManager.activeVehicle1 : ""
+    property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
     property var selectevehicle
     property double batteryVoltage: _activeVehicle ? _activeVehicle.batteryVoltage.toFixed(
                                                          1) : 0
@@ -15,7 +16,7 @@ Item {
     property double bili_width: sw
     property double bili_height: sh
     property var parsedErrors: ""
-    property var bms_cell: _activeVehicle.bms_cell
+    property var bms_cell: _activeVehicle ? _activeVehicle.bms_cell : undefined
     signal returnLast
 
     width: parent.width

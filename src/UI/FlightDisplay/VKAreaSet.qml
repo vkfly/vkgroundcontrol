@@ -79,7 +79,7 @@ Flickable {
                 maxValue: 500
                 minValue: 1
                 value: 10
-                onTextChanged: {
+                onTextChanged: function(text) {
                     areaListModel.setAngle(text)
                 }
             }
@@ -96,7 +96,7 @@ Flickable {
                 maxValue: 500
                 minValue: 1
                 value: 10
-                onTextChanged: {
+                onTextChanged: function(text) {
                     areaListModel.setSpacing(text)
                 }
             }

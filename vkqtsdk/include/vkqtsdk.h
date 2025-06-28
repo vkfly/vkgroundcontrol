@@ -43,8 +43,6 @@ public:
     Q_INVOKABLE virtual void saveLinkConfig(const QStringList &config) = 0;
     Q_INVOKABLE virtual QStringList loadLinkConfig() = 0;
 
-    Q_INVOKABLE virtual void test() = 0;
-
 signals:
     void commandAck(int sysid, int cmdid, int errcode);
 

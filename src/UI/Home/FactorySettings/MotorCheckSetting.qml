@@ -7,7 +7,7 @@ import VkSdkInstance 1.0
 
 Flickable {
 
-    property var _escStatus : VkSdkInstance.vehicleManager.vehicles[0].escStatus
+    property var _escStatus : VkSdkInstance.vehicleManager.activeVehicle.escStatus
     property int escIndex: activeVehicle ? _escStatus.index : -1
     property var escCurrent: activeVehicle ? _escStatus.current : new Array[16]
     property var escVoltage: activeVehicle ? _escStatus.voltage : new Array[16]
@@ -20,8 +20,9 @@ Flickable {
     property string advancedModeDownIcon: "/qmlimages/icon/down_arrow.png"
     property var mainColor: mainWindow.titlecolor
 
-    property var _servoOutputRaw : VkSdkInstance.vehicleManager.vehicles[0].servoOutputRaw
-    property var activeVehicle:VkSdkInstance.vehicleManager.vehicles[0]
+    property var _servoOutputRaw : VkSdkInstance.vehicleManager.activeVehicle.servoOutputRaw
+    property var activeVehicle:VkSdkInstance.vehicleManager.activeVehicle
+    property var fcumodel_versions : activeVehicle.FlightController.deviceModel
 
 
     on_ServoOutputRawChanged: {
@@ -198,7 +199,7 @@ Flickable {
 
         MotorBar {
             visible: isAdvancedMode
-            labelName: mainWindow.fcumodel_versions === "V10Pro" ? qsTr("M9") : qsTr("S1")
+            labelName: fcumodel_versions === "V10Pro" ? qsTr("M9") : qsTr("S1")
             width: parent.width
             height: 100 * sw
             barId: 9
@@ -209,7 +210,7 @@ Flickable {
             temperatureEsc: escTemperature[8]
             statusEsc: escStatus[8]
             onSendClickId: {
-                if (mainWindow.fcumodel_versions === "V10Pro") {
+                if (fcumodel_versions === "V10Pro") {
                     messageBox.escId = 9
                     messageBox.messageText = qsTr("配置%1号电机").arg(9)
                     messageBox.sendId = "VOLT_PROT_CH"
@@ -220,7 +221,7 @@ Flickable {
 
         MotorBar {
             visible: isAdvancedMode
-            labelName: mainWindow.fcumodel_versions === "V10Pro" ? qsTr("M10") : qsTr("S2")
+            labelName:fcumodel_versions === "V10Pro" ? qsTr("M10") : qsTr("S2")
             width: parent.width
             height: 100 * sw
             barId: 10
@@ -241,7 +242,7 @@ Flickable {
         }
 
         MotorBar {
-            visible: isAdvancedMode && mainWindow.fcumodel_versions === "V10Pro"
+            visible: isAdvancedMode &&fcumodel_versions === "V10Pro"
             labelName: qsTr("M11")
             width: parent.width
             height: 100 * sw
@@ -261,7 +262,7 @@ Flickable {
         }
 
         MotorBar {
-            visible: isAdvancedMode && mainWindow.fcumodel_versions === "V10Pro"
+            visible: isAdvancedMode &&fcumodel_versions === "V10Pro"
             labelName: qsTr("M12")
             width: parent.width
             height: 100 * sw
@@ -281,7 +282,7 @@ Flickable {
         }
 
         MotorBar {
-            visible: isAdvancedMode && mainWindow.fcumodel_versions === "V10Pro"
+            visible: isAdvancedMode &&fcumodel_versions === "V10Pro"
             labelName: qsTr("M13")
             width: parent.width
             height: 100 * sw
@@ -301,7 +302,7 @@ Flickable {
         }
 
         MotorBar {
-            visible: isAdvancedMode && mainWindow.fcumodel_versions === "V10Pro"
+            visible: isAdvancedMode &&fcumodel_versions === "V10Pro"
             labelName: qsTr("M14")
             width: parent.width
             height: 100 * sw
@@ -321,7 +322,7 @@ Flickable {
         }
 
         MotorBar {
-            visible: isAdvancedMode && mainWindow.fcumodel_versions === "V10Pro"
+            visible: isAdvancedMode &&fcumodel_versions === "V10Pro"
             labelName: qsTr("M15")
             width: parent.width
             height: 100 * sw
@@ -341,7 +342,7 @@ Flickable {
         }
 
         MotorBar {
-            visible: isAdvancedMode && mainWindow.fcumodel_versions === "V10Pro"
+            visible: isAdvancedMode &&fcumodel_versions === "V10Pro"
             labelName: qsTr("M16")
             width: parent.width
             height: 100 * sw

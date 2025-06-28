@@ -1,5 +1,6 @@
 ﻿import QtQuick
 
+import VKGroundControl
 import ScreenTools
 Item {
 
@@ -7,16 +8,15 @@ Item {
     width: parent.width
     height: parent.height
 
-    property var mainColor: ScreenTools.titlecolor
+    property var mainColor: ScreenTools.titleColor
     property int remoterXValue: 1500 //1000-2000
     property int remoterYValue: 1500
     property int itemWidth: remoterView.width
     property int itemHeight: remoterView.height
     property real fontSize: 25 * sw
-    property int yaoganRadius: 15 * sw
+    property int sensorRadius: 15 * sw
     property bool showLeft: true
     property bool showJapan: true
-
 
     Item {
         width: itemWidth / 4
@@ -162,13 +162,13 @@ Item {
         id: yg
         x: getx() // 位于父窗体的x位置，以左上角为起点，缺省为0
         y: gety() // 位于父窗体的y位置，以左上角为起点，缺省为0;                  // 位于父窗体的y位置，以左上角为起点，缺省为0
-        width: yaoganRadius * 2 // 宽度，此时Rectangle控件在Window控件内，属于Window的孩子，可以使用parent继承
-        height: yaoganRadius * 2 // 高度，此时Rectangle控件在Window控件内，属于Window的孩子，可以使用parent
+        width: sensorRadius * 2 // 宽度，此时Rectangle控件在Window控件内，属于Window的孩子，可以使用parent继承
+        height: sensorRadius * 2 // 高度，此时Rectangle控件在Window控件内，属于Window的孩子，可以使用parent
         color: (remoterXValue < 1000 || remoterXValue > 2000
                 || remoterYValue < 1000
                 || remoterYValue > 2000) ? "red" : mainColor // 颜色，缺省为白色
         opacity: 0.95 // 透明度，缺省为1
-        radius: yaoganRadius // 圆角，通过圆角来画出一个圆形窗体出来
+        radius: sensorRadius // 圆角，通过圆角来画出一个圆形窗体出来
         clip: true // 截断，在Rectangle控件内的子控件，超出他本身大小后会被截断
     }
     function getx() {

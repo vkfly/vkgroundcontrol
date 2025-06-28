@@ -12,7 +12,7 @@ import "../Common"
 
 VKInstallBase {
     id: _root
-    property var paramvalue11 : VkSdkInstance.vehicleManager.vehicles[0].parameters["COM_SBUSO_AF"]
+    property var paramvalue11 : VkSdkInstance.vehicleManager.activeVehicle.parameters["COM_SBUSO_AF"]
 
     property var installid:-1
     // 监听参数变化
@@ -55,7 +55,7 @@ VKInstallBase {
                             names: [qsTr("透传SBUS"),qsTr("抛投复用")]
                             selectedIndex: installid
                             onClicked: {
-                                VkSdkInstance.vehicleManager.vehicles[0].setParam("COM_SBUSO_AF",index)
+                                VkSdkInstance.vehicleManager.activeVehicle.setParam("COM_SBUSO_AF",index)
                             }
                         }
 
@@ -68,7 +68,7 @@ VKInstallBase {
                         //     fontSize: buttonFontsize
                         //     text: qsTr("透传SBUS")
                         //     onClicked: {
-                        //         VkSdkInstance.vehicleManager.vehicles[0].setParam("COM_SBUSO_AF",0)
+                        //         VkSdkInstance.vehicleManager.activeVehicle.setParam("COM_SBUSO_AF",0)
                         //         // messagebox.text_msg = qsTr("SBUS O设置为透传SBUS")
                         //         // messagebox.canshu = "COM_SBUSO_AF"
                         //         // messagebox.canshu_y = 1
@@ -90,7 +90,7 @@ VKInstallBase {
                         //     fontSize: buttonFontsize
                         //     text: qsTr("抛投复用")
                         //     onClicked: {
-                        //         VkSdkInstance.vehicleManager.vehicles[0].setParam("COM_SBUSO_AF",1)
+                        //         VkSdkInstance.vehicleManager.activeVehicle.setParam("COM_SBUSO_AF",1)
                         //     }
                         // }
                     }

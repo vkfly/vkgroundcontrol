@@ -38,7 +38,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             width: parent.width - 526 * sw // 设置 Item 的宽度，这里要与 ProgressBar 保持一致
             height: 30 * sw // 设置 Item 的高度，这里要与 ProgressBar 保持一致
-            value: _activeVehicle ? (_activeVehicle.prc_progress) : 0
+            value: _activeVehicle ? (_activeVehicle.getCurrentData) : 0
             from: 0
             to: 100
 
@@ -64,7 +64,7 @@ Item {
             width: 80 * sw
             height: 60 * sw
             anchors.verticalCenter: parent.verticalCenter
-            text: _activeVehicle ? (_activeVehicle.prc_progress + "%") : "0%"
+            text: _activeVehicle ? (_activeVehicle.getCurrentData + "%") : "0%"
             font.pixelSize: buttonFontSize
             font.bold: false
             horizontalAlignment: Text.AlignHCenter
@@ -173,8 +173,7 @@ Item {
             if (fileUrl !== "") {
                 // 将文件路径传递给C++
                 displayText.text = "开始升级"
-                _activeVehicle.handleFileSelected(fileUrl.toString().replace(
-                                                      "file:///", ""))
+                _activeVehicle.upgradeFirmware(fileUrl.toString().replace("file:///", ""))
                 // cppObject.loadFile(fileUrl.toString().replace("file://", ""))
             }
         }
@@ -226,8 +225,7 @@ Item {
             fullPath = fullPath
         }
         onFileEnd: {
-            _activeVehicle.handleFileSelected(fullPath.toString().replace(
-                                                  "file:///", ""))
+            _activeVehicle.upgradeFirmware(fullPath.toString().replace("file:///", ""))
         }
     }
 }

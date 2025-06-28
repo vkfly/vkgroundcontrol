@@ -10,16 +10,15 @@ import Controls
 CustomPopup {
 
     id: popup
-    width: popupWidth
-    height: mainColumn.height
-
+    contentWidth: popupWidth
+    contentHeight: mainColumn.implicitHeight
     // 基础配置属性
     property bool isAllMode: false
     property string textMessage: ""
     property string textModel: ""
     property string imageSource: ""
-    property int popupWidth: 600
-    property int popupHeight: 720
+    property int popupWidth: 600 * ScreenTools.scaleWidth
+    property int popupHeight: 720 * ScreenTools.scaleWidth
     property int itemType: 1
     property int textAlignment: 0 // 0: 居中对齐, 1: 靠左对齐
 
@@ -29,7 +28,8 @@ CustomPopup {
     property int buttonFontSize: 14
     property string buttonFontColor: "white"
     property var selectedBackgroundColor: mainWindow.titlecolor
-    property real buttonFontSize30: 30 * sw
+    property real buttonFontSize25: 25 * sw
+    property real buttonFontSize20: 20 * sw
     property real itemHeight: 60 * sw
     property real fieldWidth: 260 * sw
     property real labelWidth: 160 * sw
@@ -80,7 +80,7 @@ CustomPopup {
             height: 50 * sw
             color: "black"
             text: labelText
-            fontSize: 50 * sh
+            fontSize: buttonFontSize25
             verticalAlignment: Text.AlignVCenter
         }
 
@@ -89,7 +89,7 @@ CustomPopup {
             anchors.verticalCenter: parent.verticalCenter
             width: fieldWidth
             height: 50 * sw
-            font.pixelSize: buttonFontSize30
+            font.pixelSize: buttonFontSize20
             font.bold: false
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -112,7 +112,7 @@ CustomPopup {
             height: 50 * sw
             color: "black"
             text: labelText
-            fontSize: 50 * sh
+            fontSize: buttonFontSize25
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
         }
@@ -125,7 +125,7 @@ CustomPopup {
             names: buttonNames
             selectedIndex: parent.selectedIndex
             mainColor: selectedBackgroundColor
-            fontSize: buttonFontSize30 * 4.5 / 6
+            fontSize: buttonFontSize25 * 4.5 / 6
             backgroundColor: "white"
         }
     }
@@ -133,9 +133,6 @@ CustomPopup {
     Column {
         id: mainColumn
         width: parent.width
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-
         Item {
             width: parent.width
             height: 30 * sw
@@ -155,14 +152,14 @@ CustomPopup {
                 color: "black"
                 text: qsTr("航点ID")
                 verticalAlignment: Text.AlignVCenter
-                fontSize: 50 * sh
+                fontSize: 25 * sw
             }
 
             VKLabel {
                 anchors.verticalCenter: parent.verticalCenter
                 width: fieldWidth
                 height: 50 * sw
-                fontSize: buttonFontSize30
+                fontSize: buttonFontSize25
                 text: (waypointId + 1).toString()
                 color: "black"
                 horizontalAlignment: Text.AlignHCenter
@@ -300,7 +297,7 @@ CustomPopup {
                         buttonText: qsTr("取消")
                         backgroundColor: "gray"
                         textColor: buttonFontColor
-                        fontSize: buttonFontSize30
+                        fontSize: buttonFontSize25
                         cornerRadius: 0
                         borderWidth: 0
                         onClicked: popup.close()
@@ -318,7 +315,7 @@ CustomPopup {
                         buttonText: qsTr("确认")
                         backgroundColor: selectedBackgroundColor
                         textColor: buttonFontColor
-                        fontSize: buttonFontSize30
+                        fontSize: buttonFontSize25
                         cornerRadius: 0
                         borderWidth: 0
 

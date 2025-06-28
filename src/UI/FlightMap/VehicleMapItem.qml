@@ -57,7 +57,7 @@ MapQuickItem {
             transform: Rotation {
                 origin.x:       vehicleIcon.width  / 2
                 origin.y:       vehicleIcon.height / 2
-                angle:          VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeYaw
+                angle:          VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeYaw
             }
         }
     }

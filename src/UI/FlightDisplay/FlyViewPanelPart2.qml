@@ -7,16 +7,13 @@ Item {
     width: parent.width
     height: parent.height
     property double dis_to_wpt: _vehicles ? _vehicles.fmuStatus.distToTar : 0
-    property double dis_to_home: _vehicles ? _vehicles.homeDis : 0
+    property double dis_to_home: _vehicles ? _vehicles.homeDistance : 0
     property double throttle: _vehicles ? _vehicles.vfrHud.throttle : 0
-    property double v_speed: _vehicles ? (_vehicles.globalPositionInt.verticalSpeed).toFixed(
-                                             1) : 0
-    property double h_speed: _vehicles ? (_vehicles.globalPositionInt.horizontalSpeed).toFixed(
-                                             1) : 0
-    property double height_value: _vehicles ? _vehicles.globalPositionInt.relativeAlt.toFixed(
-                                                  1) : 0
+    property double v_speed: _vehicles ? (_vehicles.globalPositionInt.verticalSpeed).toFixed(1) : 0
+    property double h_speed: _vehicles ? (_vehicles.globalPositionInt.horizontalSpeed).toFixed(1) : 0
+    property double height_value: _vehicles ? _vehicles.globalPositionInt.relativeAlt.toFixed(1) : 0
 
-    property var _vehicles: VkSdkInstance.vehicleManager.vehicles[0]
+    property var _vehicles: VkSdkInstance.vehicleManager.activeVehicle
 
     Column {
         width: parent.width
@@ -73,9 +70,8 @@ Item {
                 SixTuText {
                     width: parent.width / 3
                     height: parent.height
-                    text_name1: dis_to_home > 1000 ? qsTr("距离(km)") : qsTr(
-                                                         "距离(m)")
-                    text_name2: get_dis_home()
+                    text_name1: dis_to_home > 1000 ? qsTr("距离(km)") : qsTr("距离(m)")
+                    text_name2: format_dist(dis_to_home)
                 }
             }
         }
@@ -97,38 +93,23 @@ Item {
                     width: parent.width / 3
                     height: parent.height
                     text_name1: qsTr("对地雷达(m)")
-                    text_name2: _vehicles ? _vehicles.distanceSensor.currentDistance.toFixed(
-                                                1) : "0"
-                    //text_name2: get_dis()
+                    text_name2: _vehicles ? _vehicles.distanceSensor.currentDistance.toFixed(1) : "0"
                 }
                 SixTuText {
                     width: parent.width / 3
                     height: parent.height
-                    text_name1: _vehicles.fmuStatus.flightDist < 1000 ? qsTr("里程(m)") : qsTr(
-                                                                            "里程(km)")
-                    text_name2: _vehicles ? _vehicles.fmuStatus.flightDist
-                                            < 1000 ? _vehicles.fmuStatus.flightDist : (_vehicles.fmuStatus.flightDist * 0.001).toFixed(
-                                                         2) : "0"
+                    text_name1: _vehicles.fmuStatus.flightDist < 1000 ? qsTr("里程(m)") : qsTr("里程(km)")
+                    text_name2: _vehicles ? format_dist(_vehicles.fmuStatus.flightDist) : "0"
                 }
             }
         }
     }
 
-    function get_dis() {
-        if (dis_to_wpt > 1000) {
-            return (VkSdkInstance.vehicleManager.vehicles[0].fmuStatus.distToTar / 1000.0).toFixed(
-                        1)
+    function format_dist(dist) {
+        if (dist > 1000) {
+            return (dist / 1000).toFixed(1)
         } else {
-            return (VkSdkInstance.vehicleManager.vehicles[0].fmuStatus.distToTar).toFixed(
-                        0)
-        }
-    }
-
-    function get_dis_home() {
-        if (dis_to_home > 1000) {
-            return (dis_to_home / 1000.0).toFixed(1)
-        } else {
-            return (dis_to_home).toFixed(0)
+            return dist.toFixed(0)
         }
     }
 }

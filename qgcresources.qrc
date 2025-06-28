@@ -4,6 +4,7 @@
         <file alias="opensans-demibold">resources/fonts/OpenSans-Semibold.ttf</file>
         <file alias="NanumGothic-Regular">resources/fonts/NanumGothic-Regular.ttf</file>
         <file alias="NanumGothic-Bold">resources/fonts/NanumGothic-Bold.ttf</file>
+        <file alias="songti">resources/fonts/songti.ttf</file>
     </qresource>
     <qresource prefix="/res"/>
     <qresource prefix="/res/firmware"/>

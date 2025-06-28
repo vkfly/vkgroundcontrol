@@ -16,11 +16,10 @@ class VkVehicle : public QObject {
     Q_PROPERTY(int id READ getSysId CONSTANT)
     Q_PROPERTY(QGeoCoordinate coordinate READ getCoordinate NOTIFY coordinateChanged)
     Q_PROPERTY(QGeoCoordinate home READ getHome NOTIFY homePositionChanged)
-    Q_PROPERTY(double homeDis READ homeDis NOTIFY homeDisChanged)
+    Q_PROPERTY(double homeDistance READ homeDis NOTIFY homeDisChanged)
     Q_PROPERTY(double headToHome READ homeDis NOTIFY headToHomeChanged)
 
     Q_PROPERTY(Vk_Heartbeat* heartbeat READ heartBeat CONSTANT)
-    Q_PROPERTY(QList<VkLogEntry*> logs READ getLogEntries NOTIFY logChanged)
     Q_PROPERTY(VkSystemStatus* sysStatus READ sysStatus CONSTANT)
 
     Q_PROPERTY(Vk_QingxieBms* qingxieBms READ qingxieBms CONSTANT)
@@ -64,15 +63,47 @@ class VkVehicle : public QObject {
     Q_PROPERTY(Vk_DistanceSensor* distanceSensor READ distanceSensor CONSTANT)
     Q_PROPERTY(Vk_WeigherState* weigherState READ weigherState CONSTANT)
     Q_PROPERTY(Vk_FormationLeader* formationLeader READ formationLeader CONSTANT)
+
+    Q_PROPERTY(QList<VkLogEntry*> logs READ getLogEntries NOTIFY logChanged)
+    Q_PROPERTY(float progress READ getProgress NOTIFY progressChanged)
+
     Q_PROPERTY(QQmlPropertyMap* payload READ getPayload CONSTANT)
+
+    Q_PROPERTY(int getCurrentProgress READ getCurrentProgress NOTIFY getCurrentProgressChanged)
 
 public:
     VkVehicle(QObject *parent = nullptr) : QObject(parent) {}
     virtual ~VkVehicle() = default;
 
+    /**
+     * @brief 起飞
+     */
     Q_INVOKABLE virtual void takeOff() = 0;
-    Q_INVOKABLE virtual void motorTest(int motor, int percent, int timeoutSecs, bool showError) = 0;
 
+    /**
+     * @brief 测试电机，以怠速旋转
+     * @param motor 电机编号，从0开始
+     */
+    Q_INVOKABLE virtual void motorTest(int motor) = 0;
+
+    /**
+     * @brief 开始设备校准
+     * @param calType 校准设备类型，2: 磁力计 3: 遥控器 15: 水平校准
+     */
+    Q_INVOKABLE virtual void startCalibration(int calType) = 0;
+
+    /**
+     * @brief 停止设备校准
+     * @param calType 校准设备类型，同startCalibration。
+     * @note 目前只有遥控器校准需要停止
+     */
+    Q_INVOKABLE virtual void stopCalibration(int calType) = 0;
+
+    /**
+     * @brief 设置参数
+     * @param name 参数名称
+     * @param value 参数值
+     */
     Q_INVOKABLE virtual void setParam(QString name, double value) = 0;
 
     Q_INVOKABLE virtual void newMission() = 0;
@@ -81,17 +112,43 @@ public:
     Q_INVOKABLE virtual void addLandWaypoint(double lat, double lon, double alt, float speed = NAN) = 0;
     // Q_INVOKABLE virtual void addPhotoWaypoint(double lat, double lon, double alt) = 0;
     Q_INVOKABLE virtual void updateWaypoint(int idx) = 0;
-    Q_INVOKABLE virtual void startMission(QString param1, int param2, int param3) = 0;
+    Q_INVOKABLE virtual void startMission(int wpid, int execMode, int doneAct) = 0;
     Q_INVOKABLE virtual void uploadMission() = 0;
     Q_INVOKABLE virtual void uploadMissionModel(MissionModel* mission) = 0;
     Q_INVOKABLE virtual void downloadMission(MissionModel * mission) = 0;
-    Q_INVOKABLE virtual void returnMission(QString param1, int param2) = 0;
+    Q_INVOKABLE virtual void returnMission(int wpid, int execMode) = 0;
+    Q_INVOKABLE virtual void offboard() = 0;
 
-    Q_INVOKABLE virtual double homeDis() const = 0;
+    Q_INVOKABLE virtual void cancelCurrentCommand() = 0;
+
+    /**
+     * @brief 获取日志列表
+     */
+    Q_INVOKABLE virtual void getLogList() = 0;
+
+    /**
+     * @brief 擦除所有日志
+     */
+    Q_INVOKABLE virtual void eraseLogs() = 0;
+
+    /**
+     * @brief 下载日志
+     * @param logDir 存放日志文件的目录
+     * @param logid 日志id，从VkLogEntry中获取
+     */
+    Q_INVOKABLE virtual void downloadLog(const QString& logFilePath, int logid) = 0;
+
+    /**
+     * @brief 升级固件
+     * @param filePath 固件文件名
+     */
+    Q_INVOKABLE virtual void upgradeFirmware(const QString &filePath) = 0;
+
     virtual QQmlPropertyMap* getPayload() = 0;
 
 protected:
     virtual int getSysId() = 0;
+    virtual double homeDis() const = 0;
     virtual Vk_Heartbeat* heartBeat() = 0;
     virtual Vk_QingxieBms* qingxieBms() = 0;
     virtual Vk_BmsStatus* bmsStatus() = 0;
@@ -140,7 +197,10 @@ protected:
 
     virtual Vk_FormationLeader* formationLeader() = 0;
     virtual Vk_ParachuteStatus* parachuteStatus() = 0;
+    virtual float getProgress() = 0;
 
+
+    virtual int getCurrentProgress() = 0;
 
 signals:
     void heartBeat(const Vk_Heartbeat *msg);
@@ -175,9 +235,11 @@ signals:
     void weigherStateChanged(const Vk_WeigherState *msg);
     void formationLeaderChanged(const Vk_FormationLeader *msg);
 
-
     void logChanged();
 
     void missionChanged();
     void paramChanged();
+    void progressChanged();
+
+    void getCurrentProgressChanged();
 };

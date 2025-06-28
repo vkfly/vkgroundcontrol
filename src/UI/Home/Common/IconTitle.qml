@@ -5,7 +5,7 @@ import ScreenTools
 
 Item {
 
-    property real buttonFontSize: 20
+    property real buttonFontSize: 25 * ScreenTools.scaleWidth
     property string btText: "机型设置"
     property color btTextColor: vkPal.titleColor
     property bool isSelected: false
@@ -87,7 +87,7 @@ Item {
                             model: deviceInfos
                             delegate: InfoItem {
                                 width: parent.width
-                                height: 5 * ScreenTools.defaultFontPixelWidth
+                                height: 30 * ScreenTools.scaleWidth
                                 labelText: modelData.name
                                 valueText: modelData.value
                             }
@@ -98,14 +98,13 @@ Item {
                     Column {
                         width: parent.width * 0.05
                         height: parent.height
-
+                        spacing: 0
                         // 使用函数创建重复的指示器项
                         Repeater {
                             model: deviceInfos
                             delegate: Item {
-                                property int index: modelData + 1
                                 width: parent.width
-                                height: 5 * ScreenTools.defaultFontPixelWidth
+                                height: 30 * ScreenTools.scaleWidth
                                 StatusIndicator {
                                     visible: modelData.hasUpdate
                                     anchors.centerIn: parent
@@ -122,12 +121,12 @@ Item {
     component InfoItem: Item {
         property string labelText: ""
         property string valueText: ""
-        property real fontSize: 12
+        property real fontSize: 16 * ScreenTools.scaleWidth
 
         Text {
             text: labelText
             font.bold: false
-            font.pointSize: fontSize
+            font.pixelSize: fontSize
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             verticalAlignment: Text.AlignVCenter
@@ -136,7 +135,7 @@ Item {
         Text {
             text: valueText
             font.bold: false
-            font.pointSize: fontSize
+            font.pixelSize: fontSize
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             verticalAlignment: Text.AlignVCenter
@@ -145,8 +144,8 @@ Item {
 
     // 状态指示器组件
     component StatusIndicator: Item {
-        width: 2 * ScreenTools.defaultFontPixelWidth
-        height: 2 * ScreenTools.defaultFontPixelWidth
+        width: 12 * ScreenTools.scaleWidth
+        height: 12 * ScreenTools.scaleWidth
 
         Rectangle {
             width: parent.width

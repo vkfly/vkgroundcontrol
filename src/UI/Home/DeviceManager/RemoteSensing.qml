@@ -1,7 +1,6 @@
 ﻿import QtQuick
 import QtQuick.Controls
 
-import VKGroundControl
 import ScreenTools
 
 Item {

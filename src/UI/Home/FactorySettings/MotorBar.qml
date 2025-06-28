@@ -4,6 +4,7 @@ import QtQuick.Controls
 import VKGroundControl.Palette
 import VKGroundControl 1.0
 import VkSdkInstance 1.0
+import ScreenTools
 
 // import VKGroundControl.MultiVehicleManager
 Item {
@@ -20,11 +21,11 @@ Item {
   property real rpmEsc: 0
   property real temperatureEsc: 0
   property real statusEsc: 0
-  property real fontSize: 30 * sw * 5 / 6
+  property real fontSize: 30 * ScreenTools.scaleWidth * 5 / 6
   property var mainColor: qgcPal.titleColor
 
   //property var _activeVehicle: VKGroundControl.multiVehicleManager.activeVehicle1 || null
-  property var _activeVehicle: VkSdkInstance.vehicleManager.vehicles[0]
+  property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
   signal sendClickId
 
   VKPalette {
@@ -34,7 +35,7 @@ Item {
   Row {
     width: parent.width
     height: parent.height
-    spacing: 30 * sw
+    spacing: 30 * ScreenTools.scaleWidth
 
     Item {
       width: parent.height
@@ -72,7 +73,7 @@ Item {
       }
     }
     Column {
-      width: motorBar.width - 200 * sw - 200 * sw - 40 * sw
+      width: motorBar.width - 200 * ScreenTools.scaleWidth - 200 * ScreenTools.scaleWidth - 40 * ScreenTools.scaleWidth
       anchors.verticalCenter: parent.verticalCenter
       // height: parent.height*0.15
       ProgressBar {
@@ -85,79 +86,79 @@ Item {
           implicitWidth: control.width
           implicitHeight: control.height
           color: "lightgray"
-          radius: 6 * sw //圆滑度
+          radius: 6 * ScreenTools.scaleWidth //圆滑度
         }
         contentItem: Item {
           //内容项
           Rectangle {
             width: ((motorValue - 1000) / 1000.0) * control.width
             height: control.height
-            radius: 6 * sw //圆滑度
+            radius: 6 * ScreenTools.scaleWidth //圆滑度
             color: control.value >= 0.8 ? "red" : mainColor
           }
         }
       }
       Row {
         width: parent.width
-        height: 10 * sw
+        height: 10 * ScreenTools.scaleWidth
         Text {
           visible: voltageEsc !== 0 && voltageEsc !== 0.0
-          width: 80 * sw
-          height: 30 * sw
+          width: 80 * ScreenTools.scaleWidth
+          height: 30 * ScreenTools.scaleWidth
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          font.pixelSize: 40 * mainWindow.bili_height
+          font.pixelSize: 40 * ScreenTools.scaleHeight
           color: "#0bff05"
           text: voltageEsc.toFixed(0) + "V"
         }
         Text {
           visible: currentEsc !== 0 && currentEsc !== 0.0
-          width: 80 * sw
-          height: 30 * sw
+          width: 80 * ScreenTools.scaleWidth
+          height: 30 * ScreenTools.scaleWidth
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          font.pixelSize: 40 * mainWindow.bili_height
+          font.pixelSize: 40 * ScreenTools.scaleHeight
           color: "#0bff05"
           text: currentEsc.toFixed(0) + "A"
         }
         Text {
           visible: rpmEsc !== 0 && rpmEsc !== 0.0
-          width: 120 * sw
-          height: 30 * sw
+          width: 120 * ScreenTools.scaleWidth
+          height: 30 * ScreenTools.scaleWidth
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          font.pixelSize: 40 * mainWindow.bili_height
+          font.pixelSize: 40 * ScreenTools.scaleHeight
           color: "#0bff05"
           text: rpmEsc + "rpm"
         }
 
         Text {
           visible: temperatureEsc !== 0 && temperatureEsc !== 0.0
-          width: 120 * sw
-          height: 30 * sw
+          width: 120 * ScreenTools.scaleWidth
+          height: 30 * ScreenTools.scaleWidth
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          font.pixelSize: 40 * mainWindow.bili_height
+          font.pixelSize: 40 * ScreenTools.scaleHeight
           color: "#0bff05"
           text: temperatureEsc + "℃"
         }
 
         Text {
           visible: statusEsc !== 0 && statusEsc !== 0.0
-          width: 120 * sw
-          height: 30 * sw
+          width: 120 * ScreenTools.scaleWidth
+          height: 30 * ScreenTools.scaleWidth
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          font.pixelSize: 40 * mainWindow.bili_height
+          font.pixelSize: 40 * ScreenTools.scaleHeight
           color: "#0bff05"
           text: statusEsc
         }
       }
     }
     Text {
-      width: 80 * sw
+      width: 80 * ScreenTools.scaleWidth
       height: parent.height
-      //font.pixelSize: 40*mainWindow.bili_height
+      //font.pixelSize: 40*ScreenTools.scaleHeight
       text: motorValue
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
@@ -167,7 +168,7 @@ Item {
     }
     Button {
       id: bt_check
-      width: 160 * sw
+      width: 160 * ScreenTools.scaleWidth
       height: parent.height * 0.60
       anchors.verticalCenter: parent.verticalCenter
       background: Rectangle {
@@ -186,7 +187,7 @@ Item {
         }
       }
       onClicked: {
-        _activeVehicle.motorTest(barId, 1200, 5, true)
+        _activeVehicle.motorTest(barId)
       }
     }
   }

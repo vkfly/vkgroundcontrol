@@ -12,7 +12,7 @@ import "../Common"
 VKInstallBase {
     id: _root
 
-    property var paramvalue : VkSdkInstance.vehicleManager.vehicles[0].parameters["IMU_ATT_YOFF0"]
+    property var paramvalue : VkSdkInstance.vehicleManager.activeVehicle.parameters["IMU_ATT_YOFF0"]
 
 
     onParamvalueChanged: {
@@ -30,8 +30,6 @@ VKInstallBase {
         }
     }
     // 监听参数变化
-
-
 
     Row {
         width: parent.width
@@ -67,13 +65,13 @@ VKInstallBase {
                         names: [qsTr("水平向前"), qsTr("水平向右"), qsTr("水平向后"), qsTr("水平向左")]
                         onClicked:{
                             if(index===0)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_ATT_YOFF0",0)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_ATT_YOFF0",0)
                             if(index===1)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_ATT_YOFF0",90)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_ATT_YOFF0",90)
                             if(index===2)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_ATT_YOFF0",180)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_ATT_YOFF0",180)
                             if(index===3)
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam("IMU_ATT_YOFF0",-90)
+                            VkSdkInstance.vehicleManager.activeVehicle.setParam("IMU_ATT_YOFF0",-90)
                         }
                     }
                 }

@@ -31,7 +31,6 @@ ComboBox {
         width: comboBox.width
         height: comboBox.height
         background: Rectangle {
-            anchors.fill: comboBox
             color: "white"
         }
         Text {

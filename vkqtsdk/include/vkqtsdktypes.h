@@ -4,8 +4,8 @@
 
 #pragma once
 
+#include "vkdata.h"
 #include <QObject>
-#include <QVariant>
 #include <QList>
 
 class VkHeartbeat;
@@ -160,7 +160,7 @@ private:
 class Vk_QingxieBms : public QObject {
     Q_OBJECT
 
-           // Q_PROPERTY 声明（与成员变量一一对应）
+    // Q_PROPERTY 声明（与成员变量一一对应）
     Q_PROPERTY(float batVoltage READ batVoltage NOTIFY statusUpdated)
     Q_PROPERTY(float servoCurrent READ servoCurrent NOTIFY statusUpdated)
     Q_PROPERTY(float stackVoltage READ stackVoltage NOTIFY statusUpdated)
@@ -178,10 +178,10 @@ class Vk_QingxieBms : public QObject {
 public:
     explicit Vk_QingxieBms(QObject *parent = nullptr);
 
-           // 更新数据的接口（假设外部数据通过结构体 VkQingxieBmsData 传递）
+    // 更新数据的接口（假设外部数据通过结构体 VkQingxieBmsData 传递）
     void updateqingxieBmsData(const struct VkQingxieBms *status);
 
-           // Q_PROPERTY 的 READ 函数声明
+    // Q_PROPERTY 的 READ 函数声明
     float batVoltage() const;
     float servoCurrent() const;
     float stackVoltage() const;

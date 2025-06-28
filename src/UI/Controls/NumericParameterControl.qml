@@ -22,6 +22,7 @@ Item {
     property var oldText: 0
     property int valueType: 3
     property real parameterValue: 0
+    property real _parameterValue: 0
     property int sendId: 99
     
     // 滑块范围属性
@@ -37,7 +38,44 @@ Item {
         
     // 信号定义
     signal textClicked()
-    
+
+    onParameterValueChanged: {
+        _parameterValue = parameterValue
+    }
+
+    property var handleTextClicked: function() {
+        showKeyboardNumView()
+    }
+
+    property var handleTextChanged: function(param, value) {
+        if (VkSdkInstance.vehicleManager.activeVehicle) {
+            VkSdkInstance.vehicleManager.activeVehicle.setParam(param, value)
+        }
+    }
+
+    function showKeyboardNumView() {
+        // 触发键盘输入
+        if (typeof keyBoardNumView !== 'undefined') {
+            keyBoardNumView.parameterName = parameterName
+            keyBoardNumView.sendId = sendId
+            keyBoardNumView.setInputParameters(
+                minValue,
+                maxValue,
+                labelName,
+                unit,
+                fixNum,
+                parameterValue.toFixed(fixNum)
+            )
+            keyBoardNumView.keyboardConfirmed.connect(onKeyboardConfirmed)
+            keyBoardNumView.visible = true
+        }
+    }
+
+    function onKeyboardConfirmed() {
+        keyBoardNumView.keyboardConfirmed.disconnect(onKeyboardConfirmed)
+        handleTextChanged(keyBoardNumView.parameterName,keyBoardNumView.getCurrentValue())
+    }
+
     // 主要内容区域
     Item {
         width: parent.width
@@ -100,17 +138,14 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     backgroundColor: parameterVolumeControl.backgroundColor
                     backgroundOpacity: 1.0
-                    enabled: parameterValue > minValue
+                    enabled: _parameterValue > minValue
 
                     onClicked: {
                         var step = 1 / Math.pow(10, fixNum)
-                        var newValue = parameterValue - step
+                        var newValue = _parameterValue - step
                         newValue = Math.max(newValue, minValue)
-                        parameterValue = parseFloat(newValue.toFixed(fixNum))
-
-                        if (activeVehicle) {
-                            activeVehicle.setParam(parameterName, parameterValue)
-                        }
+                        _parameterValue = parseFloat(newValue.toFixed(fixNum))
+                        handleTextChanged(parameterName,_parameterValue)
                     }
                 }
 
@@ -130,7 +165,7 @@ Item {
                             height: parent.height
                             font.pixelSize: buttonFontSize
                             font.bold: false
-                            text: parameterValue.toFixed(fixNum) + unit
+                            text: _parameterValue.toFixed(fixNum) + unit
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             color: "black"
@@ -170,17 +205,14 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     backgroundColor: parameterVolumeControl.backgroundColor
                     backgroundOpacity: 1.0
-                    enabled: parameterValue < maxValue
+                    enabled: _parameterValue < maxValue
 
                     onClicked: {
                         var step = 1 / Math.pow(10, fixNum)
-                        var newValue = parameterValue + step
+                        var newValue = _parameterValue + step
                         newValue = Math.min(newValue, maxValue)
-                        parameterValue = parseFloat(newValue.toFixed(fixNum))
-
-                        if (VkSdkInstance.vehicleManager.vehicles[0]) {
-                            VkSdkInstance.vehicleManager.vehicles[0].setParam(parameterName, parameterValue)
-                        }
+                        _parameterValue = parseFloat(newValue.toFixed(fixNum))
+                        handleTextChanged(parameterName, _parameterValue)
                     }
                 }
             }

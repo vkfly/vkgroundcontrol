@@ -7,7 +7,7 @@ Item {
     height: parent.width
     property real angle: 0
     signal clicked
-    property var _vehicles: VkSdkInstance.vehicleManager.vehicles[0]
+    property var _vehicles: VkSdkInstance.vehicleManager.activeVehicle
     property double headingAngle: _vehicles ? _vehicles.attitude.attitudeYaw : 0
     property var head_to_home: _vehicles ? _vehicles.headToHome : 0
 

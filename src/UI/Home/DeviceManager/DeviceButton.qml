@@ -21,7 +21,7 @@ Item {
         height: parent.height
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        radius: 5 * ScreenTools.defaultFontPixelWidth
+        radius: 30 * ScreenTools.scaleWidth
         color: button.pressed ? "lightgray" : "white"
     }
 

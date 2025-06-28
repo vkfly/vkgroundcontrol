@@ -10,8 +10,6 @@ import "../Common"
 Flickable {
     id: installSettingPage
     
-
-    
     // 布局设置
     height: parent.height
     width: parent.width
@@ -23,12 +21,12 @@ Flickable {
         id: column
         width: parent.width * 0.95
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: ScreenTools.defaultFontPixelWidth
+        spacing: 6 * ScreenTools.scaleWidth
         
         // 顶部间距
         Item {
             width: parent.width
-            height: ScreenTools.defaultFontPixelWidth * 4.8
+            height: ScreenTools.scaleWidth * 28.8
         }
         
         // 飞控安装部分
@@ -84,10 +82,22 @@ Flickable {
         // 底部间距
         Item {
             width: parent.width
-            height: ScreenTools.defaultFontPixelWidth * 4.8
+            height: ScreenTools.scaleWidth * 28.8
         }
     }
-    
+
+    VKLevelCalibration{
+        width:600 * ScreenTools.scaleWidth
+        id:levelCalibrationPopup
+        anchors.centerIn: parent
+    }
+
+    VKCompassCalibration{
+        width:600 * ScreenTools.scaleWidth
+        id:compassCalibrationPopup
+        anchors.centerIn: parent
+    }
+
     // 消息弹窗
     // VKMessageShow {
     //     id: messagebox

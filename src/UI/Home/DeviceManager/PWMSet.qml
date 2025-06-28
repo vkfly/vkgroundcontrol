@@ -7,8 +7,6 @@ import ScreenTools
 import VKGroundControl.Controllers
 import VkSdkInstance 1.0
 
-// import VKGroundControl.Vehicle
-// import VKGroundControl.MultiVehicleManager
 Item {
     id: root
 
@@ -38,11 +36,6 @@ Item {
 
     // Original param property kept separate for compatibility
     property string param: ""
-
-    // Vehicle Properties
-    property var parameterManager: VKGroundControl.multiVehicleManager.activeVehicle1 ? VKGroundControl.multiVehicleManager.activeVehicle1.parameterManager : ""
-    property var paramName: parameterManager.paramName
-    property var paramValue: parameterManager.paramValue
 
     property var value1 : ""
     property string paramName1: paramNames[0] || ""
@@ -115,6 +108,54 @@ Item {
         }
     }
 
+    // Models
+    property ListModel channelModel: ListModel {
+        ListElement { text: qsTr("不启用") }
+        ListElement { text: qsTr("通道 7") }
+        ListElement { text: qsTr("通道 8") }
+        ListElement { text: qsTr("通道 9") }
+        ListElement { text: qsTr("通道 10") }
+        ListElement { text: qsTr("通道 11") }
+        ListElement { text: qsTr("通道 12") }
+        ListElement { text: qsTr("通道 13") }
+        ListElement { text: qsTr("通道 14") }
+        ListElement { text: qsTr("通道 15") }
+        ListElement { text: qsTr("通道 16") }
+    }
+
+    property ListModel pwmModelV10: ListModel {
+        ListElement { text: qsTr("不启用") }
+        ListElement { text: qsTr("M 5") }
+        ListElement { text: qsTr("M 6") }
+        ListElement { text: qsTr("M 7") }
+        ListElement { text: qsTr("M 8") }
+        ListElement { text: qsTr("M 9") }
+        ListElement { text: qsTr("M 10") }
+        ListElement { text: qsTr("M 11") }
+        ListElement { text: qsTr("M 12") }
+        ListElement { text: qsTr("M 13") }
+        ListElement { text: qsTr("M 14") }
+        ListElement { text: qsTr("M 15") }
+        ListElement { text: qsTr("M 16") }
+    }
+
+    property ListModel pwmModelV12: ListModel {
+        ListElement { text: qsTr("不启用") }
+        ListElement { text: qsTr("M 5") }
+        ListElement { text: qsTr("M 6") }
+        ListElement { text: qsTr("M 7") }
+        ListElement { text: qsTr("M 8") }
+        ListElement { text: qsTr("S 1") }
+        ListElement { text: qsTr("S 2") }
+    }
+
+    property ListModel photoTypeModel: ListModel {
+        ListElement { text: qsTr("低电平") }
+        ListElement { text: qsTr("高电平") }
+        ListElement { text: qsTr("PWM") }
+    }
+
+
     VKPalette {
         id: qgcPal
     }
@@ -122,116 +163,7 @@ Item {
     // name: value
     width: parent.width
     height: parent.height
-    property ListModel channelModel: ListModel {
-        ListElement {
-            text: qsTr("不启用")
-        }
-        ListElement {
-            text: qsTr("通道 7")
-        }
-        ListElement {
-            text: qsTr("通道 8")
-        }
-        ListElement {
-            text: qsTr("通道 9")
-        }
-        ListElement {
-            text: qsTr("通道 10")
-        }
-        ListElement {
-            text: qsTr("通道 11")
-        }
-        ListElement {
-            text: qsTr("通道 12")
-        }
-        ListElement {
-            text: qsTr("通道 13")
-        }
-        ListElement {
-            text: qsTr("通道 14")
-        }
-        ListElement {
-            text: qsTr("通道 15")
-        }
-        ListElement {
-            text: qsTr("通道 16")
-        }
-    }
-    property ListModel pwmModelV10: ListModel {
-        ListElement {
-            text: qsTr("不启用")
-        }
-        ListElement {
-            text: qsTr("M 5")
-        }
-        ListElement {
-            text: qsTr("M 6")
-        }
-        ListElement {
-            text: qsTr("M 7")
-        }
-        ListElement {
-            text: qsTr("M 8")
-        }
-        ListElement {
-            text: qsTr("M 9")
-        }
-        ListElement {
-            text: qsTr("M 10")
-        }
-        ListElement {
-            text: qsTr("M 11")
-        }
-        ListElement {
-            text: qsTr("M 12")
-        }
-        ListElement {
-            text: qsTr("M 13")
-        }
-        ListElement {
-            text: qsTr("M 14")
-        }
-        ListElement {
-            text: qsTr("M 15")
-        }
-        ListElement {
-            text: qsTr("M 16")
-        }
-    }
-    property ListModel pwmModelV12: ListModel {
-        ListElement {
-            text: qsTr("不启用")
-        }
-        ListElement {
-            text: qsTr("M 5")
-        }
-        ListElement {
-            text: qsTr("M 6")
-        }
-        ListElement {
-            text: qsTr("M 7")
-        }
-        ListElement {
-            text: qsTr("M 8")
-        }
-        ListElement {
-            text: qsTr("S 1")
-        }
-        ListElement {
-            text: qsTr("S 2")
-        }
-    }
-    property ListModel photoTypeModel: ListModel {
-        ListElement {
-            text: qsTr("低电平")
-        }
-        ListElement {
-            text: qsTr("高电平")
-        }
-        ListElement {
-            text: qsTr("PWM")
-        }
-    }
+
     Item {
         width: parent.width
         height: parent.height
@@ -240,7 +172,6 @@ Item {
             width: parent.width * 0.95
             height: parent.height
             anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.horizontalCenter: parent.horizontalCenter
             spacing: parent.width / 6 * 0.25
             Text {
                 width: parent.width / 8
@@ -276,7 +207,6 @@ Item {
                         text: comboBox1.currentText
                         font.pixelSize: buttonFontSize
                         color: "black"
-                        // font.bold: combox1.currentIndex===0?false:true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -298,7 +228,6 @@ Item {
                             font.bold: false
                         }
                     }
-
                     currentIndex: 0
                     onActivated: {
                         if (activeVehicle) {
@@ -341,18 +270,9 @@ Item {
                         border.width: 1
                         border.color: "black"
                     }
-
-                    // delegate: ItemDelegate {
-                    //     text: model.text
-
-                    //     font.pixelSize: bt_fontsize// 修改字体大小为18
-                    //     font.bold: false
-                    // }
                     contentItem: Text {
-
                         text: comboBox2.currentText
                         font.pixelSize: buttonFontSize
-                        // font.bold: combox2.currentIndex===0?false:true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -361,10 +281,8 @@ Item {
                         height: 60 * ScreenTools.scaleWidth
                         background: Rectangle {
                             anchors.fill: parent
-                            // radius:10
                             color: "white"
                         }
-                        //anchors.fill: parent
                         Text {
                             width: comboBox1.width
                             height: 60 * ScreenTools.scaleWidth
@@ -375,9 +293,6 @@ Item {
                             color: "black"
                             font.bold: false
                         }
-
-                        // horizontalAlignment: Text.AlignHCenter
-                        //  font.pixelSize: button_fontsize // 修改字体大小为18
                     }
 
                     onActivated: {
@@ -428,13 +343,9 @@ Item {
                             anchors.fill: parent
                             radius: 10
                             Rectangle {
-
                                 anchors.fill: parent
                                 radius: 10
-                                //anchors.right: parent.right;
-                                // width: 10;
                                 height: parent.height
-                                //(color.hovered || control.pressed)
                                 color: decreaseButton1.pressed ? "gray" : backgroundColor
                             }
                             Image {

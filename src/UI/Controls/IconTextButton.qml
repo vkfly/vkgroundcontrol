@@ -16,11 +16,10 @@ Button {
     leftPadding:    _horizontalPadding
     rightPadding:   _horizontalPadding
     focusPolicy:    Qt.ClickFocus
-    font.family:    ScreenTools.normalFontFamily
     text:           ""
 
     property bool   primary:        false                               ///< primary button for a group of buttons
-    property bool   showBorder:     qgcPal.globalTheme === QGCPalette.Light
+    property bool   showBorder:     qgcPal.globalTheme === VKPalette.Light
     property real   backRadius:     ScreenTools.buttonBorderRadius
     property real   heightFactor:   0.5
     property string iconSource:     ""
@@ -35,8 +34,8 @@ Button {
 
     property bool  showHighlight:     enabled && (pressed | checked | hovered)
 
-    property int _horizontalPadding:    ScreenTools.defaultFontPixelWidth * 2
-    property int _verticalPadding:      Math.round(ScreenTools.defaultFontPixelHeight * heightFactor)
+    property int _horizontalPadding:    ScreenTools.scaleWidth * 12
+    property int _verticalPadding:      Math.round(6 * ScreenTools.scaleWidth)
 
     VKPalette { id: qgcPal; colorGroupEnabled: enabled }
 
@@ -58,7 +57,7 @@ Button {
     }
 
     contentItem: RowLayout {
-            spacing: ScreenTools.defaultFontPixelWidth
+            spacing: 6 * ScreenTools.scaleWidth
 
             VKColoredImage {
                 id:                     icon
@@ -77,7 +76,6 @@ Button {
                 Layout.alignment:       Qt.AlignHCenter
                 text:                   control.text
                 font.pixelSize:         control.pixelSize
-                font.family:            control.font.family
                 font.weight:            fontWeight
                 color:                  showHighlight ? qgcPal.buttonHighlightText : (primary ? qgcPal.primaryButtonText : qgcPal.buttonText)
                 visible:                control.text !== ""

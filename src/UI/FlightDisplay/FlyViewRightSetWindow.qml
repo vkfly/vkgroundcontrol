@@ -19,10 +19,8 @@ Row {
     property var set_page_index: FlyViewRightSetWindow.RightWindow.ParSetWindow
     anchors.right: parent.right
     spacing: 0
-    // visible: showidwindow===1&&video_visible===false
     //飞行页面右侧框显示
     Button {
-        //visible:video_visible===false
         anchors.top: parent.top
         anchors.topMargin: 65 * ScreenTools.scaleWidth
         //id:setbt
@@ -58,15 +56,10 @@ Row {
         width: mainWindow.width * 0.55
 
         height: parent.height
-        //visible: issetbool
         Rectangle {
-            //anchors.right:  parent.right
-            //id: setrect
             width: item.width
             color: "black"
             height: item.height
-            // anchors.right: parent.right
-            //visible: issetbool
             Row {
                 width: item.width
                 height: item.height
@@ -88,21 +81,14 @@ Row {
                                 width: 45 * ScreenTools.scaleWidth
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                // anchors.fill: parent
                                 source: set_page_index === FlyViewRightSetWindow.RightWindow.ParSetWindow ? "/qmlimages/icon/plane_b.png" : "/qmlimages/icon/plane_a.png"
                             }
 
                             background: Rectangle {
                                 color: "transparent"
-                                // border.color:selectcolor
-                                // border.width:  set_page_index==3?3*ScreenTools.scaleWidth:0
-                                // radius: 5*ScreenTools.scaleWidth
                             }
                             onClicked: {
                                 set_page_index = FlyViewRightSetWindow.RightWindow.ParSetWindow
-                                //right_page. source="qrc:/qml/MessageAllShow.qml"
-                                // if(_activeVehicle)
-                                //     _activeVehicle.requestlist()
                             }
                         }
 
@@ -122,8 +108,6 @@ Row {
                             }
                             onClicked: {
                                 set_page_index = FlyViewRightSetWindow.RightWindow.VKBatteryWindow
-
-                                //right_page .source="qrc:/qml/LinkSettings.qml"
                             }
                         }
 
@@ -135,7 +119,6 @@ Row {
                                 width: 45 * ScreenTools.scaleWidth
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                //anchors.fill: parent
                                 source: set_page_index === FlyViewRightSetWindow.RightWindow.VKMessageWindow ? "/qmlimages/icon/msg_b.png" : "/qmlimages/icon/msg_a.png"
                             }
 
@@ -149,24 +132,18 @@ Row {
                         Button {
                             height: 65 * ScreenTools.scaleWidth
                             width: 65 * ScreenTools.scaleWidth
-                            //visible: false
                             Image {
                                 height: 45 * ScreenTools.scaleWidth
                                 width: 45 * ScreenTools.scaleWidth
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                //anchors.fill: parent
                                 source: set_page_index == FlyViewRightSetWindow.RightWindow.VKOtherSetWindow ? "/qmlimages/icon/set_b.png" : "/qmlimages/icon/set_a.png"
                             }
                             background: Rectangle {
                                 color: "transparent"
-                                //border.color: selectcolor
-                                //border.width: set_page_index==18?3*ScreenTools.scaleWidth:0
-                                //radius: 5*ScreenTools.scaleWidth
                             }
                             onClicked: {
                                 set_page_index = FlyViewRightSetWindow.RightWindow.VKOtherSetWindow
-                                //right_page .source="qrc:/qml/LinkSettings.qml"
                             }
                         }
 
@@ -188,12 +165,9 @@ Row {
                     id: item1
                     width: item.width - 75 * ScreenTools.scaleWidth
                     height: parent.height
-
                     MessageAllShow {
-
                         width: item1.width
                         height: parent.height
-
                         visible: set_page_index
                                  === FlyViewRightSetWindow.RightWindow.VKMessageWindow
                     }

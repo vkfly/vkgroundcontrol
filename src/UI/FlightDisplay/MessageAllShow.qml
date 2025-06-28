@@ -19,7 +19,7 @@ Flickable {
     property double fontsize: button_fontsize
     property var fontcolor: "white"
 
-    property var value: VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeRoll
+    property var value: VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeRoll
     onValueChanged: {
 
     }
@@ -193,9 +193,9 @@ Flickable {
 
                             //text: qsTr("目标距离:%1m").arg(_activeVehicle? getmubiao_dis():"0")
                             text: qsTr("目标距离:%1m").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].fmuStatus.distToTar)
-                            //text: qsTr("目标距离:%1m").arg(VkSdkInstance.vehicleManager.vehicles[0].sysStatus.batteryVoltage.toFixed(1))
-                            //text: VkSdkInstance.vehicleManager.vehicles[0].sysStatus.batteryVoltage.toFixed(1)+ "V"
+                                      VkSdkInstance.vehicleManager.activeVehicle.fmuStatus.distToTar)
+                            //text: qsTr("目标距离:%1m").arg(VkSdkInstance.vehicleManager.activeVehicle.sysStatus.batteryVoltage.toFixed(1))
+                            //text: VkSdkInstance.vehicleManager.activeVehicle.sysStatus.batteryVoltage.toFixed(1)+ "V"
                             verticalAlignment: Text.AlignVCenter
                         }
                         Text {
@@ -207,8 +207,8 @@ Flickable {
                             //text: _activeVehicle?getups_v():"UPS 电压: 0V"
                             //text: qsTr("UPS 电压:%1V").arg(_activeVehicle? getups_v():"0")
                             text: qsTr("UPS 电压:%1V").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].fmuStatus.upsVolt)
-                            //text: VkSdkInstance.vehicleManager.vehicles[0].sysStatus.batteryVoltage.toFixed(1)+ "V"
+                                      VkSdkInstance.vehicleManager.activeVehicle.fmuStatus.upsVolt)
+                            //text: VkSdkInstance.vehicleManager.activeVehicle.sysStatus.batteryVoltage.toFixed(1)+ "V"
                             verticalAlignment: Text.AlignVCenter
                         }
                         Text {
@@ -220,7 +220,7 @@ Flickable {
                             // text:_activeVehicle? getads_v():"ADC 电压: 0V"
                             //text: qsTr("ADC 电压:%1V").arg(_activeVehicle? getads_v():"0")
                             text: qsTr("ADC 电压:%1V").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].fmuStatus.adcVolt)
+                                      VkSdkInstance.vehicleManager.activeVehicle.fmuStatus.adcVolt)
                             verticalAlignment: Text.AlignVCenter
                         }
                     }
@@ -235,7 +235,7 @@ Flickable {
                             font.bold: false
                             //text:qsTr("温度:%1℃").arg(_activeVehicle? _activeVehicle.temperatures:"")
                             text: qsTr("温度:%1℃").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].insStatus.temperature)
+                                      VkSdkInstance.vehicleManager.activeVehicle.insStatus.temperature)
                             verticalAlignment: Text.AlignVCenter
                         }
                         Text {
@@ -246,7 +246,7 @@ Flickable {
                             font.bold: false
                             //text:qsTr("基础油门:%1%").arg(_activeVehicle? _activeVehicle.throttle:"")
                             text: qsTr("基础油门:%1%").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].vfrHud.throttle)
+                                      VkSdkInstance.vehicleManager.activeVehicle.vfrHud.throttle)
                             verticalAlignment: Text.AlignVCenter
                         }
 
@@ -281,7 +281,7 @@ Flickable {
                             font.bold: false
                             //text:qsTr("经度:%1").arg(_activeVehicle? (_activeVehicle.longitude).toFixed(7):"")
                             text: qsTr("经度:%1").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].coordinate.longitude)
+                                      VkSdkInstance.vehicleManager.activeVehicle.coordinate.longitude)
                             verticalAlignment: Text.AlignVCenter
                         }
                         Text {
@@ -293,7 +293,7 @@ Flickable {
 
                             //text:qsTr("纬度:%1").arg(_activeVehicle? (_activeVehicle.latitude).toFixed(7):"")
                             text: qsTr("纬度:%1").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].coordinate.latitude)
+                                      VkSdkInstance.vehicleManager.activeVehicle.coordinate.latitude)
                             verticalAlignment: Text.AlignVCenter
                         }
                         Text {
@@ -304,7 +304,7 @@ Flickable {
                             font.bold: false
                             //text:qsTr("锁状态:%1").arg(_activeVehicle? _activeVehicle.lock_staus===0?qsTr("落锁"):qsTr("解锁"):"")
                             text: qsTr("锁状态:%1").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].heartbeat.lockStatus
+                                      VkSdkInstance.vehicleManager.activeVehicle.heartbeat.lockStatus
                                       === 0 ? qsTr("落锁") : qsTr("解锁"))
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -320,7 +320,7 @@ Flickable {
                             font.bold: false
                             //text:qsTr("横滚角:%1").arg(_activeVehicle?rollAngle.toFixed(2):"")
                             text: qsTr("横滚角:%1").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeRoll.toFixed(
+                                      VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeRoll.toFixed(
                                           2))
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -332,7 +332,7 @@ Flickable {
                             font.bold: false
                             //text:qsTr("俯仰角:%1").arg(_activeVehicle? pitchAngle.toFixed(2):"")
                             text: qsTr("俯仰角:%1").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudePitch.toFixed(
+                                      VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudePitch.toFixed(
                                           2))
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -343,12 +343,12 @@ Flickable {
                             color: fontcolor
                             font.bold: false
                             //text:qsTr("航向角:%1").arg(_activeVehicle?(headingAngle<0?(360+headingAngle).toFixed(2):headingAngle.toFixed(2)):"")
-                            //text: qsTr("航向角:%1%").arg(VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeYaw<0?(360+attitudeYaw).toFixed(2):attitudeYaw.toFixed(2))
-                            //text: qsTr("航向角:%1").arg(VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeYaw.toFixed(2))
+                            //text: qsTr("航向角:%1%").arg(VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeYaw<0?(360+attitudeYaw).toFixed(2):attitudeYaw.toFixed(2))
+                            //text: qsTr("航向角:%1").arg(VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeYaw.toFixed(2))
                             text: qsTr("航向角:%1").arg(
-                                      VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeYaw
-                                      < 0 ? (360 + VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeYaw).toFixed(
-                                                2) : VkSdkInstance.vehicleManager.vehicles[0].attitude.attitudeYaw.toFixed(
+                                      VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeYaw
+                                      < 0 ? (360 + VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeYaw).toFixed(
+                                                2) : VkSdkInstance.vehicleManager.activeVehicle.attitude.attitudeYaw.toFixed(
                                                 2))
 
                             verticalAlignment: Text.AlignVCenter
@@ -365,10 +365,10 @@ Flickable {
                             color: fontcolor
                             font.bold: false
                             //text: _activeVehicle?(_activeVehicle.bizhang_dis[0]===65535?qsTr("前避障距离:无"):qsTr("前避障距离:%1m").arg((_activeVehicle.bizhang_dis[0]*0.01).toFixed(1))):qsTr("右避障距离:无")
-                            text: VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[0]
+                            text: VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[0]
                                   === 65535 ? qsTr("前避障距离:无") : qsTr(
                                                   "前避障距离:%1m").arg(
-                                                  (VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[0] * 0.01).toFixed(
+                                                  (VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[0] * 0.01).toFixed(
                                                       1))
 
                             verticalAlignment: Text.AlignVCenter
@@ -380,10 +380,10 @@ Flickable {
                             color: fontcolor
                             font.bold: false
                             //text:_activeVehicle?(_activeVehicle.bizhang_dis[2]===65535?qsTr("后避障距离:无"):qsTr("后避障距离:%1m").arg((_activeVehicle.bizhang_dis[2]*0.01).toFixed(1))):qsTr("后避障距离:无")
-                            text: VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[2]
+                            text: VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[2]
                                   === 65535 ? qsTr("后避障距离:无") : qsTr(
                                                   "后避障距离:%1m").arg(
-                                                  (VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[2] * 0.01).toFixed(
+                                                  (VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[2] * 0.01).toFixed(
                                                       1))
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -398,10 +398,10 @@ Flickable {
                             color: fontcolor
                             font.bold: false
                             // text:_activeVehicle?(_activeVehicle.bizhang_dis[3]===65535?qsTr("左避障距离:无"):qsTr("左避障距离:%1m").arg((_activeVehicle.bizhang_dis[3]*0.01).toFixed(1))):qsTr("左避障距离:无")
-                            text: VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[3]
+                            text: VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[3]
                                   === 65535 ? qsTr("左避障距离:无") : qsTr(
                                                   "左避障距离:%1m").arg(
-                                                  (VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[3] * 0.01).toFixed(
+                                                  (VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[3] * 0.01).toFixed(
                                                       1))
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -412,10 +412,10 @@ Flickable {
                             color: fontcolor
                             font.bold: false
                             // text:_activeVehicle?(_activeVehicle.bizhang_dis[1]===65535?qsTr("右避障距离:无"):qsTr("右避障距离:%1m").arg((_activeVehicle.bizhang_dis[1]*0.01).toFixed(1))):qsTr("右避障距离:无")
-                            text: VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[1]
+                            text: VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[1]
                                   === 65535 ? qsTr("右避障距离:无") : qsTr(
                                                   "右避障距离:%1m").arg(
-                                                  (VkSdkInstance.vehicleManager.vehicles[0].obstacleDistance.distances[1] * 0.01).toFixed(
+                                                  (VkSdkInstance.vehicleManager.activeVehicle.obstacleDistance.distances[1] * 0.01).toFixed(
                                                       1))
                             verticalAlignment: Text.AlignVCenter
                         }

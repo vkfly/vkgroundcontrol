@@ -14,6 +14,7 @@ import "LinkSettings"
 
 Item {
 
+    id: _root
     enum ModuleType {
         None,
         DataPlayback,    // 数据回放
@@ -48,17 +49,20 @@ Item {
             source: "/qmlimages/icon/background.jpg"
         }
 
-        IconTextButton {
+        TextButton {
             anchors.top: parent.top
             anchors.topMargin: 60 * sw
-            showBorder: false
             anchors.right: parent.right
             anchors.rightMargin: 60 * sw
-            backRadius: 10 * sw
             backgroundColor: "red"
             textColor: "white"
-            text: qsTr("退出")
-            pixelSize: fontSize
+            buttonText: qsTr("退出")
+            fontSize: _root.fontSize
+            leftPadding: 16 * ScreenTools.scaleWidth
+            rightPadding: 16 * ScreenTools.scaleWidth
+            topPadding: 8 * ScreenTools.scaleWidth
+            bottomPadding: 8 * ScreenTools.scaleWidth
+            cornerRadius: 8 * ScreenTools.scaleWidth
             onClicked: {
                 mainWindow.close()
             }
@@ -84,13 +88,13 @@ Item {
         }
 
         Column {
-            spacing: ScreenTools.defaultFontPixelWidth * 5
+            spacing: ScreenTools.scaleWidth * 30
             anchors.left: parent.left
-            anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 10
+            anchors.leftMargin: ScreenTools.scaleWidth * 60
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: ScreenTools.defaultFontPixelWidth * 10
+            anchors.bottomMargin: ScreenTools.scaleWidth * 60
             Row {
-                spacing: ScreenTools.defaultFontPixelWidth * 10
+                spacing: ScreenTools.scaleWidth * 60
                 // IconTextButton {
                 //     id: rePlayButton
                 //     visible: Qt.platform.os !== "android"
@@ -134,19 +138,19 @@ Item {
                 // }
             }
             Row {
-                spacing: ScreenTools.defaultFontPixelWidth * 10
+                spacing: 60 * ScreenTools.scaleWidth
                 IconTextButton {
                     id: deviceManagerButton
-                    visible: Qt.platform.os !== "android"
+                    // visible: Qt.platform.os !== "android"
                     showBorder: false
-                    height: ScreenTools.defaultFontPixelWidth * 15
-                    backRadius: ScreenTools.defaultFontPixelWidth * 5
+                    height: 120 * ScreenTools.scaleWidth
+                    backRadius: 30 * ScreenTools.scaleWidth
                     backgroundColor: deviceManagerButton.pressed ? "gray" : "#60000000"
                     text: qsTr("设备管理")
                     pixelSize: fontSize
-                    iconWidth: ScreenTools.defaultFontPixelWidth * 6
-                    leftPadding: ScreenTools.defaultFontPixelWidth * 6
-                    rightPadding: ScreenTools.defaultFontPixelWidth * 6
+                    iconWidth: 36 * ScreenTools.scaleWidth
+                    leftPadding: 36 * ScreenTools.scaleWidth
+                    rightPadding: 36 * ScreenTools.scaleWidth
                     textColor: "white"
                     iconSource: "/qmlimages/icon/driveset.png"
                     onClicked: {
@@ -161,16 +165,16 @@ Item {
 
                 IconTextButton {
                     id: factoryButton
-                    visible: Qt.platform.os !== "android"
+                    // visible: Qt.platform.os !== "android"
                     showBorder: false
-                    height: ScreenTools.defaultFontPixelWidth * 15
-                    backRadius: ScreenTools.defaultFontPixelWidth * 5
+                    height: 120 * ScreenTools.scaleWidth
+                    backRadius: 30 * ScreenTools.scaleWidth
                     backgroundColor: factoryButton.pressed ? "gray" : "#60000000"
                     text: qsTr("工厂模式")
                     pixelSize: fontSize
-                    iconWidth: ScreenTools.defaultFontPixelWidth * 6
-                    leftPadding: ScreenTools.defaultFontPixelWidth * 6
-                    rightPadding: ScreenTools.defaultFontPixelWidth * 6
+                    iconWidth: 36 * ScreenTools.scaleWidth
+                    leftPadding: 36 * ScreenTools.scaleWidth
+                    rightPadding: 36 * ScreenTools.scaleWidth
                     textColor: "white"
                     iconSource: "/qmlimages/icon/factory_set.png"
                     onClicked: {
@@ -180,8 +184,8 @@ Item {
                         } else {
                             moduleType = HomePage.ModuleType.FactorySettings
                             // clickSend(qsTr("工厂模式"), 10)
-                            if (_activeVehicle)
-                                _activeVehicle.requestlist()
+                            // if (_activeVehicle)
+                            //     _activeVehicle.requestlist()
                         }
                     }
                 }

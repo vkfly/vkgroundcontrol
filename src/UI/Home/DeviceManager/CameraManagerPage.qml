@@ -283,7 +283,4 @@ Flickable {
         mainWindow.camera_model = cameraModelCombo.currentText
     }
 
-    Connections {
-        target: cameractl
-    }
 }

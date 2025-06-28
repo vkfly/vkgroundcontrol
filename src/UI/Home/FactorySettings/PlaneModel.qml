@@ -43,7 +43,7 @@ Item {
 
     // UI相关属性
     property var selectedColor: qgcPal.titleColor
-    property real planeIconWidth: ScreenTools.defaultFontPixelWidth * 29
+    property real planeIconWidth: ScreenTools.scaleWidth * 174
 
     // 图标相关属性
     property string uploadSuccessIcon: "/qmlimages/icon/upload.png"
@@ -58,12 +58,14 @@ Item {
     // 选择相关属性
     property int selectedImage: 0 // 用于跟踪当前选中的图片，0表示未选中任何图片
     property string motorRotationInfo: " 1/3电机逆时针旋转 \n 2/4电机顺时针旋转"
-    property var paramvalue : VkSdkInstance.vehicleManager.vehicles[0].parameters["AIRFRAME"]
+    property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
+    property var paramvalue : _activeVehicle ? _activeVehicle.parameters["AIRFRAME"] : 0
 
 
     onParamvalueChanged: {
-        currentPlaneType=paramvalue11
+        currentPlaneType=paramvalue
     }
+
     VKPalette {
         id: qgcPal
     }

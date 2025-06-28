@@ -6,6 +6,8 @@ import VKGroundControl
 import Controls
 import VKGroundControl.FileDownloader
 import VkSdkInstance 1.0
+import Home
+
 
 import "../Common"
 
@@ -33,7 +35,12 @@ Flickable {
     property real speedValue: 0.05
 
 
-    property var _Vehicle : VkSdkInstance.vehicleManager.vehicles[0]
+    property var _Vehicle : VkSdkInstance.vehicleManager.activeVehicle
+    property var getCurrentData : _Vehicle.getCurrentData
+
+    //property var _Vehicle : VkSdkInstance.vehicleManager.vehicles[0]
+    property var getCurrentProgress : _Vehicle.getCurrentProgress
+
 
     height: parent.height
     width: parent.width
@@ -436,42 +443,42 @@ Flickable {
                                 height: 60 * sw
                                 spacing: 20 * sw
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                Button {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    id: button1
-                                    visible: have_fcu_update
-                                    width: 180 * sw
-                                    height: 50 * sw
-                                    font.pixelSize: 20 * mainWindow.bili_height
-                                    onClicked: {
-                                        var url = fetchDataFromServer(fkVersion.text.toString())
-                                    }
+                                // Button {
+                                //     anchors.verticalCenter: parent.verticalCenter
+                                //     id: button1
+                                //     visible: have_fcu_update
+                                //     width: 180 * sw
+                                //     height: 50 * sw
+                                //     font.pixelSize: 20 * mainWindow.bili_height
+                                //     onClicked: {
+                                //         var url = fetchDataFromServer(fkVersion.text.toString())
+                                //     }
 
-                                    background: Rectangle {
-                                        anchors.fill: parent
-                                        radius: 30 * sw
-                                        Rectangle {
-                                            anchors.fill: parent
-                                            radius: 30 * sw
-                                            height: parent.height
-                                            color: button1.pressed ? "gray" : mainColor
-                                        }
-                                        Text {
-                                            id: text_1
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.horizontalCenter: parent.horizontalCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                            verticalAlignment: Text.AlignVCenter
-                                            text: isUpdating
-                                                  ? qsTr("传输%1%").arg(updateProgress) : qsTr(
-                                                                 "在线升级")
-                                            font.pixelSize: buttonFontSize * 5 / 6
-                                            color: "white"
-                                            font.bold: false
-                                        }
-                                        color: "#00000000"
-                                    }
-                                }
+                                //     background: Rectangle {
+                                //         anchors.fill: parent
+                                //         radius: 30 * sw
+                                //         Rectangle {
+                                //             anchors.fill: parent
+                                //             radius: 30 * sw
+                                //             height: parent.height
+                                //             color: button1.pressed ? "gray" : mainColor
+                                //         }
+                                //         Text {
+                                //             id: text_1
+                                //             anchors.verticalCenter: parent.verticalCenter
+                                //             anchors.horizontalCenter: parent.horizontalCenter
+                                //             horizontalAlignment: Text.AlignHCenter
+                                //             verticalAlignment: Text.AlignVCenter
+                                //             text: isUpdating
+                                //                   ? qsTr("传输%1%").arg(getCurrentData) : qsTr(
+                                //                                  "在线升级")
+                                //             font.pixelSize: buttonFontSize * 5 / 6
+                                //             color: "white"
+                                //             font.bold: false
+                                //         }
+                                //         color: "#00000000"
+                                //     }
+                                // }
                                 Button {
                                     id: button2
                                     width: 180 * sw
@@ -479,7 +486,7 @@ Flickable {
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 40 * mainWindow.bili_height
                                     onClicked: {
-                                        fileDialog.open()
+                                        fileDialog.openForLoad()
                                     }
                                     background: Rectangle {
                                         anchors.fill: parent
@@ -497,7 +504,7 @@ Flickable {
                                             horizontalAlignment: Text.AlignHCenter
                                             verticalAlignment: Text.AlignVCenter
                                             text: isLocalFmuUpdating
-                                                  ? qsTr("传输%1%").arg(updateProgress) : qsTr(
+                                                  ? qsTr("传输%1%").arg(getCurrentProgress) : qsTr(
                                                                  "本地升级")
                                             font.pixelSize: buttonFontSize * 5 / 6
                                             color: "white"
@@ -533,45 +540,45 @@ Flickable {
                                 height: 60 * sw
                                 spacing: 20 * sw
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                Button {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    id: button3
-                                    visible: Qt.platform.os === "android"
-                                             && have_apk_update
-                                             && factory_ver_manager === ""
-                                    width: 180 * sw
-                                    height: 50 * sw
-                                    font.pixelSize: 20 * mainWindow.bili_height
-                                    onClicked: {
-                                        apkUpdateProgress = 0
-                                        var url = fetchDataFromServerApk()
-                                    }
+                                // Button {
+                                //     anchors.verticalCenter: parent.verticalCenter
+                                //     id: button3
+                                //     visible: Qt.platform.os === "android"
+                                //              && have_apk_update
+                                //              && factory_ver_manager === ""
+                                //     width: 180 * sw
+                                //     height: 50 * sw
+                                //     font.pixelSize: 20 * mainWindow.bili_height
+                                //     onClicked: {
+                                //         apkUpdateProgress = 0
+                                //         var url = fetchDataFromServerApk()
+                                //     }
 
-                                    background: Rectangle {
-                                        anchors.fill: parent
-                                        radius: 30 * sw
-                                        Rectangle {
-                                            anchors.fill: parent
-                                            radius: 30 * sw
-                                            height: parent.height
-                                            color: button3.pressed ? "gray" : mainColor
-                                        }
-                                        Text {
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.horizontalCenter: parent.horizontalCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                            verticalAlignment: Text.AlignVCenter
-                                            text: isApkUpdating
-                                                  ? qsTr("在线升级") : qsTr(
-                                                                  "正在下载%1%").arg(
-                                                                  apkUpdateProgress)
-                                            font.pixelSize: buttonFontSize * 5 / 6
-                                            color: "white"
-                                            font.bold: false
-                                        }
-                                        color: "#00000000"
-                                    }
-                                }
+                                //     background: Rectangle {
+                                //         anchors.fill: parent
+                                //         radius: 30 * sw
+                                //         Rectangle {
+                                //             anchors.fill: parent
+                                //             radius: 30 * sw
+                                //             height: parent.height
+                                //             color: button3.pressed ? "gray" : mainColor
+                                //         }
+                                //         Text {
+                                //             anchors.verticalCenter: parent.verticalCenter
+                                //             anchors.horizontalCenter: parent.horizontalCenter
+                                //             horizontalAlignment: Text.AlignHCenter
+                                //             verticalAlignment: Text.AlignVCenter
+                                //             text: isApkUpdating
+                                //                   ? qsTr("在线升级") : qsTr(
+                                //                                   "正在下载%1%").arg(
+                                //                                   apkUpdateProgress)
+                                //             font.pixelSize: buttonFontSize * 5 / 6
+                                //             color: "white"
+                                //             font.bold: false
+                                //         }
+                                //         color: "#00000000"
+                                //     }
+                                // }
                                 Text {
                                     id: button4
                                     width: 180 * sw
@@ -667,10 +674,10 @@ Flickable {
                     Item {
                         width: parent.width
                         height: parent.height
-                        // LogDownloadPage {
-                        //     width: parent.width
-                        //     height: parent.height
-                        // }
+                        LogDownloadPage{
+                            width: parent.width
+                            height: parent.height
+                        }
                     }
                 }
             }
@@ -1050,9 +1057,11 @@ Flickable {
         messageType: 1
         popupHeight: 240 * sw
     }
+
     FileDownloader {
         id: fileDownloader
     }
+
     Connections {
         property var fullPath
         target: fileDownloader
@@ -1068,23 +1077,49 @@ Flickable {
         }
         onFileend: {
             if (isUpdating) {
-                activeVehicle.handleFileSelected(fullPath.toString().replace("file:///", ""))
+                _Vehicle.upgradeFirmware(fullPath.toString().replace("file:///", ""))
             }
             if (isApkUpdating) {
                 isApkUpdating = false
             }
         }
     }
-    FileDialog {
+
+    VKFileDialog {
         id: fileDialog
-        title: qsTr("选择文件")
         nameFilters: ["Update files (*.rbl)"]
-        onAccepted: {
-            var fileUrl = fileDialog.fileUrl
-            if (fileUrl !== "") {
-                activeVehicle.handleFileSelected(fileUrl.toString().replace("file:///", ""))
-                isLocalFmuUpdating = true
-            }
+        title: qsTr("选择文件")
+        onAcceptedForLoad: function(filePath){
+            _Vehicle.upgradeFirmware(filePath)
+            isLocalFmuUpdating = true
         }
     }
+
+    // FileDialog {
+    //     id: fileDialog
+    //     title: qsTr("选择文件")
+    //     nameFilters: ["Update files (*.rbl)"]
+    //     fileMode: FileDialog.OpenFile
+
+    //     onAccepted: {
+    //         // 获取第一个选择的文件（单个文件模式）
+    //         var fileUrl = fileDialog.selectedFile
+
+    //         var filePath = fileUrl.toString();
+    //         if (Qt.platform.os === "windows") {
+    //             filePath = filePath.replace("file:///", "");
+    //         } else {
+    //             filePath = filePath.replace("file://", "");
+    //         }
+
+    //         if (filePath && filePath !== "") {
+    //             console.log("Selected file path:", filePath); // 添加调试输出
+
+    //             _Vehicle.upgradeFirmware(filePath)
+    //             isLocalFmuUpdating = true
+    //         } else {
+    //             console.error("未选择有效的文件")
+    //         }
+    //     }
+    // }
 }

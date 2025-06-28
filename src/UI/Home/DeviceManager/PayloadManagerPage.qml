@@ -19,7 +19,7 @@ Flickable {
     property color mainColor: mainWindow.titlecolor
     
     // Vehicle Properties
-    property var activeVehicle: VkSdkInstance.vehicleManager.vehicles[0] //TODO暂时这么处理，可以用activevehicle
+    property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle //TODO暂时这么处理，可以用activevehicle
     property int escIndex: activeVehicle ? activeVehicle.esc_index : ""
     property var escCurrent: activeVehicle ? activeVehicle.esc_current : ""
     property var escVoltage: activeVehicle ? activeVehicle.esc_vol : ""
@@ -414,7 +414,7 @@ Flickable {
                             height: 80 * ScreenTools.scaleWidth
                             titleName: qsTr("降落伞")
                             paramNames: ["PARACHUTE_RCCH", "PARACHUTE_CH", "PARACHUTE_ON", "PARACHUTE_OFF"]
-                            value1 : VkSdkInstance.vehicleManager.vehicles[0].parameters["PARACHUTE_RCCH"]
+                            value1 : VkSdkInstance.vehicleManager.activeVehicle.parameters["PARACHUTE_RCCH"]
                         }
                     }
                 }
@@ -640,7 +640,7 @@ Flickable {
                         width: 300 * ScreenTools.scaleWidth
                         height: 50 * ScreenTools.scaleWidth
                         onClicked: {
-                            vk_weigher_cal.open()
+                            vkweighercal.open()
                         }
                         background: Rectangle {
                             anchors.fill: parent
@@ -681,5 +681,12 @@ Flickable {
         popupWidth: parent.width * 0.5
         messageType: 1
         popupHeight: 240 * ScreenTools.scaleWidth
+    }
+
+    WeightCalculator{
+        width:800 * ScreenTools.scaleWidth
+        id:vkweighercal
+        //id:vkbiandui
+        anchors.centerIn: parent
     }
 }

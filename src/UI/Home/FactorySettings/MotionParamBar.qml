@@ -127,8 +127,8 @@ Item {
                     newValue = Math.max(newValue, sliderMinValue)
                     //更新显示值
                     parameterValue = Number(newValue.toFixed(decimalPlaces))
-                    if(VkSdkInstance.vehicleManager.vehicles[0]){
-                        VkSdkInstance.vehicleManager.vehicles[0].setParam(parameter,value);
+                    if(VkSdkInstance.vehicleManager.activeVehicle){
+                        VkSdkInstance.vehicleManager.activeVehicle.setParam(parameter,parameterValue);
                     }
                 }
             }
@@ -205,8 +205,8 @@ Item {
                     parameterValue = Number(newValue.toFixed(decimalPlaces))
 
                     // 发送参数到车辆
-                    if(VkSdkInstance.vehicleManager.vehicles[0]){
-                        VkSdkInstance.vehicleManager.vehicles[0].setParam(parameter, parameterValue)
+                    if(VkSdkInstance.vehicleManager.activeVehicle){
+                        VkSdkInstance.vehicleManager.activeVehicle.setParam(parameter, parameterValue)
                     }
                 }
             }

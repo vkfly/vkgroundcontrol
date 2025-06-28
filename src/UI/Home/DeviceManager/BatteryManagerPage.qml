@@ -3,6 +3,7 @@ import QtQuick.Controls
 
 import VKGroundControl
 import VKGroundControl.Palette
+import ScreenTools
 
 Flickable {
     // UI Properties
@@ -147,5 +148,12 @@ Flickable {
                 }
             }
         }
+    }
+
+    BatteryCalibration{
+        width:800*ScreenTools.scaleWidth
+        id:vk_battery_cal
+        //id:vkbiandui
+        anchors.centerIn: parent
     }
 }

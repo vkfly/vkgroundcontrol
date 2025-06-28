@@ -21,12 +21,6 @@ Item {
     property string decrementButtonColor: slider.value > slider.minSliderValue ? "blue" : "lightgray"
     property string incrementButtonColor: slider.value < slider.maxSliderValue ? "blue" : "lightgray"
     
-    // 参数管理相关属性
-    property var _parameterManager: VKGroundControl.multiVehicleManager.activeVehicle1 ? VKGroundControl.multiVehicleManager.activeVehicle1.parameterManager : ""
-    property string paramName: _parameterManager ? _parameterManager.paramName : ""
-    property string paramValue: _parameterManager ? _parameterManager.paramValue : ""
-    property var paramValue1: 0
-    
     // 滑块相关属性
     property var valueType: 3
     property var barValue: 0
@@ -216,8 +210,8 @@ Item {
                     onClicked: {
                         if (curValue < maxValue) {
                             curSetValue = (curValue + addValue).toFixed(toFix)
-                            if (VkSdkInstance.vehicleManager.vehicles[0]) {
-                                VkSdkInstance.vehicleManager.vehicles[0].setParam(param, curSetValue)
+                            if (VkSdkInstance.vehicleManager.activeVehicle) {
+                                VkSdkInstance.vehicleManager.activeVehicle.setParam(param, curSetValue)
                             }
                         }
                     }

@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "vkdata.h"
 #include <QObject>
 #include <QList>
 

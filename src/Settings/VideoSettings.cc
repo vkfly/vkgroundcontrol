@@ -61,8 +61,6 @@ DECLARE_SETTINGGROUP(Video, "Video") {
     }
     _nameToMetaDataMap[videoSourceName]->setEnumInfo(videoSourceCookedList, videoSourceList);
     _setForceVideoDecodeList();
-    // Set default value for videoSource
-    _setDefaults();
 }
 
 void VideoSettings::_setDefaults() {

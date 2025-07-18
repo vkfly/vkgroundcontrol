@@ -722,7 +722,7 @@ Item {
         visible: showRtk
         width: 560 * ScreenTools.scaleWidth
         height: 140 * ScreenTools.scaleWidth
-        parent: signalIcon
+        parent: _root
 
         // 智能定位
         x: {

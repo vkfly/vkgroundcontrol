@@ -73,9 +73,9 @@ Item {
             anchors.horizontalCenter: flyButton.horizontalCenter
             anchors.bottom: flyButton.top
             backgroundColor: "transparent"
-            text: _activeVehicle ? qsTr("已连接") : qsTr("未连接")
+            text: _activeVehicle && _activeVehicle.isConnected ? qsTr("已连接") : qsTr("未连接")
             pixelSize: fontSize * 0.8
-            textColor: _activeVehicle ? vkPal.titleColor : "red"
+            textColor: _activeVehicle && _activeVehicle.isConnected ? vkPal.titleColor : "red"
             showHighlight: false
             onClicked: {
                 if(ScreenTools.isAndroid) {

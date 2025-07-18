@@ -163,7 +163,7 @@ void QGCApplication::setLanguage() {
     removeTranslator(JsonHelper::translator());
     removeTranslator(&_qgcTranslatorSourceCode);
     removeTranslator(&_qgcTranslatorQtLibs);
-    if (_locale.name() != "en_US") {
+    if (_locale.name() != "zh_CN") {
         QLocale::setDefault(_locale);
         if (_qgcTranslatorQtLibs.load("qt_" + _locale.name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
             installTranslator(&_qgcTranslatorQtLibs);

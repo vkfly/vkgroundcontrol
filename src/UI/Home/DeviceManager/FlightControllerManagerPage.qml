@@ -749,10 +749,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("X:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.xmag
-                                                                * 0.001).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("X:%1").arg(_Vehicle? _Vehicle.imuStatus.xmag.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -761,10 +758,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Y:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.ymag
-                                                                * 0.001).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Y:%1").arg(_Vehicle? _Vehicle.imuStatus.ymag.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -773,10 +767,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Z:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.zmag
-                                                                * 0.001).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Z:%1").arg(_Vehicle? _Vehicle.imuStatus.zmag.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                             }
@@ -798,10 +789,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("X:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.xacc
-                                                                * 0.001 * 9.8065).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("X:%1").arg(_Vehicle? _Vehicle.imuStatus.xacc.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -810,10 +798,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Y:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.yacc
-                                                                * 0.001 * 9.8065).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Y:%1").arg(_Vehicle? _Vehicle.imuStatus.yacc.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -822,10 +807,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Z:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.zacc
-                                                                * 0.001 * 9.8065).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Z:%1").arg(_Vehicle? _Vehicle.imuStatus.zacc.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                             }
@@ -847,10 +829,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("X:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.xgyro
-                                                                * 0.001 * 180 / Math.PI).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("X:%1").arg(_Vehicle? _Vehicle.imuStatus.xgyro.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -859,10 +838,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Y:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.ygyro
-                                                                * 0.001 * 180 / Math.PI).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Y:%1").arg(_Vehicle? _Vehicle.imuStatus.ygyro.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -871,10 +847,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Z:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImuStatus.zgyro
-                                                                * 0.001 * 180 / Math.PI).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Z:%1").arg(_Vehicle? _Vehicle.imuStatus.zgyro.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                             }
@@ -955,10 +928,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("X:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImu2Status.xacc
-                                                                * 0.001 * 9.8065).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("X:%1").arg(_Vehicle? _Vehicle.imu2Status.xacc.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -967,10 +937,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Y:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImu2Status.yacc
-                                                                * 0.001 * 9.8065).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Y:%1").arg(_Vehicle? _Vehicle.imu2Status.yacc.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -979,10 +946,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Z:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImu2Status.zacc
-                                                                * 0.001 * 9.8065).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Z:%1").arg(_Vehicle? _Vehicle.imu2Status.zacc.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                             }
@@ -1004,10 +968,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("X:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImu2Status.xgyro
-                                                                * 0.001 * 180 / Math.PI).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("X:%1").arg(_Vehicle? _Vehicle.imu2Status.xgyro.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -1016,10 +977,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Y:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImu2Status.ygyro
-                                                                * 0.001 * 180 / Math.PI).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Y:%1").arg(_Vehicle? _Vehicle.imu2Status.ygyro.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
@@ -1028,10 +986,7 @@ Flickable {
                                     font.pixelSize: fontSize
                                     font.bold: false
                                     color: fontColor
-                                    text: qsTr("Z:%1").arg(
-                                              _Vehicle ? (_Vehicle.scaledImu2Status.zgyro
-                                                                * 0.001 * 180 / Math.PI).toFixed(
-                                                                   1) : "---")
+                                    text: qsTr("Z:%1").arg(_Vehicle? _Vehicle.imu2Status.zgyro.toFixed(1) : "---")
                                     verticalAlignment: Text.AlignVCenter
                                 }
                             }

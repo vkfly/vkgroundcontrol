@@ -18,7 +18,7 @@ Popup {
 
     // Properties with camelCase naming
     property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
-    property var rcChannels: VkSdkInstance.vehicleManager.activeVehicle.rcChannels
+    property var rcChannels: activeVehicle.rcChannels
 
     property int popupWidth: 900
     property string initialInstructionText: qsTr("请把所有摇杆、拨杆都置于中位，点击确定开始校准")

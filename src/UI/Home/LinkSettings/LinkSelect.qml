@@ -18,7 +18,7 @@ Item {
         id: vk_toobar
         anchors.top: parent.top
         width: parent.width
-        titleName: "连接方式选择"
+        titleName: qsTr("连接方式选择")
         onReturnLast: {
             goToMain()
         }

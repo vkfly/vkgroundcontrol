@@ -39,6 +39,7 @@ Flickable {
         property int linkType: 0
         property string ip: ""
         property string port: ""
+        property string license: ""
 
         property string portName: ""
         property string baudrate: "115200"
@@ -82,6 +83,11 @@ Flickable {
             config.dataBits = parseInt(conf[3])
             config.parity = conf[4] === "N" ? 0 : conf[4] === "E" ? 1 : 2
             config.stopBits = parseInt(conf[5])
+        } else if (name === "4G") {
+            config.linkType = 3
+            config.ip = conf[1]
+            config.port = conf[2]
+            config.license = conf[3]
         }
         loadConfigPageWithLinkType(config.linkType)
     }
@@ -96,6 +102,9 @@ Flickable {
             break
         case 2:
             config.settingsURL = "UdpSettings.qml"
+            break
+        case 3:
+            config.settingsURL = "4GSettings.qml"
             break
         }
     }
@@ -118,6 +127,8 @@ Flickable {
             settingListStr
                     = [configName, config.portName, config.baudrate, config.dataBits, config.parity
                        === 0 ? "N" : config.parity === 1 ? "E" : "O", config.stopBits]
+        } else if (config.linkType === 3) {
+            settingListStr = [configName, config.ip, config.port, config.license]
         }
         return settingListStr
     }
@@ -133,6 +144,9 @@ Flickable {
         case 2:
             configName = "udp"
             break
+        case 3:
+            configName = "4g"
+            break;
         }
         return configName
     }
@@ -148,6 +162,8 @@ Flickable {
         } else if (config.linkType === 0) {
             settingStr = `${configName}://${config.portName}:${config.baudrate}:${config.dataBits}${config.parity
                     === 0 ? "N" : config.parity === 1 ? "E" : "O"}${config.stopBits}`
+        } else if(config.linkType === 3) {
+            settingStr = `${configName}://${config.ip}:${config.port}?${config.license}`
         }
         return settingStr
     }
@@ -166,13 +182,15 @@ Flickable {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: ScreenTools.defaultFontPixelWidth
+        anchors.margins: 8 * sw
         width: parent.width
 
         Button {
             text: qsTr("保存")
             Layout.fillWidth: true
             Layout.fillHeight: true
+            topPadding: 8 * sw
+            bottomPadding: 8 * sw
             font.pixelSize: 60 * sh
             onClicked: {
                 saveSettings()
@@ -182,6 +200,8 @@ Flickable {
             text: qsTr("连接")
             Layout.fillWidth: true
             Layout.fillHeight: true
+            topPadding: 8 * sw
+            bottomPadding: 8 * sw
             font.pixelSize: 60 * sh
             enabled: true
             onClicked: {
@@ -192,6 +212,8 @@ Flickable {
             text: qsTr("断开")
             Layout.fillWidth: true
             Layout.fillHeight: true
+            topPadding: 8 * sw
+            bottomPadding: 8 * sw
             font.pixelSize: 60 * sh
             enabled: true
             onClicked: {
@@ -203,7 +225,7 @@ Flickable {
     Loader {
         id: settingsLoader
         width: parent.width
-        height: parent.height - buttonRow.height
+        height: parent.height - buttonRow.height - 8 * sw
         visible: sourceComponent ? true : false
         property var originalLinkConfig: null
         property var editingConfig: null
@@ -247,7 +269,7 @@ Flickable {
                                         height: 45 * sw
                                         font.pixelSize: 45 * sh
                                         enabled: originalLinkConfig == null
-                                        model: ["Serial", "TCP", "UDP"]
+                                        model: ["Serial", "TCP", "UDP", "4G"]
                                         currentIndex: editingConfig.linkType
                                         onActivated: {
                                             if (index !== editingConfig.linkType) {

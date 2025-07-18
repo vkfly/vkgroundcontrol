@@ -27,7 +27,7 @@ Column {
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: 45 * sh
             color: "white"
-            text: qsTr("服务地址")
+            text: qsTr("IP地址")
         }
         TextField {
             id: hostField

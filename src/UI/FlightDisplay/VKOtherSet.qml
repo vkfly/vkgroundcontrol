@@ -191,7 +191,7 @@ Flickable {
             content: Column {
                 width: parent.width
                 spacing: 30 * ScreenTools.scaleWidth
-/*
+
                 SettingRow {
                     labelText: qsTr("语言设置")
 
@@ -201,8 +201,8 @@ Flickable {
                         height: 50 * ScreenTools.scaleWidth
                         anchors.verticalCenter: parent.verticalCenter
                         fontSize: buttonFontSize * 5 / 6
-                        // currentIndex: VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumIndex
-                        // model: VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumStrings
+                        currentIndex: VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumIndex
+                        model: VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumStrings
                         onActivated: {
                             VKGroundControl.settingsManager.appSettings.qLocaleLanguage.value
                                     = VKGroundControl.settingsManager.appSettings.qLocaleLanguage.enumValues[index]
@@ -210,23 +210,23 @@ Flickable {
                     }
                 }
 
-                SettingRow {
-                    labelText: qsTr("语音设置")
+                // SettingRow {
+                //     labelText: qsTr("语音设置")
 
-                    content: CustomComboBox {
-                        width: 320 * ScreenTools.scaleWidth
-                        height: 50 * ScreenTools.scaleWidth
-                        anchors.verticalCenter: parent.verticalCenter
-                        fontSize: buttonFontSize * 5 / 6
-                        currentIndex: 1
-                        model: [qsTr("开启"), qsTr("关闭")]
-                        onActivated: {
+                //     content: CustomComboBox {
+                //         width: 320 * ScreenTools.scaleWidth
+                //         height: 50 * ScreenTools.scaleWidth
+                //         anchors.verticalCenter: parent.verticalCenter
+                //         fontSize: buttonFontSize * 5 / 6
+                //         currentIndex: 1
+                //         model: [qsTr("开启"), qsTr("关闭")]
+                //         onActivated: {
 
-                            // 处理语音设置
-                        }
-                    }
-                }
-*/
+                //             // 处理语音设置
+                //         }
+                //     }
+                // }
+
                 SettingRow {
                     labelText: qsTr("地图提供商")
 

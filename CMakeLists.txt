@@ -144,7 +144,7 @@ find_package(Qt6
         Concurrent
         Core
         Gui
-        # LinguistTools
+        LinguistTools
         Location
         Multimedia
         Network
@@ -599,6 +599,20 @@ if(QGC_CUSTOM_BUILD)
     target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${CUSTOM_LIBRARIES})
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CUSTOM_DIRECTORIES})
 endif()
+
+file(GLOB TS_SOURCES ${CMAKE_SOURCE_DIR}/translations/qgc_*.ts)
+set_source_files_properties(${TS_SOURCES} PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/i18n")
+qt_add_translations(${CMAKE_PROJECT_NAME}
+    # TS_FILE_BASE ${CMAKE_PROJECT_NAME}
+    # TS_FILE_DIR ${CMAKE_SOURCE_DIR}/translations/
+    TS_FILES ${TS_SOURCES}
+    # TS_FILES_OUTPUT_VARIABLE
+    # QM_FILES_OUTPUT_VARIABLE
+    # TARGETS ${CMAKE_PROJECT_NAME}
+    # SOURCE_TARGETS ${CMAKE_PROJECT_NAME}
+    RESOURCE_PREFIX "/"
+    LUPDATE_OPTIONS -no-obsolete
+)
 
 target_precompile_headers(${CMAKE_PROJECT_NAME}
     PRIVATE

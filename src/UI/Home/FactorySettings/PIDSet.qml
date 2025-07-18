@@ -44,8 +44,8 @@ Flickable {
     property string advancedIconDown: "/qmlimages/icon/down_arrow.png"
 
     // 参数相关属性
-    property var paramName: _parameterManager.paramName
-    property var paramValue: _parameterManager.paramValue
+    // property var paramName: _parameterManager.paramName
+    // property var paramValue: _parameterManager.paramValue
     property int gyroFilterId: -1
     property int accelFilterId: -1
     property int idleValue: 5
@@ -59,24 +59,24 @@ Flickable {
         id: qgcPal
     }
     // 参数值变化处理
-    onParamValueChanged: {
-        var paramValueArray = paramValue.split("--")
+    // onParamValueChanged: {
+    //     var paramValueArray = paramValue.split("--")
 
-        switch (paramName) {
-        case "IMU_GFLT_TYPE":
-            gyroFilterId = parseInt(paramValueArray)
-            break
-        case "IMU_AFLT_TYPE":
-            accelFilterId = parseInt(paramValueArray)
-            break
-        case "LADRC_EN":
-            btOpenValue = parseInt(paramValueArray)
-            break
-        case "MC_MIN_THR":
-            idleValue = Math.round(parseFloat(paramValueArray) * 100)
-            break
-        }
-    }
+    //     switch (paramName) {
+    //     case "IMU_GFLT_TYPE":
+    //         gyroFilterId = parseInt(paramValueArray)
+    //         break
+    //     case "IMU_AFLT_TYPE":
+    //         accelFilterId = parseInt(paramValueArray)
+    //         break
+    //     case "LADRC_EN":
+    //         btOpenValue = parseInt(paramValueArray)
+    //         break
+    //     case "MC_MIN_THR":
+    //         idleValue = Math.round(parseFloat(paramValueArray) * 100)
+    //         break
+    //     }
+    // }
     // 主布局容器
     Column {
         id: column
@@ -859,7 +859,14 @@ Flickable {
                 width: 800 * sw
                 height: 100 * sw
                 spacing: 100 * sw
-                names: [qsTr("一键保存"),qsTr("一键导入"),qsTr("恢复出厂")]
+                names: [qsTr("一键保存"),qsTr("一键导入")]
+                onClicked: {
+                if(index===0)
+                    saveFileDialog.open()
+                if(index===1)
+                    loadFiledialog.open()
+                }
+
             }
 
             Button {
@@ -895,34 +902,88 @@ Flickable {
     //     type: 1
     //     popupHeight: 240 * sw
     // }
+
+    // FileDialog {
+    //     id: fileDialog
+    //     title: qsTr("保存参数文件")
+    //     fileMode: FileDialog.SaveFile
+    //     nameFilters: ["XML files (*.xml)"]
+
+    //     onAccepted: {
+    //         var fileUrl = fileDialog.fileUrl
+    //         if (fileUrl !== "") {
+    //             // 将文件路径传递给C++
+    //             VkSdkInstance.vehicleManager.activeVehicle.saveParamsToXML(fileUrl.toString().replace("file:///", ""))
+    //             // cppObject.loadFile(fileUrl.toString().replace("file://", ""))
+    //             console.log("参数已保存到:", filePath);
+    //         }
+    //     }
+    // }
+
     FileDialog {
-        id: fileDialog
+        id: saveFileDialog
         title: qsTr("保存参数文件")
-        nameFilters: ["KML files (*.xaml)"] // 文件类型过滤器
+        fileMode: FileDialog.SaveFile
+        nameFilters: ["JSON files (*.json)"]
+
         onAccepted: {
-            var fileUrl = fileDialog.fileUrl
-            if (fileUrl !== "") {
-                // 转换路径，去掉 file:///
-                var filePath = fileUrl.toString().replace("file:///", "")
-                //customListModel.savekmlfile(filePath)
-                VKGroundControl.multiVehicleManager.activeVehicle1.parameterManager.saveParamMapToXML(
-                            filePath)
-            }
+            // 获取文件路径（QUrl对象）
+            var fileUrl = selectedFile;
+
+            // 将 QUrl 转换为字符串
+            var filePath = fileUrl.toString();
+
+            // 保存参数
+            VkSdkInstance.vehicleManager.activeVehicle.saveParamMapToJSON(filePath.replace("file:///", ""));
+
+            // 添加成功提示
+            console.log("参数已保存到:", filePath);
         }
     }
 
+
+    // FileDialog {
+    //     id: fileDialog
+    //     title: qsTr("保存参数文件")
+    //     nameFilters: ["XML files (*.xml)"]
+    //     onAccepted: {
+    //         var filePath = fileDialog.fileUrl.toString().replace("file:///", "");
+    //         console.log("保存到:", filePath);
+    //         VkSdkInstance.vehicleManager.activeVehicle.saveParamsToXML(filePath);
+    //     }
+    // }
+
+    // FileDialog {
+    //     id: openfiledialog
+    //     title: qsTr("选择文件")
+    //     nameFilters: ["XML files (*.xaml)"]
+    //     onAccepted: {
+    //         var fileUrl = openfiledialog.fileUrl
+    //         if (fileUrl !== "") {
+    //             // 转换路径，去掉 file:///
+    //             var filePath = fileUrl.toString().replace("file:///", "")
+    //             VKGroundControl.multiVehicleManager.activeVehicle1.parameterManager.loadParamMapFromXML(
+    //                         filePath)
+    //         }
+    //     }
+    // }
+
     FileDialog {
-        id: openfiledialog
-        title: qsTr("选择文件")
-        nameFilters: ["XML files (*.xaml)"]
+        id: loadFiledialog
+        title: qsTr("读取参数文件")
+        nameFilters: ["JSON files (*.json)"]
+
         onAccepted: {
-            var fileUrl = openfiledialog.fileUrl
-            if (fileUrl !== "") {
-                // 转换路径，去掉 file:///
-                var filePath = fileUrl.toString().replace("file:///", "")
-                VKGroundControl.multiVehicleManager.activeVehicle1.parameterManager.loadParamMapFromXML(
-                            filePath)
-            }
+            // 获取文件路径（QUrl对象）
+            var fileUrl = selectedFile;
+
+            // 将 QUrl 转换为字符串
+            var filePath = fileUrl.toString();
+
+            // 保存参数
+            VkSdkInstance.vehicleManager.activeVehicle.loadParamMapFromJSON(filePath.replace("file:///", ""));
+
+            console.log("文件已经打开:", filePath);
         }
     }
 }

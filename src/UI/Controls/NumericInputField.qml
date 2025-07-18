@@ -22,7 +22,7 @@ Item {
     }
 
     function reset() {
-        valueTextInput.text = "0"
+        valueTextInput.text = ""
     }
 
     function currentValue() {
@@ -63,8 +63,9 @@ Item {
 
     // Remove leading zeros from numbers (except decimals)
     function processNumber(number) {
-        if (number.length > 0) {
+        if (number.length > 1) {
             if (number.charAt(0) === '0' && !number.includes('.')) {
+                console.log("processNumber",number.substring(1))
                 return number.substring(1)
             }
         }

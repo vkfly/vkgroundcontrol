@@ -1,0 +1,130 @@
+# Doxyfile 1.9.1
+
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = "VKQTSDK API Documentation"
+PROJECT_NUMBER         = "1.0.0"
+PROJECT_BRIEF          = "VK Qt SDK API 文档"
+OUTPUT_DIRECTORY       = ./doxygen_docs
+OUTPUT_LANGUAGE        = Chinese
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+JAVADOC_AUTOBRIEF      = YES
+INHERIT_DOCS           = YES
+TAB_SIZE               = 4
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = YES
+
+#---------------------------------------------------------------------------
+# Build related configuration options
+#---------------------------------------------------------------------------
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = YES
+HIDE_UNDOC_MEMBERS     = YES
+HIDE_UNDOC_CLASSES     = YES
+SORT_MEMBER_DOCS       = YES
+GENERATE_TODOLIST      = NO
+GENERATE_TESTLIST      = NO
+GENERATE_BUGLIST       = NO
+GENERATE_DEPRECATEDLIST= NO
+SHOW_USED_FILES        = NO
+SHOW_FILES             = NO
+SHOW_NAMESPACES        = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to warning and progress messages
+#---------------------------------------------------------------------------
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the input files
+#---------------------------------------------------------------------------
+INPUT                  = ../vkqtsdk/include
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.h *.hpp *.cpp *.c *.cc *.cxx
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */build/* \
+                         */cmake-build-*/* \
+                         */.git/* \
+                         */external/*
+
+#---------------------------------------------------------------------------
+# Configuration options related to source browsing
+#---------------------------------------------------------------------------
+SOURCE_BROWSER         = NO
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES
+REFERENCED_BY_RELATION = NO
+REFERENCES_RELATION    = NO
+VERBATIM_HEADERS       = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the alphabetical class index
+#---------------------------------------------------------------------------
+ALPHABETICAL_INDEX     = YES
+COLS_IN_ALPHA_INDEX    = 5
+
+#---------------------------------------------------------------------------
+# Configuration options related to the HTML output
+#---------------------------------------------------------------------------
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_DYNAMIC_MENUS     = YES
+HTML_INDEX_NUM_ENTRIES = 100
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to the LaTeX output
+#---------------------------------------------------------------------------
+GENERATE_LATEX         = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the preprocessor
+#---------------------------------------------------------------------------
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SEARCH_INCLUDES        = YES
+INCLUDE_PATH           = ../vkqtsdk/include
+PREDEFINED             = Q_OBJECT \
+                         Q_GADGET \
+                         Q_ENUM(x)=enum x \
+                         "Q_PROPERTY(type name ...)=type name;" \
+                         Q_INVOKABLE= \
+                         Q_SIGNAL=signal \
+                         Q_SLOT=slot \
+                         Q_SIGNALS=signals \
+                         Q_SLOTS=slots \
+                         Q_DECLARE_METATYPE(x)= \
+                         Q_DECL_EXPORT= \
+                         Q_DECL_IMPORT= \
+                         Q_DECL_OVERRIDE=override \
+                         Q_DECL_FINAL=final \
+                         Q_NULLPTR=nullptr
+
+#---------------------------------------------------------------------------
+# Configuration options related to the dot tool
+#---------------------------------------------------------------------------
+CLASS_DIAGRAMS         = YES
+HAVE_DOT               = NO
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+DOT_IMAGE_FORMAT       = png
+DOT_GRAPH_MAX_NODES    = 50
+GENERATE_LEGEND        = YES
+DOT_CLEANUP            = YES

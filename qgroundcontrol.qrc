@@ -126,6 +126,7 @@
         <file alias="Home/LinkSettings/TcpSettings.qml">src/UI/Home/LinkSettings/TcpSettings.qml</file>
         <file alias="Home/LinkSettings/UdpSettings.qml">src/UI/Home/LinkSettings/UdpSettings.qml</file>
         <file alias="Home/LinkSettings/SerialSettings.qml">src/UI/Home/LinkSettings/SerialSettings.qml</file>
+        <file alias="Home/LinkSettings/4GSettings.qml">src/UI/Home/LinkSettings/4GSettings.qml</file>
         <file alias="ScreenTools/qmldir">src/UI/ScreenTools/qmldir</file>
     </qresource>
     <qresource prefix="/json">

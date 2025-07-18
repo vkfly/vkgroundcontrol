@@ -22,13 +22,13 @@
 
 // Release languages are 90%+ complete
 QList<QLocale::Language> AppSettings::_rgReleaseLanguages = {
-    QLocale::English,
-    QLocale::Azerbaijani,
     QLocale::Chinese,
-    QLocale::Japanese,
-    QLocale::Korean,
-    QLocale::Portuguese,
-    QLocale::Russian,
+    QLocale::English,
+    // QLocale::Azerbaijani,
+    // QLocale::Japanese,
+    // QLocale::Korean,
+    // QLocale::Portuguese,
+    // QLocale::Russian,
 };
 
 // Partial languages are 40%+ complete
@@ -38,26 +38,26 @@ QList<QLocale::Language> AppSettings::_rgPartialLanguages = {
 
 AppSettings::LanguageInfo_t AppSettings::_rgLanguageInfo[] = {
     { QLocale::AnyLanguage,     "System" },                     // Must be first
-    { QLocale::Azerbaijani,     "Azerbaijani (Azerbaijani)" },
-    { QLocale::Bulgarian,       "български (Bulgarian)" },
     { QLocale::Chinese,         "中文 (Chinese)" },
-    { QLocale::Dutch,           "Nederlands (Dutch)" },
     { QLocale::English,         "English" },
-    { QLocale::Finnish,         "Suomi (Finnish)" },
-    { QLocale::French,          "Français (French)" },
-    { QLocale::German,          "Deutsche (German)" },
-    { QLocale::Greek,           "Ελληνικά (Greek)" },
-    { QLocale::Hebrew,          "עברית (Hebrew)" },
-    { QLocale::Italian,         "Italiano (Italian)" },
-    { QLocale::Japanese,        "日本語 (Japanese)" },
-    { QLocale::Korean,          "한국어 (Korean)" },
-    { QLocale::NorwegianBokmal, "Norsk (Norwegian)" },
-    { QLocale::Polish,          "Polskie (Polish)" },
-    { QLocale::Portuguese,      "Português (Portuguese)" },
-    { QLocale::Russian,         "Pусский (Russian)" },
-    { QLocale::Spanish,         "Español (Spanish)" },
-    { QLocale::Swedish,         "Svenska (Swedish)" },
-    { QLocale::Turkish,         "Türk (Turkish)" }
+    // { QLocale::Azerbaijani,     "Azerbaijani (Azerbaijani)" },
+    // { QLocale::Bulgarian,       "български (Bulgarian)" },
+    // { QLocale::Dutch,           "Nederlands (Dutch)" },
+    // { QLocale::Finnish,         "Suomi (Finnish)" },
+    // { QLocale::French,          "Français (French)" },
+    // { QLocale::German,          "Deutsche (German)" },
+    // { QLocale::Greek,           "Ελληνικά (Greek)" },
+    // { QLocale::Hebrew,          "עברית (Hebrew)" },
+    // { QLocale::Italian,         "Italiano (Italian)" },
+    // { QLocale::Japanese,        "日本語 (Japanese)" },
+    // { QLocale::Korean,          "한국어 (Korean)" },
+    // { QLocale::NorwegianBokmal, "Norsk (Norwegian)" },
+    // { QLocale::Polish,          "Polskie (Polish)" },
+    // { QLocale::Portuguese,      "Português (Portuguese)" },
+    // { QLocale::Russian,         "Pусский (Russian)" },
+    // { QLocale::Spanish,         "Español (Spanish)" },
+    // { QLocale::Swedish,         "Svenska (Swedish)" },
+    // { QLocale::Turkish,         "Türk (Turkish)" }
 };
 
 DECLARE_SETTINGGROUP(App, "") {

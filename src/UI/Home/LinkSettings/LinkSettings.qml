@@ -54,6 +54,7 @@ Flickable {
             config.ip = "127.0.0.1"
             config.port = "9876"
             connect()
+            connectRc()
             return
         }
         openCommSettings(null)
@@ -152,6 +153,10 @@ Flickable {
     }
     function connect() {
         VkSdkInstance.startLink(getConnectStr())
+    }
+
+    function connectRc() {
+        VkSdkInstance.startRcLink(`udp://127.0.0.1:9877`)
     }
 
     function getConnectStr() {

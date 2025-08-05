@@ -36,6 +36,7 @@ Button {
 
     property int _horizontalPadding:    ScreenTools.scaleWidth * 12
     property int _verticalPadding:      Math.round(6 * ScreenTools.scaleWidth)
+    property real iconTextSpacing: 8 * ScreenTools.scaleWidth
 
     VKPalette { id: qgcPal; colorGroupEnabled: enabled }
 
@@ -57,7 +58,7 @@ Button {
     }
 
     contentItem: RowLayout {
-            spacing: 6 * ScreenTools.scaleWidth
+            spacing: control.iconTextSpacing
 
             VKColoredImage {
                 id:                     icon

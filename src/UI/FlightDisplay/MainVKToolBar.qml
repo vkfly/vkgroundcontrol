@@ -1025,27 +1025,8 @@ Item {
 
     function getsignal() {
 
-        if (_activeVehicle) {
-            if (_activeVehicle.single_value === 0) {
-                return "/qmlimages/icon/rc_0.png"
-            }
-            if (_activeVehicle.single_value === 1) {
-                return "/qmlimages/icon/rc_1.png"
-            }
-            if (_activeVehicle.single_value === 2) {
-                return "/qmlimages/icon/rc_2.png"
-            }
-            if (_activeVehicle.single_value === 3) {
-                return "/qmlimages/icon/rc_3.png"
-            }
-            if (_activeVehicle.single_value === 4) {
-                return "/qmlimages/icon/rc_4.png"
-            }
-            if (_activeVehicle.single_value >= 5) {
-                return "/qmlimages/icon/rc_5.png"
-            }
-        } else {
-            return "/qmlimages/icon/rc_0.png"
-        }
+        var level = Math.floor(VkSdkInstance.rcInfo.rssi / 17)
+        console.log("getsignal",level)
+        return `/qmlimages/icon/rc_${level}.png`
     }
 }

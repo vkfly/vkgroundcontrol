@@ -25,6 +25,13 @@
     "default":     ""
 },
 {
+    "name":             "rtspServerUrl",
+    "shortDesc": "RTSP Server Url",
+    "longDesc":  "RTSP server url address and port to push video stream. Example: rtsp://192.168.1.100:8554/stream",
+    "type":             "string",
+    "default":     "rtmp://push.jiagutech.com/live/test"
+},
+{
     "name":             "tcpUrl",
     "shortDesc": "Video TCP Url",
     "longDesc":  "TCP url address and port to bind to for video stream. Example: 192.168.143.200:3001",

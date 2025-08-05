@@ -7,6 +7,7 @@ import Controls
 import ScreenTools
 
 import VkSdkInstance 1.0
+import VKServer
 
 import "DeviceManager"
 import "FactorySettings"
@@ -21,7 +22,7 @@ Item {
         OfflineMap,      // 离线地图
         FactorySettings, // 工厂设置
         DeviceManagement, // 设备管理
-        LinkSelect  // 连接选择
+        LinkSelect
     }
 
     property var buttonMain: vkPal.titleColor
@@ -31,6 +32,8 @@ Item {
     property int moduleType: HomePage.ModuleType.None
     property real fontSize: 30 * sw
     property var _activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
+    property var userInfo: VkSdkInstance.vkServerController.userInfo
+    property bool isLogin: VkSdkInstance.vkServerController.isLogin
 
     signal clickSend(var msg, var id)
     signal goToFlyPage
@@ -83,6 +86,32 @@ Item {
                 }
                 if (!_activeVehicle) {
                     moduleType = HomePage.ModuleType.LinkSelect
+                }
+            }
+        }
+
+        IconTextButton {
+            id: userButton
+            iconTextSpacing: 18 * ScreenTools.scaleWidth
+            anchors.left: parent.left
+            anchors.leftMargin: ScreenTools.scaleWidth * 60
+            anchors.top: parent.top
+            anchors.topMargin: 60 * sw
+            showBorder: false
+            backRadius: 16 * ScreenTools.scaleWidth
+            backgroundColor: userButton.pressed ? "gray" : "#80000000"
+            text: userInfo.userName !== "" ? userInfo.userName : qsTr("我的")
+            pixelSize: fontSize
+            iconWidth: 36 * ScreenTools.scaleWidth
+            leftPadding: 36 * ScreenTools.scaleWidth
+            rightPadding: 36 * ScreenTools.scaleWidth
+            topPadding: 18 * ScreenTools.scaleWidth
+            bottomPadding: 18 * ScreenTools.scaleWidth
+            textColor: "white"
+            iconSource: "/qmlimages/icon/user_logo.png"
+            onClicked: {
+                if(!isLogin) {
+                    userPage.open()
                 }
             }
         }
@@ -240,6 +269,10 @@ Item {
         onGoToMain: {
             moduleType = HomePage.ModuleType.None
         }
+    }
+
+    LoginRegisterPopup {
+        id: userPage
     }
 
 }

@@ -6,6 +6,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QDateTime>
 
 class VkHeartbeat;
 class VkSysStatus;
@@ -77,7 +78,7 @@ signals:
 
 private:
     QString _rc_model;
-    int _rssi;
+    int _rssi = 0;
 };
 
 //----------------------- 心跳包状态 -----------------------
@@ -2225,3 +2226,109 @@ signals:
 private:
     VkWeigherState *m_data;
 };
+
+
+class KmlInfo {
+    Q_GADGET
+
+    Q_PROPERTY(QString url READ getUrl CONSTANT)
+    Q_PROPERTY(QString name READ getName CONSTANT)
+    Q_PROPERTY(QString createTime READ getCreateTime CONSTANT)
+
+public:
+    explicit KmlInfo() {}
+    ~KmlInfo() {}
+
+    KmlInfo(const KmlInfo& other) {
+        url = other.url;
+        name = other.name;
+        uploadUserId = other.uploadUserId;
+        createTime = other.createTime;
+    }
+
+    KmlInfo& operator =(const KmlInfo& other) {
+        if (this != &other) {
+            name = other.name;
+            url = other.url;
+            uploadUserId = other.uploadUserId;
+            createTime = other.createTime;
+        }
+        return *this;
+    }
+
+    QString getUrl() const {
+        return url;
+    }
+    QString getName() const {
+        return name;
+    }
+    QString getCreateTime() const {
+        QDateTime dateTime = QDateTime::fromSecsSinceEpoch(createTime);
+        QString formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+        return formattedDateTime;
+    }
+
+private:
+    QString url = "";
+    QString name = "";
+    QString uploadUserId = "";
+    int64_t createTime = 0;
+};
+
+Q_DECLARE_METATYPE(KmlInfo)
+
+class UserInfo {
+     Q_GADGET
+
+    Q_PROPERTY(QString phone READ getPhone CONSTANT)
+    Q_PROPERTY(QString userName READ getUserName CONSTANT)
+    Q_PROPERTY(QString userId READ getUserId CONSTANT)
+  
+public:
+    explicit UserInfo() {}
+    
+    UserInfo(const QString& userName, const QString& phone, const QString& userId) {
+        this->phone = phone;
+        this->userName = userName;
+        this->userId = userId;
+    }
+
+    UserInfo(const UserInfo& other) {
+        phone = other.phone;
+        userName = other.userName;
+        userId = other.userId;
+
+    }
+
+    UserInfo& operator =(const UserInfo& other) {
+        if (this != &other) {
+            phone = other.phone;
+            userName = other.userName;
+            userId = other.userId;
+        }
+        return *this;
+    }
+
+    ~UserInfo() {}
+
+    QString getPhone() const {
+        return phone;
+    }
+
+    QString getUserName() const {
+        return userName;
+    }
+
+    QString getUserId() const {
+        return userId;
+    }
+
+
+private:
+    QString phone = "";
+    QString userId = "";
+    QString userName = "";
+    QString password = "";
+};
+
+Q_DECLARE_METATYPE(UserInfo)

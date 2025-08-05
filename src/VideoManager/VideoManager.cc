@@ -222,6 +222,58 @@ void VideoManager::grabImage(const QString &imageFile) {
     }
 }
 
+void VideoManager::startStreamingToServer(const QString& serverUrl) {
+    if (_isStreamingToServer) {
+        return;
+    }
+    
+    QString url = serverUrl;
+    // 如果没有提供服务器URL，则使用配置中的URL
+    if (url.isEmpty()) {
+        url = _videoSettings->rtspServerUrl()->rawValue().toString();
+    }
+    
+    if (url.isEmpty()) {
+        qCWarning(VideoManagerLog) << "RTSP server URL is empty";
+        return;
+    }
+    
+    _serverUrl = url;
+    _isStreamingToServer = true;
+    emit isStreamingToServerChanged();
+    
+    // 启动所有接收器的RTSP推流
+    for (VideoReceiver *receiver : std::as_const(_videoReceivers)) {
+        // 这里需要使用QMetaObject::invokeMethod因为startStreamingToServer可能是GstVideoReceiver特有的方法
+        QMetaObject::invokeMethod(receiver, "startStreamingToServer", Q_ARG(QString, url));
+    }
+    
+    qCDebug(VideoManagerLog) << "Starting RTSP streaming to server:" << url;
+}
+
+void VideoManager::stopStreamingToServer() {
+    if (!_isStreamingToServer) {
+        return;
+    }
+    
+    _isStreamingToServer = false;
+    emit isStreamingToServerChanged();
+    
+    // 停止所有接收器的RTSP推流
+    for (VideoReceiver *receiver : std::as_const(_videoReceivers)) {
+        QMetaObject::invokeMethod(receiver, "stopStreamingToServer");
+    }
+    
+    qCDebug(VideoManagerLog) << "Stopping RTSP streaming to server";
+}
+
+QString VideoManager::getRtspServerUrl() const {
+    if (_videoSettings) {
+        return _videoSettings->rtspServerUrl()->rawValue().toString();
+    }
+    return QString();
+}
+
 double VideoManager::aspectRatio() const {
     // for (VideoReceiver *receiver : _videoReceivers) {
     //     QGCVideoStreamInfo *pInfo = receiver->videoStreamInfo();

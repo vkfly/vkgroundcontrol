@@ -267,7 +267,14 @@
         <file alias="icon/AlertAircraft.svg">resources/icon/AlertAircraft.svg</file>
         <file alias="icon/compassInstrumentArrow.svg">resources/icon/compassInstrumentArrow.svg</file>
         <file alias="icon/Hamburger.svg">resources/icon/Hamburger.svg</file>
-
+        <file alias="icon/eye_open.png">resources/icon/eye_open.png</file>
+        <file alias="icon/eye_close.png">resources/icon/eye_close.png</file>
+        <file alias="icon/default_flight_count.png">resources/icon/default_flight_count.png</file>
+        <file alias="icon/default_work_area.png">resources/icon/default_work_area.png</file>
+        <file alias="icon/default_work_time.png">resources/icon/default_work_time.png</file>
+        <file alias="icon/default_mine_sortie_management.png">resources/icon/default_mine_sortie_management.png</file>
+        <file alias="icon/default_mine_general_settings.png">resources/icon/default_mine_general_settings.png</file>
+        <file alias="icon/default_mine_avatar.png">resources/icon/default_mine_avatar.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

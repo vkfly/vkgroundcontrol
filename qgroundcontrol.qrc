@@ -38,6 +38,7 @@
         <file alias="Controls/FileButton.qml">src/UI/Controls/FileButton.qml</file>
         <file alias="Controls/VKMenu.qml">src/UI/Controls/VKMenu.qml</file>
         <file alias="Controls/VKMenuItem.qml">src/UI/Controls/VKMenuItem.qml</file>
+        <file alias="Controls/VKToast.qml">src/UI/Controls/VKToast.qml</file>
         <file alias="ScreenTools/ScreenTools.qml">src/UI/ScreenTools/ScreenTools.qml</file>
         <file alias="FlightDisplay/FlightDisplayViewVideo.qml">src/UI/FlightDisplay/FlightDisplayViewVideo.qml</file>
         <file alias="FlightDisplay/FlyView.qml">src/UI/FlightDisplay/FlyView.qml</file>

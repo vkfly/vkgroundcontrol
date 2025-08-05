@@ -56,8 +56,9 @@ public class QGCActivity extends QtActivity implements IController.Listener {
 
         ControllerFactory.INSTANCE.registerAll();
         controller = ControllerFactory.INSTANCE.createController(this);
-        controller.connect(this,"");
         bridge = new UdpBridge(9876, controller);
+        rcb = RcBridge(9877, controller)
+        controller.connect(this, "");
     }
 
     @Override
@@ -75,7 +76,12 @@ public class QGCActivity extends QtActivity implements IController.Listener {
 
     @Override
     public void onControllerState(String name, Object value) {
-        Log.d("yuhang", "recv from rc: " + value);
+        Log.d("yuhang", "recv from rc: " + name + "=" + value);
+        if ("type".equals(name)) {
+            rcb.send(("type:" + value + "\n").getBytes());
+        } else if ("rssi".equals(name)) {
+            rcb.send(("rssi:" + value + "\n").getBytes());
+        }
     }
 
     @Override

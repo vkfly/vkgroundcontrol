@@ -57,4 +57,5 @@ add_subdirectory(VideoManager)
 add_subdirectory(QtLocationPlugin)
 add_subdirectory(Utilities)
 add_subdirectory(Android)
+add_subdirectory(VKServer)
 

@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+option java_package = "com.jiagu.uav.client";
+option java_outer_classname = "UavCtlMessage";
+option go_package = "./message";
+
+// DT_INST = 101
+// DT_ROUTE = 102
+// DT_WP = 103
+// DT_GIMBAL = 104
+
+message InstructionProto {
+    string droneId = 1;
+    uint32 inst = 2;//1-解锁 2-起飞 3-去作业 4-返航 5-降落 6-暂停 7-继续 8-开始推流 9-结束推流
+}
+
+message WaypointProto {
+    uint32 index = 1;
+    double lat = 2;
+    double lng = 3;
+    int32 alt = 4; // cm
+    int32 height = 5; // cm
+    uint32 wlMission = 6;
+    int32 wlParam = 7;
+    uint32 wpMission = 8;
+    int32 wpParam = 9;
+}
+
+message WaypointGroupProto {
+    string droneId = 1;
+    string routeId = 2;
+    repeated WaypointProto wps = 3;
+}
+
+message RouteProto {
+    string droneId = 1;
+    string routeId = 2;
+    uint32 wpNum = 3;
+    int32 height = 4;//cm
+    int32 speed = 5;//cm/s
+    int32 spray = 6;//ml/mu
+    int32 width = 7;//cm
+}
+
+message GimbalProto {
+    string droneId = 1;
+    uint32 inst = 2;//cmdId 1-方向 2-拍照 3-开始录像 4-结束录像 5-变焦 6-指点移动(将吊舱位置移动到x,y位置) 7-一键回中 8-开始目标跟踪 9-停止目标跟踪
+    oneof payload {
+        GimbalPos pos = 3; //cmd=1-方向
+        GimbalZoom zoom = 4; //cmd=5-变焦
+        GimbalPoint point = 5; //cmd=6-指点移动
+        GimbalTargetTrack track = 6; //cmd=8-目标跟踪
+    }
+}
+
+message GimbalPos {
+    uint32 type = 1;//0-停止 1-吊舱向上 2-吊舱向下 3-吊舱向左 4-吊舱向右
+    uint32 strength = 2;//速度 0-100%
+}
+
+message GimbalZoom {
+    uint32 type = 1;//0-停止变焦 1-拉远 2-拉近
+    uint32 strength = 2;//速度 0-100%
+}
+
+message GimbalPoint {
+//    图像坐上角为原点
+    uint32 x = 1;//水平坐标(百分比0-100)
+    uint32 y = 2;//垂直坐标(百分比0-100)
+}
+
+message GimbalTargetTrack {
+//    图像坐上角为原点
+    uint32 left = 1;//左上顶点 水平位置 x(百分比0-100)
+    uint32 top = 2;//左上顶点 垂直位置 y(百分比0-100)
+    uint32 right = 3;//右下顶点 水平位置 x(百分比0-100)
+    uint32 bottom = 4;//右下顶点 垂直位置 y(百分比0-100)
+}

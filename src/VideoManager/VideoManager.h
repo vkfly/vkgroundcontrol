@@ -41,6 +41,7 @@ class VideoManager : public QObject {
     Q_PROPERTY(double   thermalHfov             READ thermalHfov                                NOTIFY aspectRatioChanged)
     Q_PROPERTY(QSize    videoSize               READ videoSize                                  NOTIFY videoSizeChanged)
     Q_PROPERTY(QString  imageFile               READ imageFile                                  NOTIFY imageFileChanged)
+    Q_PROPERTY(bool     isStreamingToServer     READ isStreamingToServer                        NOTIFY isStreamingToServerChanged)
 
 public:
     explicit VideoManager(QObject *parent = nullptr);
@@ -83,10 +84,18 @@ public:
     QString imageFile() const {
         return _imageFile;
     }
+    
+    bool isStreamingToServer() const {
+        return _isStreamingToServer;
+    }
 
     void setfullScreen(bool on);
     static bool gstreamerEnabled();
     static bool qtmultimediaEnabled();
+
+    Q_INVOKABLE void startStreamingToServer(const QString& serverUrl = QString());
+    Q_INVOKABLE void stopStreamingToServer();
+    Q_INVOKABLE QString getRtspServerUrl() const;
 
 signals:
     void aspectRatioChanged();
@@ -97,6 +106,7 @@ signals:
     void imageFileChanged(const QString &filename);
     void isAutoStreamChanged();
     void isStreamSourceChanged();
+    void isStreamingToServerChanged();
     void isUvcChanged();
     void recordingChanged();
     void recordingStarted(const QString &filename);
@@ -134,8 +144,10 @@ private:
     QAtomicInteger<bool> _decoding = false;
     QAtomicInteger<bool> _recording = false;
     QAtomicInteger<bool> _streaming = false;
+    QAtomicInteger<bool> _isStreamingToServer = false;
     QSize _videoSize;
     QString _imageFile;
+    QString _serverUrl;
 };
 
 /*===========================================================================*/

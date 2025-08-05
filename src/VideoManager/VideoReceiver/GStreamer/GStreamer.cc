@@ -348,6 +348,7 @@ namespace GStreamer {
             if (settings.contains(AppSettings::gstDebugLevelName)) {
                 gstDebugLevel = settings.value(AppSettings::gstDebugLevelName).toInt();
             }
+            // gstDebugLevel = 4;
             gst_debug_set_default_threshold(static_cast<GstDebugLevel>(gstDebugLevel));
             gst_debug_remove_log_function(gst_debug_log_default);
             gst_debug_add_log_function(_qtGstLog, nullptr, nullptr);

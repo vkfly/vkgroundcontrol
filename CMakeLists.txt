@@ -508,21 +508,17 @@ set_target_properties(${CMAKE_PROJECT_NAME}
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/vkqtsdk/include
 )
-
 #######################################################
 #           VKQTSdk Library Configuration
 #######################################################
-
 # 定义库查找函数
 function(find_vkqtsdk_library)
     set(VKQTSDK_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vkqtsdk/lib")
-
     # 确定库名称（Debug版本加'd'后缀）
     set(LIB_NAME "vkqtsdk")
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         set(LIB_NAME_DEBUG "vkqtsdkd")
     endif()
-
     # 根据平台确定搜索路径和库扩展名
     if(WIN32)
         set(LIB_EXTENSIONS ".lib" ".dll")
@@ -534,7 +530,6 @@ function(find_vkqtsdk_library)
         set(LIB_EXTENSIONS ".a" ".so")
         set(SEARCH_PATHS "${VKQTSDK_LIB_DIR}/linux")
     endif()
-
     # 查找库文件
     set(FOUND_LIBRARY "")
     foreach(SEARCH_PATH IN LISTS SEARCH_PATHS)
@@ -550,7 +545,6 @@ function(find_vkqtsdk_library)
                     break()
                 endif()
             endif()
-
             # 查找Release版本或通用版本
             set(RELEASE_LIB "${SEARCH_PATH}/lib${LIB_NAME}${EXT}")
             if(WIN32)
@@ -565,7 +559,6 @@ function(find_vkqtsdk_library)
             break()
         endif()
     endforeach()
-
     # 输出结果
     if(FOUND_LIBRARY)
         message(STATUS "Found VKQTSdk library: ${FOUND_LIBRARY}")
@@ -574,10 +567,8 @@ function(find_vkqtsdk_library)
         message(FATAL_ERROR "VKQTSdk library not found in ${VKQTSDK_LIB_DIR}")
     endif()
 endfunction()
-
 # 调用库查找函数
 find_vkqtsdk_library()
-
 # 链接找到的库文件
 if(VKQTSDK_LIBRARY)
     target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${VKQTSDK_LIBRARY})

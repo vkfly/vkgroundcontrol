@@ -50,7 +50,7 @@ Item {
         width: parent.width * 0.3
         height: parent.height
         text: _root.titleName
-        font.pointSize: 20
+        font.pixelSize: 25 * ScreenTools.scaleWidth
         color: "white"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter

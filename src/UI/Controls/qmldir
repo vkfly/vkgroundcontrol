@@ -34,3 +34,4 @@ VKMouseArea                                         1.0 VKMouseArea.qml
 SectionHeader                                       1.0 SectionHeader.qml
 VKMenu                                              1.0 VKMenu.qml
 VKMenuItem                                          1.0 VKMenuItem.qml
+VKToast                                             1.0 VKToast.qml

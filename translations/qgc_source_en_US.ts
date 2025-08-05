@@ -193,85 +193,115 @@
 <context>
     <name>CameraManagerPage</name>
     <message>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="40"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="153"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="254"/>
-        <source>SIYI ZR10</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="41"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="155"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="257"/>
-        <source>SIYI ZT30</source>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="388"/>
+        <source>SIYI ZR10</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="42"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="157"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="260"/>
-        <source>云卓 C12</source>
-        <translation>Skydroid C12</translation>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="391"/>
+        <source>SIYI ZT30</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="43"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="159"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="263"/>
-        <source>云卓 C20</source>
-        <translation>Skydroid C20</translation>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="394"/>
+        <source>云卓 C12</source>
+        <translation>Skydroid C12</translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="44"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="161"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="266"/>
-        <source>先飞D80-Pro</source>
-        <translation>XFD80-Pro</translation>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="397"/>
+        <source>云卓 C20</source>
+        <translation>Skydroid C20</translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="45"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="163"/>
-        <source>先飞Z1-mini</source>
-        <translation>Z1-mini</translation>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="400"/>
+        <source>先飞D80-Pro</source>
+        <translation>XFD80-Pro</translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="46"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="165"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="269"/>
-        <source>翔拓</source>
-        <translation>ZINGTO</translation>
+        <source>先飞Z1-mini</source>
+        <translation>Z1-mini</translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="47"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="167"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="272"/>
-        <source>拓扑</source>
-        <translation>Top</translation>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="403"/>
+        <source>翔拓</source>
+        <translation>ZINGTO</translation>
     </message>
     <message>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="48"/>
         <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="169"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="275"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="406"/>
+        <source>拓扑</source>
+        <translation>Top</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="49"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="171"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="409"/>
         <source>品灵-A40TRPRO</source>
         <translation>A40TRPRO</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="49"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="172"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="185"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="222"/>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="278"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="50"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="174"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="187"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="225"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="412"/>
         <source>其他型号</source>
         <translation>Other Model</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="108"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="110"/>
         <source>吊舱型号</source>
         <translation>Gimbal Type</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="198"/>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="201"/>
         <source>视频流地址</source>
         <translation>Video Stream Address</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="248"/>
+        <source>*以下操作需登录并连上无人机</source>
+        <translation>*Login and connect to the drone is required for the following actions</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="268"/>
+        <source>推流地址</source>
+        <translation>Stream URL</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="280"/>
+        <source>获取</source>
+        <translation>Retrieve</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="305"/>
+        <source>推流到服务器</source>
+        <translation>Push stream to server</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="341"/>
+        <source>拉流地址</source>
+        <translation>Pull stream URL</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/DeviceManager/CameraManagerPage.qml" line="370"/>
+        <source>刷新</source>
+        <translation>Refresh</translation>
     </message>
 </context>
 <context>
@@ -319,6 +349,35 @@
         <location filename="../src/UI/Home/DeviceManager/CanvasDrawing.qml" line="89"/>
         <source>后退</source>
         <translation>Backward</translation>
+    </message>
+</context>
+<context>
+    <name>ChangePassword</name>
+    <message>
+        <location filename="../src/VKServer/ChangePassword.qml" line="40"/>
+        <source>旧密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/ChangePassword.qml" line="47"/>
+        <location filename="../src/VKServer/ChangePassword.qml" line="71"/>
+        <source>请输入新密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/ChangePassword.qml" line="64"/>
+        <source>新密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/ChangePassword.qml" line="88"/>
+        <source>登录</source>
+        <translation type="unfinished">Login</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/ChangePassword.qml" line="110"/>
+        <source>确认</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1038,32 +1097,37 @@
 <context>
     <name>HomePage</name>
     <message>
-        <location filename="../src/UI/Home/HomePage.qml" line="59"/>
+        <location filename="../src/UI/Home/HomePage.qml" line="62"/>
         <source>退出</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/HomePage.qml" line="76"/>
+        <location filename="../src/UI/Home/HomePage.qml" line="79"/>
         <source>已连接</source>
         <translation>Connected</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/HomePage.qml" line="76"/>
+        <location filename="../src/UI/Home/HomePage.qml" line="79"/>
         <source>未连接</source>
         <translation>Unconnected</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/HomePage.qml" line="149"/>
+        <location filename="../src/UI/Home/HomePage.qml" line="103"/>
+        <source>我的</source>
+        <translation>Me</translation>
+    </message>
+    <message>
+        <location filename="../src/UI/Home/HomePage.qml" line="178"/>
         <source>设备管理</source>
         <translation>Device</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/HomePage.qml" line="173"/>
+        <location filename="../src/UI/Home/HomePage.qml" line="202"/>
         <source>工厂模式</source>
         <translation>Factory</translation>
     </message>
     <message>
-        <location filename="../src/UI/Home/HomePage.qml" line="207"/>
+        <location filename="../src/UI/Home/HomePage.qml" line="236"/>
         <source>进入飞行页面</source>
         <translation>Go Flight</translation>
     </message>
@@ -1194,6 +1258,52 @@
         <location filename="../src/UI/Home/DeviceManager/LogDownloadProgressDialog.qml" line="49"/>
         <source>日志下载</source>
         <translation>Log Download</translation>
+    </message>
+</context>
+<context>
+    <name>Login</name>
+    <message>
+        <location filename="../src/VKServer/Login.qml" line="35"/>
+        <source>用户名</source>
+        <translation>Username</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Login.qml" line="43"/>
+        <source>请输入手机号</source>
+        <translation>Phone number</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Login.qml" line="55"/>
+        <source>密码</source>
+        <translation>Password</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Login.qml" line="62"/>
+        <source>请输入密码</source>
+        <translation>Please enter the password.</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Login.qml" line="79"/>
+        <source>注册</source>
+        <translation>Register</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Login.qml" line="101"/>
+        <source>登录</source>
+        <translation>Login</translation>
+    </message>
+</context>
+<context>
+    <name>LoginRegisterPopup</name>
+    <message>
+        <location filename="../src/VKServer/LoginRegisterPopup.qml" line="46"/>
+        <source>登录</source>
+        <translation>Login</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/LoginRegisterPopup.qml" line="49"/>
+        <source>注册</source>
+        <translation>Register</translation>
     </message>
 </context>
 <context>
@@ -3462,6 +3572,49 @@ Is this really what you want?</source>
     </message>
 </context>
 <context>
+    <name>Register</name>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="40"/>
+        <source>用户名</source>
+        <translation>Username</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="48"/>
+        <source>请输入用户名</source>
+        <translation>Please enter username</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="58"/>
+        <source>手机号</source>
+        <translation>Phone number</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="66"/>
+        <source>请输入手机号</source>
+        <translation>Please enter phone number</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="77"/>
+        <source>密码</source>
+        <translation>Password</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="84"/>
+        <source>请输入密码</source>
+        <translation>Please enter the password.</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="100"/>
+        <source>登录</source>
+        <translation>Login</translation>
+    </message>
+    <message>
+        <location filename="../src/VKServer/Register.qml" line="122"/>
+        <source>注册</source>
+        <translation>Register</translation>
+    </message>
+</context>
+<context>
     <name>RemoteBar</name>
     <message>
         <location filename="../src/UI/Home/DeviceManager/RemoteBar.qml" line="16"/>
@@ -4706,62 +4859,62 @@ Z:up posirive</translation>
 <context>
     <name>VideoSettings</name>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="55"/>
+        <location filename="../src/Settings/VideoSettings.h" line="56"/>
         <source>No Video Available</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="56"/>
+        <location filename="../src/Settings/VideoSettings.h" line="57"/>
         <source>Video Stream Disabled</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="57"/>
+        <location filename="../src/Settings/VideoSettings.h" line="58"/>
         <source>RTSP Video Stream</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="58"/>
+        <location filename="../src/Settings/VideoSettings.h" line="59"/>
         <source>UDP h.264 Video Stream</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="59"/>
+        <location filename="../src/Settings/VideoSettings.h" line="60"/>
         <source>UDP h.265 Video Stream</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="60"/>
+        <location filename="../src/Settings/VideoSettings.h" line="61"/>
         <source>TCP-MPEG2 Video Stream</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="61"/>
+        <location filename="../src/Settings/VideoSettings.h" line="62"/>
         <source>MPEG-TS Video Stream</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="62"/>
+        <location filename="../src/Settings/VideoSettings.h" line="63"/>
         <source>3DR Solo (requires restart)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="63"/>
+        <location filename="../src/Settings/VideoSettings.h" line="64"/>
         <source>Parrot Discovery</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="64"/>
+        <location filename="../src/Settings/VideoSettings.h" line="65"/>
         <source>Yuneec Mantis G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="65"/>
+        <location filename="../src/Settings/VideoSettings.h" line="66"/>
         <source>Herelink AirUnit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Settings/VideoSettings.h" line="66"/>
+        <location filename="../src/Settings/VideoSettings.h" line="67"/>
         <source>Herelink Hotspot</source>
         <translation></translation>
     </message>

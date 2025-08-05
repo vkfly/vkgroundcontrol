@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option java_package = "com.jiagu.uav.client";
+option java_outer_classname = "UavMessage";
+option go_package = "./message";
+
+// DT_TRACK = 1
+// DT_BATTERY = 2
+
+message TrackProto {
+    uint64 timestamp = 1;
+
+    string droneId = 2;
+
+    double lat = 3;
+    double lng = 4;
+    int32 alt = 5; // cm
+    int32 height = 6; // cm
+    int32 hvel = 7; // cm/s
+    int32 vvel = 8; // cm/s
+    uint32 satellite = 9;
+    uint32 locType = 10;
+
+    int32 yaw = 51; // 0.1 degree
+    int32 pitch = 52; // 0.1 degree
+    int32 roll = 53; // 0.1 degree
+    bool onAir = 54;
+
+    uint32 ftime = 101;
+    float area = 102;
+    uint32 flow = 103; // ml/min
+    uint32 dose = 104; // ml
+    uint32 warning = 105;
+    uint32 pump = 106;
+}
+
+message BatteryProto {
+    uint64 timestamp = 1;
+    string battId = 2;
+    uint32 cycle = 3;
+    uint32 status = 4;
+    uint32 percent = 5;
+    uint32 voltage = 6; // mV
+    int32 current = 7; // mA
+    int32 temperature = 8; // 0.1 degree
+    repeated uint32 cells = 10;
+}

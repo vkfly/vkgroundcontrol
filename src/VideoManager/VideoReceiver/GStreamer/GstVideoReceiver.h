@@ -68,6 +68,8 @@ public slots:
     void startRecording(const QString &videoFile, FILE_FORMAT format) override;
     void stopRecording() override;
     void takeScreenshot(const QString &imageFile) override;
+    void startStreamingToServer(const QString &serverUrl);
+    void stopStreamingToServer();
 
 private slots:
     void _watchdog();
@@ -77,6 +79,7 @@ private:
     GstElement *_makeSource(const QString &input);
     GstElement *_makeDecoder(GstCaps *caps = nullptr, GstElement *videoSink = nullptr);
     GstElement *_makeFileSink(const QString &videoFile, FILE_FORMAT format);
+    GstElement *_makeRtmpSink(const QString &serverUrl);
 
     void _onNewSourcePad(GstPad *pad);
     void _onNewDecoderPad(GstPad *pad);
@@ -90,6 +93,7 @@ private:
     bool _unlinkBranch(GstElement *from);
     void _shutdownDecodingBranch();
     void _shutdownRecordingBranch();
+    void _shutdownRtmpBranch();
 
     bool _needDispatch();
     void _dispatchSignal(Task emitter);
@@ -104,12 +108,15 @@ private:
     static GstPadProbeReturn _videoSinkProbe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data);
     static GstPadProbeReturn _eosProbe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data);
     static GstPadProbeReturn _keyframeWatch(GstPad *pad, GstPadProbeInfo *info, gpointer user_data);
+    static void _onRtmpParsebinPadAdded(GstElement *element, GstPad *pad, gpointer data);
 
     GstElement *_decoder = nullptr;
     GstElement *_decoderValve = nullptr;
     GstElement *_fileSink = nullptr;
+    GstElement *_rtmpSink = nullptr;
     GstElement *_pipeline = nullptr;
     GstElement *_recorderValve = nullptr;
+    GstElement *_rtmpValve = nullptr;
     GstElement *_source = nullptr;
     GstElement *_tee = nullptr;
     GstElement *_videoSink = nullptr;
@@ -122,4 +129,5 @@ private:
         "qtmux",
         "mp4mux"
     };
+    bool _removingRtmp = false;  // 添加这个成员变量
 };

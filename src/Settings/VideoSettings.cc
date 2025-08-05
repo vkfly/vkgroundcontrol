@@ -158,6 +158,14 @@ DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, rtspUrl) {
     return _rtspUrlFact;
 }
 
+DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, rtspServerUrl) {
+    if (!_rtspServerUrlFact) {
+        _rtspServerUrlFact = _createSettingsFact(rtspServerUrlName);
+        connect(_rtspServerUrlFact, &Fact::valueChanged, this, &VideoSettings::_configChanged);
+    }
+    return _rtspServerUrlFact;
+}
+
 DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, tcpUrl) {
     if (!_tcpUrlFact) {
         _tcpUrlFact = _createSettingsFact(tcpUrlName);

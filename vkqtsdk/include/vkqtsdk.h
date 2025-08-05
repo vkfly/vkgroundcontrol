@@ -10,8 +10,10 @@
 
 class VkObjManager;
 class Vk_RcInfo;
+class VkServerController;
 
 Q_MOC_INCLUDE("objmanager.h")
+Q_MOC_INCLUDE("vkservercontroller.h")
 
 /**
  * @class VkSdkInstance
@@ -44,6 +46,8 @@ class VkSdkInstance : public QObject {
      * 包含遥控器的连接状态、信号强度和通道数据等信息
      */
     Q_PROPERTY(Vk_RcInfo *rcInfo READ getRcInfo CONSTANT)
+
+    Q_PROPERTY(VkServerController *vkServerController READ getVkServerController CONSTANT)
 
 public:
     /**
@@ -133,6 +137,7 @@ protected:
 
     ~VkSdkInstance() {}
 
+    virtual VkServerController *getVkServerController() = 0;
 public:
     /**
      * @brief 初始化SDK

@@ -1,9 +1,10 @@
-﻿import QtQuick
+import QtQuick
 import QtQuick.Controls
 import Qt.labs.settings
 
 import VKGroundControl
 import VKGroundControl.Palette
+import VkSdkInstance
 // import VKGroundControl.Vehicle
 // import VKGroundControl.MultiVehicleManager
 
@@ -11,15 +12,15 @@ Flickable {
     // UI Properties
     property real buttonFontSize: 30 * sw * 5/6
     property var mainColor: qgcPal.titleColor
-    
+
     // Vehicle Management Properties
 
-    
+
     // Advanced Settings Properties
     property bool isAdvanced: false
     property string advancedIconDown: "/qmlimages/icon/down_arrow.png"
     property string advancedIconUp: "/qmlimages/icon/up_arrow.png"
-    
+
     // Parameter Properties
     // Video Settings Properties
     property var videoSettings: VKGroundControl.settingsManager.videoSettings
@@ -30,7 +31,7 @@ Flickable {
     property bool isRtsp: isGStreamer && videoSource === videoSettings.rtspVideoSource
     property bool isTcp: isGStreamer && videoSource === videoSettings.tcpVideoSource
     property bool isMpegts: isGStreamer && videoSource === videoSettings.mpegtsVideoSource
-    
+
     // Filter Properties
     property int gyroFilterId: -1
     property int accelFilterId: -1
@@ -102,18 +103,19 @@ Flickable {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 //spacing: parent.width/6*0.25
                                 Text {
-                                    width: parent.width / 6
+                                    width: parent.width / 2
                                     height: 60 * sw
+                                    anchors.left: parent.left
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: qsTr("吊舱型号")
                                     font.pixelSize: buttonFontSize
                                     font.bold: false
                                     verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
+                                    horizontalAlignment: Text.AlignLeft
                                 }
                                 ComboBox {
                                     id: cameraModelCombo
-                                    width: parent.width / 3
+                                    width: parent.width / 4
                                     height: 60 * sw
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
@@ -192,19 +194,21 @@ Flickable {
                                 //anchors.horizontalCenter: parent.horizontalCenter
                                 //spacing: parent.width/6*0.25
                                 Text {
-                                    width: parent.width / 6
+                                    width: parent.width / 2
                                     height: 60 * sw
+                                    anchors.left: parent.left
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: qsTr("视频流地址")
                                     font.pixelSize: buttonFontSize
                                     font.bold: false
                                     verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
+                                    horizontalAlignment: Text.AlignLeft
                                 }
                                 TextField {
                                     id: rtspUrlField
-                                    width: parent.width * 4.6/6
+                                    width: parent.width / 4
                                     height: 60 * sw
+                                    anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: "rtsp://192.168.144.64:558/live/single"
                                     font.pixelSize: buttonFontSize
@@ -213,7 +217,6 @@ Flickable {
                                         radius: 10
                                         color: "lightgray"
                                     }
-                                    anchors.right: parent.right
                                     verticalAlignment: Text.AlignVCenter
                                     onEditingFinished: {
 
@@ -229,21 +232,152 @@ Flickable {
                                 }
                             }
                         }
-                    }
-                }
-                Item {
-                    width: 2
-                    height: parent.height
 
-                    Rectangle {
-                        width: parent.width
-                        height: mainContent.height
-                        color: "gray"
+                        Item {
+                            width: parent.width
+                            height: 30 * sw
+                        }
+
+                        Item {
+                            width: parent.width
+                            height:tipsText.height
+                            Text {
+                                id: tipsText
+                                width: parent.width * 0.95
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                text: qsTr("*以下操作需登录并连上无人机")
+                                font.pixelSize: buttonFontSize
+                                font.bold: false
+                                color: "orange"
+                            }
+                        }
+
+                        Item {
+                            width: parent.width
+                            height: 80 * sw
+                            Item {
+                                width: parent.width * 0.95
+                                height: parent.height
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                Text {
+                                    width: parent.width / 2
+                                    height: 60 * sw
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: qsTr("推流地址")
+                                    font.pixelSize: buttonFontSize
+                                    font.bold: false
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignLeft
+                                }
+
+                                Button {
+                                    width: parent.width / 6
+                                    height: 60 * sw
+                                    anchors.right: parent.right
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: qsTr("获取")
+                                    font.pixelSize: buttonFontSize
+                                    onClicked: {
+                                        if(_activeVehicle) {
+                                            VkSdkInstance.vkServerController.requestRtmpPushUrl(_activeVehicle.FlightController.serialNumber)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Streaming toggle switch
+                        Item {
+                            width: parent.width
+                            height: 80 * sw
+                            Item {
+                                width: parent.width * 0.95
+                                height: parent.height
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                Text {
+                                    width: parent.width / 3
+                                    height: 60 * sw
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: qsTr("推流到服务器")
+                                    font.pixelSize: buttonFontSize
+                                    font.bold: false
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignLeft
+                                }
+
+
+                                Switch {
+                                    id: streamingSwitch
+                                    height: 60 * sw
+                                    anchors.right: parent.right
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    enabled: VkSdkInstance.vkServerController.isLogin && VkSdkInstance.vkServerController.rtmpServerUrl !== ""
+
+                                    onCheckedChanged: {
+                                        toggleStreamingToServer(checked)
+                                    }
+                                }
+                            }
+                        }
+
+                        // Share code display and button
+                        Item {
+                            width: parent.width
+                            height: 80 * sw
+                            Item {
+                                width: parent.width * 0.95
+                                height: parent.height
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                Text {
+                                    width: parent.width / 2
+                                    height: 60 * sw
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: qsTr("拉流地址")
+                                    font.pixelSize: buttonFontSize
+                                    font.bold: false
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignLeft
+                                }
+
+                                Text {
+                                    id: shareCodeText
+                                    width: parent.width / 4
+                                    height: 60 * sw
+                                    anchors.right: shareCodeButton.left
+                                    anchors.rightMargin: 10 * sw
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: VkSdkInstance.vkServerController.shareCode
+                                    font.pixelSize: buttonFontSize - 5
+                                    font.bold: false
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignRight
+                                    elide: Text.ElideRight
+
+                                }
+
+                                Button {
+                                    id: shareCodeButton
+                                    width: parent.width / 6
+                                    height: 60 * sw
+                                    anchors.right: parent.right
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: qsTr("刷新")
+                                    font.pixelSize: buttonFontSize
+                                    onClicked: {
+                                        if(_activeVehicle) {
+                                            VkSdkInstance.vkServerController.requestPullStreamShareCode(_activeVehicle.FlightController.serialNumber)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
-                Item {
-                    width: parent.width * 1/4
-                    height: parent.height
                 }
             }
         }
@@ -279,8 +413,27 @@ Flickable {
             rtspUrlField.text = settings.cameraOtherModelAddr
             videoSettings.rtspUrl.value = settings.cameraOtherModelAddr
         }
-        
+
         mainWindow.camera_model = cameraModelCombo.currentText
     }
 
+    // Function to toggle streaming to server
+    function toggleStreamingToServer(checked) {
+        if (checked) {
+            // Start streaming with the server URL from settings
+            VKGroundControl.videoManager.startStreamingToServer(VkSdkInstance.vkServerController.rtmpServerUrl)
+        } else {
+            // Stop streaming
+            VKGroundControl.videoManager.stopStreamingToServer()
+        }
+    }
+
+    // Function to copy share code to clipboard
+    function copyShareCode() {
+        // Get the server URL as share code
+        var shareCode = VKGroundControl.videoManager.getRtspServerUrl()
+        // In a real implementation, you would copy to clipboard here
+        // For now, we'll just show a notification
+        console.log("Share code copied to clipboard: " + shareCode)
+    }
 }

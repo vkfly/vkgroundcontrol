@@ -29,6 +29,7 @@ public class QGCActivity extends QtActivity implements IController.Listener {
     private WifiManager.MulticastLock m_wifiMulticastLock;
     private Controller controller;
     private UdpBridge bridge;
+    private RcBridge rcb;
 
     public QGCActivity() {
         m_instance = this;
@@ -57,7 +58,7 @@ public class QGCActivity extends QtActivity implements IController.Listener {
         ControllerFactory.INSTANCE.registerAll();
         controller = ControllerFactory.INSTANCE.createController(this);
         bridge = new UdpBridge(9876, controller);
-        rcb = RcBridge(9877, controller)
+        rcb = new RcBridge(9877, controller);
         controller.connect(this, "");
     }
 

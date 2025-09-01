@@ -635,7 +635,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter // 垂直居中
                             horizontalAlignment: Text.AlignHCenter
                             text: _activeVehicle ? secondsToHMS(
-                                                       _activeVehicle.flytime) : "00:00:00"
+                                                       _activeVehicle.fmuStatus.flightTime) : "00:00:00"
                             verticalAlignment: Text.AlignVCenter
                             color: "#FFFFFF"
                             font.pixelSize: 55 * sh

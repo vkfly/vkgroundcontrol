@@ -71,6 +71,7 @@
         <file alias="FlightDisplay/VKReturn.qml">src/UI/FlightDisplay/VKReturn.qml</file>
         <file alias="FlightDisplay/MainVKToolBar.qml">src/UI/FlightDisplay/MainVKToolBar.qml</file>
         <file alias="FlightDisplay/BMSMsgToolbar.qml">src/UI/FlightDisplay/BMSMsgToolbar.qml</file>
+        <file alias="FlightDisplay/QXBMSMsg.qml">src/UI/FlightDisplay/QXBMSMsg.qml</file>
         <file alias="FlightMap/VehicleMapItem.qml">src/UI/FlightMap/VehicleMapItem.qml</file>
         <file alias="FlightMap/FlightMap.qml">src/UI/FlightMap/FlightMap.qml</file>
         <file alias="FlightMap/MapScale.qml">src/UI/FlightMap/MapScale.qml</file>

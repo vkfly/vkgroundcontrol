@@ -472,6 +472,50 @@ class Vk_QingxieBms : public QObject {
     Q_PROPERTY(quint8 selfCheck READ selfCheck NOTIFY statusUpdated)
     /** @brief BMS模块ID */
     Q_PROPERTY(quint8 id READ id NOTIFY statusUpdated)
+    /**
+     * @brief 气体质量
+     * @details 单位：g，原始值(dg)除以10得到实际质量
+     */
+    Q_PROPERTY(float gassMass READ gassMass NOTIFY statusUpdated)
+    /**
+     * @brief 气体百分比
+     * @details 单位：%
+     */
+    Q_PROPERTY(quint8 gassPercent READ gassPercent NOTIFY statusUpdated)
+    /**
+     * @brief 剩余运行时间
+     */
+    Q_PROPERTY(quint16 runtimeRemain READ runtimeRemain NOTIFY statusUpdated)
+    /**
+     * @brief 风扇转速百分比
+     */
+    Q_PROPERTY(quint8 fanPercent READ fanPercent NOTIFY statusUpdated)
+    /**
+     * @brief 风扇RPM
+     */
+    Q_PROPERTY(quint16 fanRpm READ fanRpm NOTIFY statusUpdated)
+    /**
+     * @brief 系统运行状态
+     */
+    Q_PROPERTY(quint8 sysRunState READ sysRunState NOTIFY statusUpdated)
+    /**
+     * @brief 系统故障状态
+     */
+    Q_PROPERTY(quint8 sysFaultState READ sysFaultState NOTIFY statusUpdated)
+    /**
+     * @brief 系统故障代码
+     */
+    Q_PROPERTY(quint16 sysFaultCode READ sysFaultCode NOTIFY statusUpdated)
+    /**
+     * @brief LiPo电流
+     * @details 单位：A，原始值(dA)除以10得到实际电流值
+     */
+    Q_PROPERTY(float lipoCurrent READ lipoCurrent NOTIFY statusUpdated)
+    /**
+     * @brief 总运行时间
+     * @details 单位：h，原始值(dh)除以10得到实际时间值
+     */
+    Q_PROPERTY(float totalRuntime READ totalRuntime NOTIFY statusUpdated)
 
 public:
     explicit Vk_QingxieBms(QObject *parent = nullptr);
@@ -489,6 +533,16 @@ public:
     quint16 faultStatus() const;
     quint8 selfCheck() const;
     quint8 id() const;
+    float gassMass() const;
+    quint8 gassPercent() const;
+    quint16 runtimeRemain() const;
+    quint8 fanPercent() const;
+    quint16 fanRpm() const;
+    quint8 sysRunState() const;
+    quint8 sysFaultState() const;
+    quint16 sysFaultCode() const;
+    float lipoCurrent() const;
+    float totalRuntime() const;
 
 signals:
     void statusUpdated();

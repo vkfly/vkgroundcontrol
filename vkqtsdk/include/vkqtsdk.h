@@ -64,10 +64,16 @@ public:
      * @brief 启动遥控器连接
      * @param schema 遥控器连接协议字符串，支持的协议包括"udp"、"tcp"、"serial"
      *      示例："udp://127.0.0.1:14540" UDP连接
-     *            "tcp://127.0.0.1:14540" TCP连接
-     *            "serial:///dev/ttyUSB0:115200:8N1" 串口连接
      */
     Q_INVOKABLE virtual void startRcLink(QString schema) = 0;
+
+    /**
+     * @brief Starts the server with a given schema.
+     * @param schema The schema to use for the server. The supported schemas are "udp".
+     *      Example: "udp://:14540" for UDP server,
+     *               "tcp://:14540" for TCP server
+     */
+    Q_INVOKABLE virtual void startServer(QString schema) = 0;
 
     /**
      * @brief Stops the link with the vehicle.

@@ -278,5 +278,90 @@ Flickable {
                 }
             }
         }
+
+        // 页面标题
+        Item {
+            width: parent.width
+            height: 60 * ScreenTools.scaleWidth
+
+            Text {
+                anchors.centerIn: parent
+                text: qsTr("MQTT设置")
+                font.pixelSize: buttonFontSize
+                color: fontColor
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        // Mqtt设置
+        SettingSection {
+            width: parent.width
+            content: Column {
+                width: parent.width
+                spacing: 30 * ScreenTools.scaleWidth
+
+                SettingRow {
+                    labelText: qsTr("连接状态")
+                    content: Text {
+                        height: 50 * ScreenTools.scaleWidth
+                        anchors.verticalCenter: parent.verticalCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        font.pixelSize: 20 * ScreenTools.scaleWidth
+                        color: VKGroundControl.mqttClient.isConnected ? ScreenTools.titleColor : "red"
+                        text: VKGroundControl.mqttClient.isConnected ? "已连接" : "未连接"
+                    }
+                }
+
+                SettingRow {
+                    labelText: qsTr("服务器地址")
+                    content: TextField {
+                        width: 320 * ScreenTools.scaleWidth
+                        height: 50 * ScreenTools.scaleWidth
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: 20 * ScreenTools.scaleWidth
+                        text: appSettings.mqttHost.value
+                        onTextChanged: {
+                            appSettings.mqttHost.value = text
+                        }
+                    }
+                }
+
+                SettingRow {
+                    labelText: qsTr("服务器端口")
+                    content: TextField {
+                        width: 320 * ScreenTools.scaleWidth
+                        height: 50 * ScreenTools.scaleWidth
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: 20 * ScreenTools.scaleWidth
+                        text: appSettings.mqttPort.value
+                        onTextChanged: {
+                            appSettings.mqttPort.value = text
+                        }
+                    }
+                }
+
+                SettingRow {
+                    labelText: qsTr("上报")
+                    id: uploadItem
+                    property int startUploadIndex: 1
+                    content: GroupButton {
+                        width: 320 * ScreenTools.scaleWidth
+                        height: 50 * ScreenTools.scaleWidth
+                        anchors.right: parent.right
+                        spacing: 2 * ScreenTools.scaleWidth
+                        selectedIndex: uploadItem.startUploadIndex
+                        names: ["开启","关闭"]
+                        onClicked: function(index) {
+                            uploadItem.startUploadIndex = index
+                            if(index === 0) {
+                                VKGroundControl.mqttClient.start()
+                            } else {
+                                VKGroundControl.mqttClient.stop()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

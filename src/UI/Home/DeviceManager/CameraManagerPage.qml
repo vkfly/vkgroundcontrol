@@ -5,6 +5,7 @@ import Qt.labs.settings
 import VKGroundControl
 import VKGroundControl.Palette
 import VkSdkInstance
+
 // import VKGroundControl.Vehicle
 // import VKGroundControl.MultiVehicleManager
 
@@ -31,6 +32,7 @@ Flickable {
     property bool isRtsp: isGStreamer && videoSource === videoSettings.rtspVideoSource
     property bool isTcp: isGStreamer && videoSource === videoSettings.tcpVideoSource
     property bool isMpegts: isGStreamer && videoSource === videoSettings.mpegtsVideoSource
+    property var shareCode: VkSdkInstance.vkServerController.shareCode
 
     // Filter Properties
     property int gyroFilterId: -1
@@ -47,6 +49,7 @@ Flickable {
         ListElement { text: qsTr("翔拓") }
         ListElement { text: qsTr("拓扑") }
         ListElement { text: qsTr("品灵-A40TRPRO") }
+        ListElement { text: qsTr("上博智像DYT") }
         ListElement { text: qsTr("其他型号") }
     }
 
@@ -60,6 +63,20 @@ Flickable {
     width: parent.width
     clip: true
 
+    Connections {
+        target: VkSdkInstance.vkServerController
+        function onStreamingStatusChanged(isStreaming) { 
+            streamingSwitch.checked = isStreaming
+        }
+    }
+
+    onShareCodeChanged: {
+        if(shareCode && shareCode != "") {
+            console.log("shareCode",shareCode)
+            const key = shareCode.split('/').pop();
+            shareCodeText.text = `http://sgcloud-test.jiagutech.com/share?type=drones&id=${_activeVehicle.FlightController.serialNumber}&key=${key}`;
+        }
+    }
     VKPalette {
         id: qgcPal
     }
@@ -85,7 +102,7 @@ Flickable {
                 width: parent.width
                 height: parent.width
                 Item {
-                    width: parent.width * 3/4 - 2
+                    width: parent.width
                     height: parent.height
                     Column {
                         width: parent.width
@@ -170,10 +187,15 @@ Flickable {
                                             videoSettings.rtspUrl.value = "rtsp://192.168.144.108:554/stream=0"
                                         } else if (currentText === qsTr("品灵-A40TRPRO")) {
                                             videoSettings.rtspUrl.value = "rtsp://192.168.144.119:554"
+                                        } else if (currentText === qsTr("上博智像DYT")) {
+                                            videoSettings.rtspUrl.value = "rtsp://192.168.2.119/554"
                                         }
+
                                         if (currentText === qsTr("其他型号")) {
                                             videoSettings.rtspUrl.value = settings.cameraOtherModelAddr
                                         }
+
+                                        videoSettings.gimbalType.value = currentIndex
 
                                         if (cameractl)
                                             cameractl.setcamera_model(
@@ -315,8 +337,7 @@ Flickable {
                                     height: 60 * sw
                                     anchors.right: parent.right
                                     anchors.verticalCenter: parent.verticalCenter
-                                    enabled: VkSdkInstance.vkServerController.isLogin && VkSdkInstance.vkServerController.rtmpServerUrl !== ""
-
+                                    enabled: VkSdkInstance.vkServerController.isLogin && VkSdkInstance.vkServerController.rtmpServerUrl !== ""   
                                     onCheckedChanged: {
                                         toggleStreamingToServer(checked)
                                     }
@@ -334,11 +355,12 @@ Flickable {
                                 anchors.horizontalCenter: parent.horizontalCenter
 
                                 Text {
+                                    id: shareLinkLabel
                                     width: parent.width / 2
                                     height: 60 * sw
                                     anchors.left: parent.left
                                     anchors.verticalCenter: parent.verticalCenter
-                                    text: qsTr("拉流地址")
+                                    text: qsTr("分享直播链接")
                                     font.pixelSize: buttonFontSize
                                     font.bold: false
                                     verticalAlignment: Text.AlignVCenter
@@ -347,12 +369,12 @@ Flickable {
 
                                 Text {
                                     id: shareCodeText
-                                    width: parent.width / 4
                                     height: 60 * sw
                                     anchors.right: shareCodeButton.left
                                     anchors.rightMargin: 10 * sw
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    text: VkSdkInstance.vkServerController.shareCode
+                                    anchors.left: shareLinkLabel.left
+                                    anchors.leftMargin: 10 * sw
+                                    anchors.verticalCenter: parent.verticalCenter 
                                     font.pixelSize: buttonFontSize - 5
                                     font.bold: false
                                     verticalAlignment: Text.AlignVCenter
@@ -363,15 +385,33 @@ Flickable {
 
                                 Button {
                                     id: shareCodeButton
-                                    width: parent.width / 6
+                                    width: 120 * sw
                                     height: 60 * sw
-                                    anchors.right: parent.right
+                                    anchors.right: copyButton.left
+                                    anchors.rightMargin: 10 * sw
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: qsTr("刷新")
                                     font.pixelSize: buttonFontSize
                                     onClicked: {
-                                        if(_activeVehicle) {
+                                        if(_activeVehicle && streamingSwitch.checked) {
                                             VkSdkInstance.vkServerController.requestPullStreamShareCode(_activeVehicle.FlightController.serialNumber)
+                                        }
+                                    }
+                                }
+
+                                Button {
+                                    id: copyButton
+                                    width: 120 * sw
+                                    height: 60 * sw
+                                    anchors.right: parent.right
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: qsTr("拷贝")
+                                    font.pixelSize: buttonFontSize
+                                    onClicked: {
+                                        if (shareCodeText.text !== "") {
+                                            VKGroundControl.copyToClipboard(shareCodeText.text)
+                                        } else {
+                                            console.log("分享链接为空")
                                         }
                                     }
                                 }
@@ -409,31 +449,32 @@ Flickable {
         if (cameraModelCombo.currentText === qsTr("品灵-A40TRPRO")) {
             videoSettings.rtspUrl.value = "rtsp://192.168.144.119:554"
         }
+        if (cameraModelCombo.currentText === qsTr("上博智像DYT")) {
+            videoSettings.rtspUrl.value = "rtsp://192.168.2.119/554"
+        }
         if (cameraModelCombo.currentText === qsTr("其他型号")) {
             rtspUrlField.text = settings.cameraOtherModelAddr
             videoSettings.rtspUrl.value = settings.cameraOtherModelAddr
         }
-
+        if (VkSdkInstance.vkServerController.isStreamingActive) {
+            streamingSwitch.checked = true
+        }
         mainWindow.camera_model = cameraModelCombo.currentText
     }
+
 
     // Function to toggle streaming to server
     function toggleStreamingToServer(checked) {
         if (checked) {
             // Start streaming with the server URL from settings
             VKGroundControl.videoManager.startStreamingToServer(VkSdkInstance.vkServerController.rtmpServerUrl)
+            VkSdkInstance.vkServerController.startPushStreamStatusSync(_activeVehicle.FlightController.serialNumber)
+            VkSdkInstance.vkServerController.requestPullStreamShareCode(_activeVehicle.FlightController.serialNumber)
         } else {
             // Stop streaming
             VKGroundControl.videoManager.stopStreamingToServer()
+            VkSdkInstance.vkServerController.stopPushStreamStatusSync()
         }
     }
 
-    // Function to copy share code to clipboard
-    function copyShareCode() {
-        // Get the server URL as share code
-        var shareCode = VKGroundControl.videoManager.getRtspServerUrl()
-        // In a real implementation, you would copy to clipboard here
-        // For now, we'll just show a notification
-        console.log("Share code copied to clipboard: " + shareCode)
-    }
 }

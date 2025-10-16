@@ -60,6 +60,8 @@ public:
     DEFINE_SETTINGFACT(applicationSetting)
     DEFINE_SETTINGFACT(applicationSettingId)
     DEFINE_SETTINGFACT(rcSetting)
+    DEFINE_SETTINGFACT(mqttHost)
+    DEFINE_SETTINGFACT(mqttPort)
 
     Q_PROPERTY(QString missionSavePath          READ missionSavePath            NOTIFY savePathsChanged)
     Q_PROPERTY(QString parameterSavePath        READ parameterSavePath          NOTIFY savePathsChanged)

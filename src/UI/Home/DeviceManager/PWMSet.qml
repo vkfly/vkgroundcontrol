@@ -98,7 +98,8 @@ Item {
     Connections {
         target: activeVehicle
         ignoreUnknownSignals: true
-        function onParametersChanged() {
+        function onParamChanged() {
+            console.log("onParametersChanged")
             if (activeVehicle) {
                 updateParamValue(paramName1);
                 updateParamValue(paramName2);

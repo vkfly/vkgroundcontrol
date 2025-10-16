@@ -24,6 +24,8 @@ target_sources(${CMAKE_PROJECT_NAME}
         Shape/SHPFileHelper.h
         StateMachine.cc
         StateMachine.h
+        memory.h
+        memory.cpp
 )
 
 if(LINUX)

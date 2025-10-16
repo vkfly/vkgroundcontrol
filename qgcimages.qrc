@@ -275,6 +275,7 @@
         <file alias="icon/default_mine_sortie_management.png">resources/icon/default_mine_sortie_management.png</file>
         <file alias="icon/default_mine_general_settings.png">resources/icon/default_mine_general_settings.png</file>
         <file alias="icon/default_mine_avatar.png">resources/icon/default_mine_avatar.png</file>
+        <file alias="icon/stop.png">resources/icon/stop.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -128,8 +128,7 @@ Item {
             item2: videoControl
             fullZOrder: _fullItemZorder
             pipZOrder: _pipItemZorder
-            show: !VKGroundControl.videoManager.fullScreen
-                  && (videoControl.pipState.state === videoControl.pipState.pipState
+            show: (videoControl.pipState.state === videoControl.pipState.pipState
                       || mapControl.pipState.state === mapControl.pipState.pipState)
       }
 
@@ -137,7 +136,6 @@ Item {
             id: customOverlay
             z: _fullItemZorder + 2
             mapControl: mapControl
-
             visible: !VKGroundControl.videoManager.fullScreen
       }
 
@@ -155,6 +153,7 @@ Item {
       FlyStatusView {
          anchors.fill: parent
          z:100
+         visible: !VKGroundControl.videoManager.fullScreen
       }
 
       ListView {

@@ -22,12 +22,16 @@ class VKPalette;
 class SettingsManager;
 class VideoManager;
 class FileDownloader;
+class GimbalController;
+class VKMqttClient;
 
 Q_MOC_INCLUDE("VKPalette.h")
 Q_MOC_INCLUDE("SettingsManager.h")
 Q_MOC_INCLUDE("VideoManager.h")
 Q_MOC_INCLUDE("FileDownloader.h")
 Q_MOC_INCLUDE("QGCMapEngineManager.h")
+Q_MOC_INCLUDE("GimbalController.h")
+Q_MOC_INCLUDE("VKMqttClient.h")
 
 class QGroundControlQmlGlobal : public QObject {
     Q_OBJECT
@@ -61,6 +65,8 @@ public:
     Q_PROPERTY(double               flightMapZoom           READ    flightMapZoom           WRITE setFlightMapZoom      NOTIFY flightMapZoomChanged)
     Q_PROPERTY(double               flightMapInitialZoom    MEMBER  _flightMapInitialZoom   CONSTANT)   ///< Zoom level to use when either gcs or vehicle shows up for first time
     Q_PROPERTY(QGCMapEngineManager* mapEngineManager        READ    mapEngineManager        CONSTANT)
+    Q_PROPERTY(GimbalController* gimbalController        READ    gimbalController        CONSTANT)
+    Q_PROPERTY(VKMqttClient* mqttClient              READ    mqttClient            CONSTANT)
 
     Q_PROPERTY(QString  parameterFileExtension  READ parameterFileExtension CONSTANT)
     Q_PROPERTY(QString  missionFileExtension    READ missionFileExtension   CONSTANT)
@@ -101,6 +107,8 @@ public:
     Q_INVOKABLE void    startAPMArduSubMockLink     (bool sendStatusText);
     Q_INVOKABLE void    startAPMArduRoverMockLink   (bool sendStatusText);
     Q_INVOKABLE void    stopOneMockLink             (void);
+
+    Q_INVOKABLE void    copyToClipboard             (const QString& text);
 
     /// Returns the list of available logging category names.
     Q_INVOKABLE QStringList loggingCategories(void) const {
@@ -145,6 +153,14 @@ public:
 
     QGCMapEngineManager*    mapEngineManager    ()  {
         return _mapEngineManager;
+    }
+
+    GimbalController* gimbalController() {
+        return _gimbalController;
+    }
+
+    VKMqttClient* mqttClient() {
+        return _mqttClient;
     }
 
 #ifndef QGC_AIRLINK_DISABLED
@@ -241,6 +257,8 @@ private:
     SettingsManager*        _settingsManager        = nullptr;
     VKPalette*              _globalPalette          = nullptr;
     QGCMapEngineManager*    _mapEngineManager       = nullptr;
+    GimbalController*       _gimbalController       = nullptr;
+    VKMqttClient*           _mqttClient           = nullptr;
     double                  _flightMapInitialZoom   = 17.0;
     QStringList             _altitudeModeEnumString;
 

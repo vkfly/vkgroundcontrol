@@ -278,6 +278,18 @@
     "enumStrings":      "American mode,Japan mode",
     "enumValues":       "0,1",
     "default": 0
+},
+{
+    "name": "mqttHost",
+    "shortDesc": "mqtt host",
+    "type": "string",
+    "default": "localhost"
+},
+{
+    "name": "mqttPort",
+    "shortDesc": "mqtt port",
+    "type": "uint32",
+    "default": 1883
 }
 ]
 }

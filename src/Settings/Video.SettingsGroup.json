@@ -142,6 +142,15 @@
     "enumValues":       "0,1,2,3,4,5",
     "default":           0,
     "qgcRebootRequired": true
+},
+{
+    "name":             "gimbalType",
+    "shortDesc":        "Gimbal Type",
+    "longDesc":         "Type of gimbal connected to the system.",
+    "type":             "uint32",
+    "enumStrings":      "SIYI ZR10,SIYI ZT30,云卓 C12,云卓 C20,先飞D80-Pro,先飞Z1-mini,翔拓,拓扑,品灵-A40TRPRO,上博智像DYT,自定义协议",
+    "enumValues":       "0,1,2,3,4,5,6,7,8,9,10",
+    "default":           9
 }
 ]
 }

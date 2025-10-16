@@ -157,6 +157,8 @@ DECLARE_SETTINGSFACT(AppSettings, passAirLink)
 DECLARE_SETTINGSFACT(AppSettings, applicationSetting)
 DECLARE_SETTINGSFACT(AppSettings, applicationSettingId)
 DECLARE_SETTINGSFACT(AppSettings, rcSetting)
+DECLARE_SETTINGSFACT(AppSettings, mqttHost)
+DECLARE_SETTINGSFACT(AppSettings, mqttPort)
 
 DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, indoorPalette) {
     if (!_indoorPaletteFact) {

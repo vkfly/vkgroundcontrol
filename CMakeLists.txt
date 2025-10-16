@@ -605,10 +605,7 @@ qt_add_translations(${CMAKE_PROJECT_NAME}
     LUPDATE_OPTIONS -no-obsolete
 )
 
-target_precompile_headers(${CMAKE_PROJECT_NAME}
-    PRIVATE
-        <QtCore/QObject>
-        <QtNetwork/QNetworkReply>
-        <QtPositioning/QGeoCoordinate>
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
+    qtmqtt
 )
-
+add_subdirectory(qtmqtt)

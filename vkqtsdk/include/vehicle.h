@@ -561,6 +561,32 @@ public:
      */
     Q_INVOKABLE virtual bool loadParamMapFromJSON(const QString &filePath) = 0;
 
+    /***** PWM related *****/
+
+    /**
+     * @brief 配置PWM通道
+     * @param index PWM通道号
+     * @param pwn_num 对应到飞控上的PWM编号（1-16）
+     * @param rcch 对应到飞控上的SBUS通道号，设置后可以通过遥控器控制对应PWM
+     * @param on PWM对应开的值
+     * @param off PWM对应关的值
+     */
+    Q_INVOKABLE virtual void pwmConfigurate(int index, int pwn_num, int rcch, int on, int off) = 0;
+
+    /**
+     * @brief 控制所有PWM通道输出，最多10个
+     * @param pwm PWM值，范围-1.0~1.0，-1.0表示关闭，1.0表示打开，NAN表示不变
+     * @param len 数组长度，最大是10
+     */
+    Q_INVOKABLE virtual void pwmControlAll(const QList<float>& pwm, int len) = 0;
+
+    /**
+     * @brief 控制单个PWM通道输出
+     * @param index PWM通道号
+     * @param pwm PWM值，范围-1.0~1.0，-1.0表示关闭，1.0表示打开，NAN表示不变
+     */
+    Q_INVOKABLE virtual void pwmControl(int index, float pwm) = 0;
+
 protected:
     virtual int getSysId() = 0;
     virtual double homeDis() const = 0;

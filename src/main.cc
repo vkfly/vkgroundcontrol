@@ -25,6 +25,7 @@
 
 #ifdef Q_OS_LINUX
     #ifndef Q_OS_ANDROID
+        #include <unistd.h>
         #include "SignalHandler.h"
     #endif
 #endif

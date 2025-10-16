@@ -58,4 +58,6 @@ add_subdirectory(QtLocationPlugin)
 add_subdirectory(Utilities)
 add_subdirectory(Android)
 add_subdirectory(VKServer)
+add_subdirectory(Gimbal)
+add_subdirectory(Mqtt)
 

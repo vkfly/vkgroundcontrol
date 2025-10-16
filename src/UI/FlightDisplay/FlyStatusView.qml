@@ -201,6 +201,32 @@ Item {
             }
       }
 
+      //舵机
+      Row {
+            anchors {
+                top: parent.top
+                right: parent.right
+                rightMargin:  150 * ScreenTools.scaleWidth
+                topMargin: 28 * ScreenTools.scaleWidth
+            }
+          Button{
+              width:  70 * ScreenTools.scaleWidth
+              height:  70 * ScreenTools.scaleWidth
+              visible: !servoPopup.isVisible
+              onClicked: {
+                  servoPopup.isVisible=!servoPopup.isVisible
+              }
+              background:Rectangle{
+                  anchors.fill: parent
+                  color: "#00000000"
+                  Image{
+                      anchors.fill: parent
+                      source: "/qmlimages/icon/duoji.png"
+                  }
+              }
+          }
+      }
+
       //左侧航点属性框
       Row {
             z: 100
@@ -330,6 +356,16 @@ Item {
             width: 800 * ScreenTools.scaleWidth
             id: vkreturn
             anchors.centerIn: parent
+      }
+
+      VKServoStatusPopup {
+            id: servoPopup
+            visible: servoPopup.isVisible
+            anchors {
+                top:parent.top
+                right: parent.right
+                rightMargin:  80 * ScreenTools.scaleWidth
+            }
       }
 
 }

@@ -20,10 +20,15 @@
 #include "VideoManager.h"
 #include "FileDownloader.h"
 #include "QGCFileDialogController.h"
+#include "GimbalController.h"
+#include "VKMqttClient.h"
 
 #include <QtCore/QSettings>
 #include <QtCore/QLineF>
+#include <QtCore/QDebug>
 #include <QtQml/QQmlEngine>
+#include <QtGui/QClipboard>
+#include <QtGui/QGuiApplication>
 
 QGeoCoordinate QGroundControlQmlGlobal::_coord = QGeoCoordinate(0.0, 0.0);
 double QGroundControlQmlGlobal::_zoom = 2;
@@ -52,8 +57,10 @@ QGroundControlQmlGlobal::QGroundControlQmlGlobal(QObject *parent)
     : QObject(parent)
     , _videoManager(VideoManager::instance())
     , _settingsManager(SettingsManager::instance())
-    , _globalPalette(new VKPalette(this)),
-      _mapEngineManager(QGCMapEngineManager::instance()) {
+    , _globalPalette(new VKPalette(this))
+    , _mapEngineManager(QGCMapEngineManager::instance())
+    , _gimbalController(new GimbalController())
+    , _mqttClient(new VKMqttClient()) {
     // We clear the parent on this object since we run into shutdown problems caused by hybrid qml app. Instead we let it leak on shutdown.
     // setParent(nullptr);
     // Load last coordinates and zoom from config file
@@ -297,4 +304,19 @@ void QGroundControlQmlGlobal::deleteAllSettingsNextBoot() {
 
 void QGroundControlQmlGlobal::clearDeleteAllSettingsNextBoot() {
     qgcApp()->clearDeleteAllSettingsNextBoot();
+}
+
+void QGroundControlQmlGlobal::copyToClipboard(const QString& text) {
+    if (text.isEmpty()) {
+        qDebug() << "copyToClipboard: text is empty";
+        return;
+    }
+    
+    QClipboard* clipboard = QGuiApplication::clipboard();
+    if (clipboard) {
+        clipboard->setText(text);
+        qDebug() << "copyToClipboard: copied to clipboard:" << text;
+    } else {
+        qDebug() << "copyToClipboard: clipboard not available";
+    }
 }

@@ -44,6 +44,8 @@
 #include "SettingsManager.h"
 #include "AppSettings.h"
 #include "VideoManager.h"
+#include "GimbalController.h"
+#include "VKMqttClient.h"
 #include <mission_model.h>
 
 #ifdef Q_OS_LINUX
@@ -197,6 +199,8 @@ void QGCApplication::init() {
     VideoManager::registerQmlTypes();
     VkSdkInstance::initSdk(VK_USER_ID, VK_SDK_LICENSE);
     VkSdkInstance::registerQmlData();
+    GimbalController::registerQmlTypes();
+    VKMqttClient::registerQmlTypes();
     int fontId = QFontDatabase::addApplicationFont(":/fonts/songti");
     if(fontId < 0) {
         qCWarning(QGCApplicationLog) << "Could not load /fonts/songti font";

@@ -16,6 +16,7 @@ class VkServerController : public QObject {
     Q_PROPERTY(QString errorMessage READ getErrorMessage NOTIFY errorMessageChanged)
     Q_PROPERTY(QString rtmpServerUrl READ getRtmpServerUrl NOTIFY rtmpServerUrlChanged)
     Q_PROPERTY(QString shareCode READ getShareCode NOTIFY shareCodeChanged)
+    Q_PROPERTY(bool isStreamingActive READ getIsStreamingActive NOTIFY streamingStatusChanged)
 
 public:
     VkServerController(QObject *parent = nullptr) : QObject(parent) {}
@@ -28,6 +29,9 @@ public:
     Q_INVOKABLE virtual void downloadKml(const QString& kmlUrl) = 0;
     Q_INVOKABLE virtual void requestRtmpPushUrl(const QString& droneId) = 0;
     Q_INVOKABLE virtual void requestPullStreamShareCode(const QString& droneId) = 0;
+    Q_INVOKABLE virtual void updateDronePushStreamStatus(const QString& droneId) = 0;
+    Q_INVOKABLE virtual void startPushStreamStatusSync(const QString& sn) = 0;
+    Q_INVOKABLE virtual void stopPushStreamStatusSync() = 0;
 
 protected:
     virtual bool getIsLogin() = 0;
@@ -38,9 +42,10 @@ protected:
     virtual QString getErrorMessage() = 0;
     virtual QString getRtmpServerUrl() = 0;
     virtual QString getShareCode() = 0;
+    virtual bool getIsStreamingActive() = 0;
 
 signals:
-    void isLoginChanged();
+    void isLoginChanged(bool isLogin);
     void registerSuccessChanged();
     void changePasswordSuccessChanged();
     void kmlListChanged();
@@ -48,4 +53,5 @@ signals:
     void errorMessageChanged();
     void rtmpServerUrlChanged();
     void shareCodeChanged();
+    void streamingStatusChanged(bool isStreaming);
 };

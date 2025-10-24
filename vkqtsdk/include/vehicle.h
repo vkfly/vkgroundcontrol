@@ -587,6 +587,12 @@ public:
      */
     Q_INVOKABLE virtual void pwmControl(int index, float pwm) = 0;
 
+    /**
+     * @brief 飞行过程中改变飞行速度
+     * @param speed 飞行速度 m/s
+     */
+    Q_INVOKABLE virtual void changeSpeed(float speed) = 0;
+
 protected:
     virtual int getSysId() = 0;
     virtual double homeDis() const = 0;

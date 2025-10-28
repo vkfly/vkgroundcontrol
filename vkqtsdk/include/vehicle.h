@@ -350,9 +350,14 @@ class VkVehicle : public QObject {
     Q_PROPERTY(QQmlPropertyMap *payload READ getPayload CONSTANT)
 
     /**
-     * @brief 获取当前操作进度
+     * @brief 获取升级进度 0~100
      */
-    Q_PROPERTY(int getCurrentProgress READ getCurrentProgress NOTIFY getCurrentProgressChanged)
+    Q_PROPERTY(int upgradeProgress READ getUpgradeProgress NOTIFY upgradeProgressChanged)
+
+    /**
+     * @brief 获取日志下载进度 0~100
+     */
+    Q_PROPERTY(int downloadLogProgress READ getDownloadLogProgress NOTIFY downloadLogProgressChanged)
 
     /**
      * @brief 获取设备连接状态
@@ -640,8 +645,8 @@ protected:
     virtual Vk_WeigherState *weigherState() = 0;
     virtual Vk_FormationLeader *formationLeader() = 0;
     virtual Vk_ParachuteStatus *parachuteStatus() = 0;
-    virtual float getProgress() = 0;
-    virtual int getCurrentProgress() = 0;
+    virtual int getDownloadLogProgress() = 0;
+    virtual int getUpgradeProgress() = 0;
     virtual bool getIsConnected() = 0;
 
 signals:
@@ -676,7 +681,7 @@ signals:
     void logChanged();
     void missionChanged();
     void paramChanged();
-    void progressChanged();
-    void getCurrentProgressChanged();
+    void downloadLogProgressChanged();
+    void upgradeProgressChanged();
     void isConnectedChanged();
 };

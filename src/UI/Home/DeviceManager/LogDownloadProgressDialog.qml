@@ -14,7 +14,7 @@ CustomPopup {
     id: progressDialog
 
     property var activeVehicle: VkSdkInstance.vehicleManager.activeVehicle
-    property real progress: activeVehicle.progress
+    property real progress: activeVehicle.downloadLogProgress
     property real _progress: 0
     contentHeight: contentColumn.height
     contentWidth: 600 * ScreenTools.scaleWidth
@@ -23,7 +23,7 @@ CustomPopup {
 
     onProgressChanged: {
         _progress = progress
-        if (progress >= 1) {
+        if (progress >= 100) {
             close()
         }
     }
@@ -59,6 +59,8 @@ CustomPopup {
         ProgressBar {
             width: parent.width
             value: _progress
+            from: 0
+            to: 100
         }
 
         Item {

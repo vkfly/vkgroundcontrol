@@ -39,7 +39,7 @@ Flickable {
     property var getCurrentData : _Vehicle.getCurrentData
 
     //property var _Vehicle : VkSdkInstance.vehicleManager.vehicles[0]
-    property var getCurrentProgress : _Vehicle.getCurrentProgress
+    property var getCurrentProgress : _Vehicle.upgradeProgress
 
 
     height: parent.height

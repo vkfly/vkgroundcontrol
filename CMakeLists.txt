@@ -504,6 +504,16 @@ set_target_properties(${CMAKE_PROJECT_NAME}
         OUTPUT_NAME ${CMAKE_PROJECT_NAME}
 )
 
+# 收集vkqtsdk头文件以便在IDE中可见
+file(GLOB VKQTSDK_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/vkqtsdk/include/*.h")
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${VKQTSDK_HEADERS})
+# 为这些头文件设置属性，跳过AUTOMOC处理
+set_source_files_properties(${VKQTSDK_HEADERS}
+    PROPERTIES
+        SKIP_AUTOMOC ON
+        HEADER_FILE_ONLY ON
+)
+
 # 添加vkqtsdk头文件目录
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/vkqtsdk/include
